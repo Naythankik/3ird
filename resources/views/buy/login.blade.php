@@ -12,6 +12,11 @@
 <body class="bg-success">
 
 <center>
+
+
+        @if(session(['success']))
+            <p class="alert alert-danger">{{ session(['success']) }}</p>
+        @endif
     <form method="post" action="/login" class="p-4 m-3">
         @csrf
         <h3 class="text-decoration-underline fw-bold text-info mb-3">Login</h3>

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('products_id');
             $table->text('image_name')->unique();
-            $table->foreign('products_id')->references('id')->on('products');
+            $table->foreign('products_id')->references('id')->on('products')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -30,7 +30,7 @@
                 <td>{{ $product->created_at }}</td>
                 <td>{{ $product->category }}</td>
                 <td>
-                    <a class="btn btn-success py-1" style="width: 75px">Edit</a>
+                    <a href="/products/{{ $product->id }}/edit" class="btn btn-success py-1" style="width: 75px">Edit</a>
                     <form action="products/{{ $product->id }}" method="post" class="mt-2" >
                         @method('delete')
                         @csrf

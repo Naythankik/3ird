@@ -54,7 +54,7 @@ class UserControllers extends Controller
     {
         $request->validated();
         $new_name = uniqid($request->username,'true').'.'.$request->profile->extension();
-        $picture = $request->profile->storeAs('buyer/profile',$new_name);
+        $picture = $request->profile->storeAs('public/buyer/profile',$new_name);
 
         Users::create([
             'first_name' => $request->first_name,
@@ -278,34 +278,11 @@ class UserControllers extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function payment(Request $request)
+    public function paymentCompleted()
     {
-  $url = "https://api.paystack.co/transaction/initialize";
-  $fields = [
-    'email' => $request->email,
-    'amount' => $request->amount,
-      'first_name' => $request->first_name,
-      'last_name' => $request->last_name
-  ];
-  $fields_string = http_build_query($fields);
-  //open connection
-  $ch = curl_init();
-
-  //set the url, number of POST vars, POST data
-  curl_setopt($ch,CURLOPT_URL, $url);
-  curl_setopt($ch,CURLOPT_POST, true);
-  curl_setopt($ch,CURLOPT_POSTFIELDS, $fields_string);
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    "Authorization: Bearer SECRET_KEY",
-    "Cache-Control: no-cache",
-  ));
-
-  //So that curl_exec returns the contents of the cURL; rather than echoing it
-  curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
-
-  //execute post
-  $result = curl_exec($ch);
-  return $result;
-  }
+        $id = auth()->id();
+        Carts::where('users_id',$id)->delete();
+        return redirect('/buy/cart');
+    }
 
 }

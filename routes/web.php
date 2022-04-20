@@ -33,6 +33,7 @@ Route::prefix('buy')
             Route::post('/pay',[UserControllers::class,'payment']);
             Route::get('/add_to_cart/{p_id}','add_to_cart');
             Route::get('/cart','cart');
+            Route::get('/cart/complete','paymentCompleted');
             Route::get('/remove_cart/{id}','remove_cart');
             Route::get('/search','search');
             Route::get('/logout','logout');

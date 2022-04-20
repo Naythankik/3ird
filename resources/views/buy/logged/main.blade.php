@@ -16,8 +16,9 @@
 
 @yield('body')
 
-<script src="https://js.paystack.co/v1/inline.js"></script>
 
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="{{ asset('js/index.js') }}"></script>
 <script src="{{ asset('js/payment.js') }}"></script>
 
 </body>

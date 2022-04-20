@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('dob');
             $table->text('profile');
             $table->text('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

@@ -89,7 +89,8 @@ class ProductsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $products = Products::with('images')->where('id', $id)->get();
+        return view('sell.products.edit')->with(['products' => $products]);
     }
 
     /**
@@ -101,7 +102,28 @@ class ProductsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'brand' => 'required',
+            'category' => 'required',
+            'feature' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+            'description' => 'required'
+        ],[
+
+        ]);
+        Products::where('id',$id)
+            ->update([
+                'name' => $request->name,
+                'brand' => $request->brand,
+                'category' => $request->category,
+                'feature' => $request->feature,
+                'price' => $request->price,
+                'quantity' => $request->quantity,
+                'description' => $request->description
+            ]);
+        return back()->with(['updated' => 'Product is updated successfully!!']);
     }
 
     /**

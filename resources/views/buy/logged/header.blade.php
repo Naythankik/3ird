@@ -10,7 +10,6 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
 
-{{--                    <form action="buy/cart" method="get">--}}
                         @if(auth()->check())
                             @php
                                 $count = \Illuminate\Support\Facades\DB::table('carts')->where('users_id',auth()->id())->count();
@@ -30,7 +29,7 @@
                                     @endif
 
                             </a>
-{{--                    </form>--}}
+
                 </li>
                 <div class="col-auto">
                     <label class="visually-hidden" for="autoSizingSelect">Preference</label>
@@ -39,6 +38,7 @@
                             Select Category
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+{{--                            <li><a href="">{{  }}</a></li>--}}
                             <li><a class="dropdown-item" href="/buy/category/automobiles">Automobiles</a></li>
                             <li><a class="dropdown-item" href="/buy/category/sporting_goods">Sporting Goods</a></li>
                             <li><a class="dropdown-item" href="/buy/category/supermarket">Supermarket</a></li>
@@ -48,7 +48,7 @@
                             <li><a class="dropdown-item" href="/buy/category/computing">Computing</a></li>
                             <li><a class="dropdown-item" href="/buy/category/electronics">Electronics</a></li>
                             <li><a class="dropdown-item" href="/buy/category/fashion">Fashion</a></li>
-                            <li><a class="dropdown-item" href="/buy/category/baby_products">Baby Products</a></li>
+                            <li><a class="dropdown-item" href="/buy/category/baby products">Baby Products</a></li>
                             <li><a class="dropdown-item" href="/buy/category/goods">Goods</a></li>
                             <li><a class="dropdown-item" href="/buy/category/gaming">Gaming</a></li>
                             <li><a class="dropdown-item" href="/buy/category/others">Others</a></li>

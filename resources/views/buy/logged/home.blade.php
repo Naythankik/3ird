@@ -3,7 +3,7 @@
 
 
     <div class="row row-cols- row-cols-md-4 g-4 ">
-        @foreach($products as $product)
+        @foreach($products as $id => $product)
             <div class="col">
                 <div class="card">
 
@@ -21,7 +21,5 @@
             </div>
         @endforeach
     </div>
-
-
 
 @endsection
