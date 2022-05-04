@@ -43,6 +43,7 @@ class ProductsController extends Controller
     public function store(ProductsRequest $request)
     {
 
+
         $pro = Products::create([
             'email' => $request->email,
             'name' => $request->name,

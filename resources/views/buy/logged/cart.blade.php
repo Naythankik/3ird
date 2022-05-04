@@ -49,23 +49,23 @@
         @endforeach
 
     </div>
-    <div class="mt-5">
-        <div class="p-1 m-1" style="display: flex; justify-content: center">
-            <b class="">Total Amount: {{ number_format($price,2) }}</b>
-        </div>
-        <form id="paymentForm">
-            @csrf
-            <input type="hidden" name="email-address" value="{{ auth()->user()->email}}" >
-            <input type="hidden" name="amount" value="{{ $price }}">
-            <input type="hidden" name="first-name" value="{{ auth()->user()->first_name }}" >
-            <input type="hidden" name="last-name" value="{{ auth()->user()->last_name }}">
-            <div class="" style="display: flex; justify-content: center">
-                <button type="submit" id="pay-now" class="btn btn-success mt-1">Payment</button>
+    @if($price > 0)
+        <div class="mt-5">
+            <div class="p-1 m-1" style="display: flex; justify-content: center">
+                <b class="">Total Amount: {{ number_format($price,2) }}</b>
             </div>
-        </form>
+            <form id="paymentForm">
+                @csrf
+                <input type="hidden" id="email-address" value="{{ auth()->user()->email}}">
+                <input type="hidden" id="amount" value="{{ $price }}">
+                <input type="hidden" id="first-name" value="{{ auth()->user()->first_name }}">
+                <input type="hidden" id="last-name" value="{{ auth()->user()->last_name }}">
+                <div class="" style="display: flex; justify-content: center">
+                    <button type="submit" id="pay-now" class="btn btn-success mt-1">Payment</button>
+                </div>
+            </form>
+        </div>
+    @else
 
-    </div>
-
-
-
+    @endif
 @endsection

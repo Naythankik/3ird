@@ -29,28 +29,31 @@ Route::post('/login',[UserControllers::class,'login']);
 
 Route::prefix('buy')
     ->controller(UserControllers::class)
-        ->group(function (){
-            Route::post('/pay',[UserControllers::class,'payment']);
-            Route::get('/add_to_cart/{p_id}','add_to_cart');
-            Route::get('/cart','cart');
-            Route::get('/cart/complete','paymentCompleted');
-            Route::get('/remove_cart/{id}','remove_cart');
-            Route::get('/search','search');
-            Route::get('/logout','logout');
-            Route::get('/category/{category}','category');
-            Route::get('/{id}/profile',[UserControllers::class,'profile'])->name('profile');
-            Route::get('/forgot-password',function ()
-            {
-                return view('buy.forget');
-            })->name('password.request');
-            Route::post('forgot-password',[UserControllers::class,'forgot'])->middleware('guest')->name('password.email');
+    ->group(function (){
+        Route::post('/pay',[UserControllers::class,'payment']);
+        Route::get('/add_to_cart/{p_id}','add_to_cart');
+        Route::get('/cart','cart');
+        Route::get('/remove_cart/{id}','remove_cart');
+        Route::get("/wishlist/{p_id}",'wishList');
+        Route::get("/list",'list');
+        Route::get("/remove/{p_id}","remove_list");
+        Route::get('/cart/complete','paymentCompleted');
+        Route::get('/search','search');
+        Route::get('/logout','logout');
+        Route::get('/category/{category}','category');
+        Route::get('/{id}/profile',[UserControllers::class,'profile'])->name('profile');
+        Route::get('/forgot-password',function ()
+        {
+            return view('buy.forget');
+        })->name('password.request');
+        Route::post('forgot-password',[UserControllers::class,'forgot'])->middleware('guest')->name('password.email');
 
-            Route::get('/reset-password/{token}', function ($token) {
-                return view('buy.reset', ['token' => $token]);
-            })->middleware('guest')->name('password.reset');
+        Route::get('/reset-password/{token}', function ($token) {
+            return view('buy.reset', ['token' => $token]);
+        })->middleware('guest')->name('password.reset');
 
-            Route::post('/reset-password',[UserControllers::class,'reset'])->middleware('guest');
-});
+        Route::post('/reset-password',[UserControllers::class,'reset'])->middleware('guest');
+    });
 Route::resource('/buy',UserControllers::class);
 
 

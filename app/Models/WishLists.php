@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class WishLists extends Model
 {
     use HasFactory;
+
+    protected $table = "wish_lists";
+
+    protected $guarded = ["id"];
+
+    public function product()
+    {
+        return $this->belongsTo(Products::class);
+    }
+
+
 }

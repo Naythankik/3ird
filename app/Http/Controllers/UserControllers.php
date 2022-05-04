@@ -6,6 +6,7 @@ use App\Http\Requests\UsersRequest;
 use App\Models\Products;
 use App\Models\Users;
 use App\Models\Carts;
+use App\Models\WishLists;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -192,17 +193,15 @@ class UserControllers extends Controller
     public function add_to_cart($p_id)
     {
         $check_cart = Carts::where('users_id',auth()->id())->where('product_id',$p_id)->count();
-
         if ($check_cart > 0)
         {
             return back()->with(['cart_exist' => 'Product is in cart!','id' => $p_id]);
         }
-
         Carts::create([
             'users_id' => auth()->id(),
             'product_id' => $p_id
         ]);
-
+        WishLists::where('users_id',auth()->id())->where('product_id',$p_id)->delete();
         return back()->with(['cart' => 'Product Added to cart successfully!','id'=> $p_id]);
     }
 
@@ -228,6 +227,39 @@ class UserControllers extends Controller
     {
         $profile = Users::where('id',$id)->get();
         return view('buy.logged.profile',['profiles' => $profile]);
+    }
+
+    public function remove_list($id)
+    {
+//        dd($id);
+        WishLists::where('users_id',auth()->id())->where('product_id',$id)->delete();
+        return back()->with(['delete' => 'Product removed from Wish List successfully!']);
+    }
+
+    public function wishList($p_id)
+    {
+        $wish = WishLists::where('users_id',auth()->id())->where('product_id',$p_id)->count();
+        $cartWish = Carts::where('users_id',auth()->id())->where('product_id',$p_id)->count();
+
+        if ($cartWish > 0)
+        {
+            return back()->with(['cart_exist' => 'Product is in Cart!','id' => $p_id]);
+        }
+        if ($wish > 0)
+        {
+            return back()->with(['cart_exist' => 'Product is in List!','id' => $p_id]);
+        }
+            WishLists::create([
+                'users_id' => auth()->id(),
+                'product_id' => $p_id
+            ]);
+            return back()->with(['cart' => 'Product Added to Wish List successfully!', 'id' => $p_id]);
+    }
+
+    public function list()
+    {
+        $wish = WishLists::with('product.images')->where('users_id',auth()->id())->get();
+        return view('buy.logged.wishlist',['wishes' => $wish]);
     }
 
     public function forgot(Request $request)
