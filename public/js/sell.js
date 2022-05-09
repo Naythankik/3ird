@@ -7,3 +7,4 @@ if (message){
 function sell(){
     confirm('Do you want to post products?')
 }
+

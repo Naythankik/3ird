@@ -19,17 +19,18 @@ class Products extends Model
         return $this->hasMany(Images::class);
     }
 
-    protected static function boot()
-    {
-        parent::boot();
 
-        static::deleted(function (Products $products){
-            dd($products->images);
-            foreach ($products->images as $image)
-            {
-                Storage::delete('public/products/'.$image['image_name']);
-            }
-        });
-    }
+//    protected static function boot()
+//    {
+//        parent::boot();
+//
+//        static::deleted(function (Products $products){
+//            dd($products->images);
+//            foreach ($products->images as $image)
+//            {
+//                Storage::delete('public/products/'.$image['image_name']);
+//            }
+//        });
+//    }
 
 }

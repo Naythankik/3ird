@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SellersRequest;
+use App\Models\Products;
 use App\Models\Seller;
 use App\Models\Users;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class SellersController extends Controller
      */
     public function index()
     {
-        return view('sell.logged_in.main');
+
+        $products = Products::with("images")->where("seller_id",auth('selling')->id())->get();
+        return view('sell.logged_in.home',['products' => $products]);
     }
 
     /**
@@ -52,7 +55,7 @@ class SellersController extends Controller
             'last_name' => $request->last_name,
             'username' => $request->username,
             'address' => $request->address,
-            'telephone' => $request->telephone,
+            'telephone' => stripslashes($request->telephone),
             'email' => $request->email,
             'dob' => $request->age,
             'profile' => $picture,
@@ -109,6 +112,7 @@ class SellersController extends Controller
 
     public function login(Request $request)
     {
+
         $request->validate([
             'username' => 'required',
             'password' => 'required'

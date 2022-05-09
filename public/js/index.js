@@ -1,29 +1,4 @@
-// const modal = document.querySelector(".mode");
-// const overlay = document.querySelector(".overlay");
-// const btnCloseModal = document.querySelector(".close");
-// const btnOpenModal = document.querySelector(".show");
-//
-// for (let i = 0; i < btnOpenModal.length; i++) {
-//     btnOpenModal[i].addEventListener("click", function () {
-//         modal.classList.remove("hidden");
-//         overlay.classList.remove("hidden");
-//         console.log("okay");
-//     });
-// }
-// const closeModal = function () {
-//     modal.classList.add("hidden");
-//     overlay.classList.add("hidden");
-// };
-//
-// btnCloseModal.addEventListener("click", closeModal);
-//
-// overlay.addEventListener("click", closeModal);
-// document.addEventListener("keydown", function (e) {
-//     if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-//         closeModal();
-//     }
-// });
-
+// switching between languages
 const language = document.getElementById('lang');
 en.addEventListener("click",function (){
     language.setAttribute("lang","en");
@@ -72,7 +47,6 @@ de.addEventListener("click",function (){
 el.addEventListener("click",function (){
     language.setAttribute("lang","el");
 });
-
 let moreLang = document.querySelector('#more');
 function more(){
     yo.removeAttribute("hidden");
@@ -85,14 +59,15 @@ function more(){
     moreLang.setAttribute("hidden","");
 }
 
+
 const list = document.querySelectorAll(".wish");
 for ( let i = 0; i < list.length; i++){
-list[i].addEventListener("click", function (e){
-    list[i].classList.remove("btn-outline-danger")
-    list[i].classList.add("btn-danger");
-    list[i].setAttribute("title","Product is in WishList")
-    alert("Product added to wishList successfully!!!");
-});
+    list[i].addEventListener("click", function (e){
+        list[i].classList.remove("btn-outline-danger")
+        list[i].classList.add("btn-danger");
+        list[i].setAttribute("title","Product is in WishList")
+        alert("Product added to wishList successfully!!!");
+    });
 }
 
 const about = document.querySelector(".modal-about");
@@ -115,9 +90,44 @@ close.addEventListener("click",closed);
 overlay.addEventListener("click", closed);
 document.addEventListener("keydown",function (e){
     if (e.key === "Escape" && !mAbout.classList.contains("hidden")){
-      closed();
+        closed();
     }
 })
 
+//wishlist
+let wish = document.querySelectorAll("#wishes");
+for (let x = 0; x < wish.length; x++){
+    wish[x].addEventListener("click", function (){
+        callback:
+            alert(`Item added to cart successfully. Redirecting...`);
+        setTimeout(function () {
+            window.location.href = "/buy/list"
+        }, 1000);
 
+    })
+}
+
+//cancelling profile changes
+let profile = document.querySelector(".cancel");
+profile.addEventListener("click",function (){
+    alert("Redirecting to home page......");
+    setTimeout(function (){
+        window.location.href = "/buy"
+    },500);
+})
+
+
+
+// progress BAr
+$(".meter > span").each(function () {
+    $(this)
+        .data("origWidth", $(this).width())
+        .width(0)
+        .animate(
+            {
+                width: $(this).data("origWidth")
+            },
+            1200
+        );
+});
 

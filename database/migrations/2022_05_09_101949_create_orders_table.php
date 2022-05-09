@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
+            $table->integer('order_number');
+            $table->foreign("user_id")->references('id')->on("buyers")->cascadeOnDelete();
+            $table->foreign("product_id")->references('id')->on("products")->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -46,6 +46,13 @@
                 @enderror
 
                 <div class="input-group mb-2 w-25">
+                    <input type="file" class="form-control" name="image"  aria-label="Recipient's username" aria-describedby="basic-addon2">
+                </div>
+                @error('image')
+                <p class="alert alert-danger w-25 p-1">{{$message}}</p>
+                @enderror
+
+                <div class="input-group mb-2 w-25">
                     <span class="input-group-text" id="basic-addon2">Telephone</span>
                     <input type="text" class="form-control" name="telephone" value="{{ $user->telephone }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
                 </div>
@@ -53,6 +60,7 @@
                 <p class="alert alert-danger w-25 p-1">{{$message}}</p>
                 @enderror
 
+                <a class="btn btn-secondary fw-bold text-dark fst-normal mt-4 cancel me-5" href="#">Cancel Changes</a>
                 <button class="btn btn-primary fw-bold text-dark fst-normal mt-4" type="submit">Save Changes</button>
             </form>
         </div>

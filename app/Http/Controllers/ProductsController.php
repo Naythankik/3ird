@@ -43,10 +43,10 @@ class ProductsController extends Controller
     public function store(ProductsRequest $request)
     {
 
-
         $pro = Products::create([
             'email' => $request->email,
             'name' => $request->name,
+            'seller_id' => auth('selling')->id(),
             'brand' => $request->brand,
             'category' => $request->category,
             'description' => $request->description,

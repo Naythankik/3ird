@@ -2,7 +2,7 @@
 @section('body')
 
     @foreach($profiles as $profile)
-        <img src="{{ Storage::url($profile->profile) }}" class="rounded mx-auto mt-3 d-block" style="width: 90px" alt="...">
+        <img src="{{ Storage::url($profile->profile) }}" class="rounded mx-auto mt-3 d-block picture" style="width: 90px" alt="">
         <table>
     <thead>
     <tr style="display: grid; justify-items: center;margin: 10px 0px 10px;">
@@ -28,7 +28,7 @@
             <td colspan="2">{{ floor((strtotime('now') - strtotime($profile->dob))/(86400*365)) }}</td>
         </tr>
         <tr>
-            <th scope="row">E-mail</th>
+            <th scope="row">Telephone</th>
             <td colspan="2">{{ $profile->telephone }}</td>
         </tr>
         <tr>

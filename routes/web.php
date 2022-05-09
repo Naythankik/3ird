@@ -30,7 +30,8 @@ Route::post('/login',[UserControllers::class,'login']);
 Route::prefix('buy')
     ->controller(UserControllers::class)
     ->group(function (){
-        Route::post('/pay',[UserControllers::class,'payment']);
+        Route::resource('/',UserControllers::class);
+        Route::post('/pay','payment');
         Route::get('/add_to_cart/{p_id}','add_to_cart');
         Route::get('/cart','cart');
         Route::get('/remove_cart/{id}','remove_cart');
@@ -40,23 +41,20 @@ Route::prefix('buy')
         Route::get('/cart/complete','paymentCompleted');
         Route::get('/search','search');
         Route::get('/logout','logout');
+        Route::get("/orders/{order}",'orders');
         Route::get('/category/{category}','category');
-        Route::get('/{id}/profile',[UserControllers::class,'profile'])->name('profile');
+        Route::get('/{id}/profile','profile')->name('profile');
         Route::get('/forgot-password',function ()
         {
             return view('buy.forget');
         })->name('password.request');
-        Route::post('forgot-password',[UserControllers::class,'forgot'])->middleware('guest')->name('password.email');
+        Route::post('forgot-password','forgot')->middleware('guest')->name('password.email');
 
         Route::get('/reset-password/{token}', function ($token) {
             return view('buy.reset', ['token' => $token]);
         })->middleware('guest')->name('password.reset');
-
-        Route::post('/reset-password',[UserControllers::class,'reset'])->middleware('guest');
+        Route::post('/reset-password','reset')->middleware('guest');
     });
-Route::resource('/buy',UserControllers::class);
-
-
 
 //Routes for sellers
 Route::prefix('/sell')->group(function (){
@@ -66,14 +64,11 @@ Route::prefix('/sell')->group(function (){
     Route::resource('/',SellersController::class);
 });
 
-
-
 //Route for products
 Route::middleware('seller:selling')->group( function (){
     Route::resource('/products',ProductsController::class);
 }
 );
-
 
 //Route for forgot password
 Route::get('/forgot-password', function () {
@@ -82,6 +77,3 @@ Route::get('/forgot-password', function () {
 
 Route::post('/forget',[SellersController::class,'forget']);
 
-//Route::get('/password-reset/{token}',function ($token){
-//    return view('reset',['token' => $token]);
-//})->name('password.reset');

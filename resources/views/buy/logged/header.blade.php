@@ -35,7 +35,7 @@
                             Select Category
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <li><a class="dropdown-item" href="/buy/category/automobiles">Automobiles</a></li>
+                            <li><a class="dropdown-item" href="/buy/category/automobile">Automobiles</a></li>
                             <li><a class="dropdown-item" href="/buy/category/sporting_goods">Sporting Goods</a></li>
                             <li><a class="dropdown-item" href="/buy/category/supermarket">Supermarket</a></li>
                             <li><a class="dropdown-item" href="/buy/category/health_&_beauty">Health & Beauty</a></li>
@@ -73,17 +73,16 @@
                 </li>
             </ul>
             <form class="d-flex w-50" method="GET" action="/buy/search">
-                @csrf
-                <input class="form-control me-2" name="search" type="search" placeholder="Search brands, category and products...." aria-label="Search">
+                <input class="form-control me-2" name="q" type="search" placeholder="Search brands, category and products...." aria-label="Search">
                 <button class="btn btn-outline-primary me-3" type="submit">Search</button>
             </form>
             <div class="dropdown">
-                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    {{ auth()->user()->username }}
+                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Hi,  {{ auth()->user()->username }}
                 </button>
                 <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="/buy/{{ auth()->id() }}/edit">Edit Profile</a></li>
                     <li><a class="dropdown-item" href="/buy/{{ auth()->id() }}/profile">View profile</a></li>
+                    <li><a class="dropdown-item" href="/buy/orders/{{auth()->id()}}"> Orders</a></li>
                     <li><a class="dropdown-item" href="">Contact Us</a></li>
                 </ul>
             </div>

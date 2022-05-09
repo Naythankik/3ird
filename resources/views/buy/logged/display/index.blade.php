@@ -17,6 +17,10 @@
                 @endif
                 </p>
                 <h5 class="card-title" >{{ $product->name }}</h5>
+                <p class="mb-0"><strong>{{ $product->quantity }} Items Left</strong></p>
+                    <div class="meter orange nostripes">
+                        <span style="width:{{ ($product->quantity !== 0) ? ($product->quantity)."%" : "0%"  }}"></span>
+                    </div>
                 <h6>Price: <i>{{ number_format($product->price,2) }}</i></h6>
                 <p class="card-text">{{ $product->description }}</p>
     </div>

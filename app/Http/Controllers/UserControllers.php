@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
+use App\Models\Order;
 use App\Models\Products;
 use App\Models\Users;
 use App\Models\Carts;
@@ -103,12 +104,14 @@ class UserControllers extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'username' => 'required',
             'email' => 'required',
-            'telephone' => 'required|numeric'
+            'telephone' => 'required|numeric',
+            'image' => 'required|image|max:2000'
         ],[
            'first_name.required' => 'This field is empty',
             'last_name.required' => 'This field is empty',
@@ -116,16 +119,22 @@ class UserControllers extends Controller
             'email.required' => 'This field is empty',
             'telephone.required' => 'This field is empty',
             'telephone.numeric' => 'This field must be a number',
+            'image.required' => 'Image is required',
+            'image.image' => 'File is not an image',
+            'image.size' => 'File is too big'
         ]);
-
+        $profiles = uniqid(lcfirst(auth()->user()->username),true).".".$request->image->extension();
+        $profile = $request->image->storeAs('public/buyer/profile',$profiles);
+//
         Users::where('id',auth()->id())->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'telephone' => $request->telephone,
-            'username' => $request->username
+            'username' => $request->username,
+            'profile' => $profile
             ]);
-
+//
         return back()->with(['updated' => 'User Info updated successfully!']);
 
     }
@@ -213,12 +222,12 @@ class UserControllers extends Controller
 
     public function search(Request $request)
     {
-        $user = '%'.$request->search.'%';
-      $string = Products::with('images')
-          ->where('brand','like',$user)
-          ->orWhere('category','like',$user)
-          ->orWhere('name','like',$user)
-          ->get();
+        $user = '%'.$request->q.'%';
+        $string = Products::with('images')
+            ->where('brand','like',$user)
+            ->orWhere('category','like',$user)
+            ->orWhere('name','like',$user)
+            ->get();
 
         return view('buy.logged.home',['products' => $string]);
     }
@@ -313,8 +322,39 @@ class UserControllers extends Controller
     public function paymentCompleted()
     {
         $id = auth()->id();
+        $users = Carts::where('users_id',$id)->get('product_id');
+
+        foreach ($users as $user){
+
+//            checking if the order is unique
+//            $check_order = Order::where([
+//                'user_id' => $id,
+//                'product_id' => $user['product_id']
+//            ])->count();
+//            if($check_order > 0){
+//                return back()->with(['order' => "Product is in order already"]);
+//            }
+            Order::create([
+                'user_id' => $id,
+                'product_id' => $user['product_id'],
+                'order_number' => date('now')
+            ]);
+            $pr_id = Products::where('id',$user['product_id'])->get('quantity');
+            $quantity = $pr_id[0]['quantity']-1;
+            Products::where('id',$user['product_id'])->update([
+                'quantity' => $quantity
+            ]);
+        }
         Carts::where('users_id',$id)->delete();
-        return redirect('/buy/cart');
+        return redirect('/buy');
+    }
+
+    public function orders($order){
+        $orders = Order::with(['user', 'product'])->where('user_id',$order)->get();
+//        foreach ($orders as $order){
+//            print_r($order['product']['name']);
+//        }
+        return view('buy.logged.order',['orders' => $orders]);
     }
 
 }

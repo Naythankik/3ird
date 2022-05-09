@@ -20,9 +20,9 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($products as $product)
+        @foreach($products as $id => $product)
             <tr>
-                <th scope="row">*</th>
+                <th scope="row">{{ $id + 1 }}</th>
                 <td class="fw-light fs-6">{{ $product->name }}</td>
                 <td>{{ $product->brand }}</td>
                 <td><span>&#8358; </span>{{ number_format($product->price).".00" }}</td>
@@ -37,8 +37,6 @@
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </td>
-
-
             </tr>
         @endforeach
 
