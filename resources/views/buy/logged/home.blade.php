@@ -20,7 +20,7 @@
         <div class="carts">
             <img src="{{ Storage::url('/logo/search.jpeg') }}">
             <div class="contents">
-                <p>There are no results for <span class="search">“{{ $_GET['q'] }}”</span>.</p>
+                <p>There are no results for <span class="search text-danger" style="cursor: pointer" title="{{$_GET['q']." is not found" }}">“{{ $_GET['q'] }}”</span>.</p>
                 <p>- Check your spelling for typing errors</p>
                 <p>- Try searching with short and simple keywords</p>
                 <p>- Try searching more general terms - you can then filter the search results</p>

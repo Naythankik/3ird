@@ -36,9 +36,10 @@
             </div>
     @else
         <div class="carts">
-        <div class="contents">
+            <img src="{{ Storage::url('/logo/wish.png') }}">
+            <div class="contents">
             <p>Nothing to show here</p>
-            <strong style="color: gray">Your Wish List is empty!</strong>
+            <p>Your Wish List is empty!</p>
             <p style="margin-top: 14px">Browse our categories and discover our best deals!</p>
         </div>
         <a class="btn btn-warning fw-bold" href="/buy">Start Shopping</a>

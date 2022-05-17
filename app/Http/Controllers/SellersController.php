@@ -46,7 +46,7 @@ class SellersController extends Controller
      */
     public function store(SellersRequest $request)
     {
-        $validated = $request->validated();
+        $request->validated();
         $new_name = uniqid($request->username,'true').'.'.$request->profile->extension();
         $picture = $request->profile->storeAs('seller/profile',$new_name);
 
@@ -147,7 +147,6 @@ class SellersController extends Controller
 
         $status = Password::broker('sellers')->sendResetLink($request->only('email'));
 
-dd($status);
        return $status === Password::RESET_LINK_SENT
         ? back()->with(['status' => __($status)])
             : back()->withErrors(['email' => __($status)]);

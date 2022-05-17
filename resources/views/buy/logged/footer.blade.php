@@ -1,5 +1,4 @@
 <footer class="foot">
-
        <div class="lang">
            <a href="#" id="en">English</a>
            <a href="#" id="fr">French</a>
@@ -44,6 +43,6 @@
            <a href="#">Developer</a>
            <a href="#">Terms</a>
            <a href="#">Complaint</a>
-{{--           <a href="sms:1234567890;?&body=message">Text Message</a>--}}
+{{--           <a href="sms:1234567890;?&body=message">Text Messages</a>--}}
        </div>
 </footer>

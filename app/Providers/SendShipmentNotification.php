@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners;
+namespace App\Providers;
 
-use App\Events\UserDeleted;
+use App\Providers\OrderShipped;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class SendUserNotification
+class SendShipmentNotification
 {
     /**
      * Create the event listener.
@@ -21,10 +21,10 @@ class SendUserNotification
     /**
      * Handle the event.
      *
-     * @param  \App\Events\UserDeleted  $event
+     * @param  \App\Providers\OrderShipped  $event
      * @return void
      */
-    public function handle(UserDeleted $event)
+    public function handle(OrderShipped $event)
     {
         //
     }

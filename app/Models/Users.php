@@ -21,4 +21,9 @@ class Users extends Authenticatable
     {
         return $this->hasMany(Carts::class);
     }
+
+    public function message()
+    {
+        return $this->hasMany(Messages::class,'user_id','id');
+    }
 }

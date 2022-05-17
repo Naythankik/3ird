@@ -30,7 +30,7 @@ Route::post('/login',[UserControllers::class,'login']);
 Route::prefix('buy')
     ->controller(UserControllers::class)
     ->group(function (){
-        Route::resource('/',UserControllers::class);
+        Route::get('/inbox/{id}','inbox');
         Route::post('/pay','payment');
         Route::get('/add_to_cart/{p_id}','add_to_cart');
         Route::get('/cart','cart');
@@ -55,20 +55,27 @@ Route::prefix('buy')
         })->middleware('guest')->name('password.reset');
         Route::post('/reset-password','reset')->middleware('guest');
     });
+Route::resource('/buy',UserControllers::class);
+
+
 
 //Routes for sellers
 Route::prefix('/sell')->group(function (){
-    Route::view('/login','sell.login')->name('relog');
+    Route::view('/login','sell.login')->name('reLogin');
     Route::get('/logout',[SellersController::class,'logout']);
     Route::post('/login',[SellersController::class,'login']);
     Route::resource('/',SellersController::class);
 });
+
+
 
 //Route for products
 Route::middleware('seller:selling')->group( function (){
     Route::resource('/products',ProductsController::class);
 }
 );
+
+
 
 //Route for forgot password
 Route::get('/forgot-password', function () {
@@ -77,3 +84,8 @@ Route::get('/forgot-password', function () {
 
 Route::post('/forget',[SellersController::class,'forget']);
 
+
+
+//testing the mailing class
+//Route::get('/mail',[UserControllers::class,'http']);
+//Route::get('/mail',[UserControllers::class,'paymentCompleted']);

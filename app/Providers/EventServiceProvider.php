@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\PodcastProcessed;
 use App\Events\UserDeleted;
+use App\Listeners\SendPodcastNotification;
 use App\Listeners\SendUserNotification;
 use App\Models\Products;
 use App\Observers\ProductObserver;
@@ -22,6 +24,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        OrderShipped::class => [
+            SendShipmentNotification::class,
+        ],
+        PodcastProcessed::class => [
+            SendPodcastNotification::class,
+        ]
     ];
 
     /**
@@ -32,10 +40,12 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Event::listen(
-            UserDeleted::class,
-            [SendUserNotification::class, 'handle']
+            PodcastProcessed::class,
+            [SendPodcastNotification::class,'handle']
         );
-        Products::observe(ProductObserver::class);
+        Event::listen(function (PodcastProcessed $event){
+
+        });
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Users;
+use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,20 +11,20 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserDeleted
+class PodcastProcessed
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $user;
+    public $order;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Users $user)
+    public function __construct(Order $order)
     {
-        $this->user = $user;
+        $this->order = $order;
     }
 
     /**

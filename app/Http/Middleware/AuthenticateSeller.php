@@ -11,7 +11,7 @@ class AuthenticateSeller extends Middleware
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
-            return route('relog');
+            return route('reLogin');
         }
     }
 }

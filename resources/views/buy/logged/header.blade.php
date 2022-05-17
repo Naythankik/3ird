@@ -77,13 +77,14 @@
                 <button class="btn btn-outline-primary me-3" type="submit">Search</button>
             </form>
             <div class="dropdown">
-                <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Hi,  {{ auth()->user()->username }}
+                <button class="btn btn-outline-info border-0 dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Hi,  {{ auth()->user()->username }}
                 </button>
                 <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="/buy/{{ auth()->id() }}/edit">Edit Profile</a></li>
-                    <li><a class="dropdown-item" href="/buy/{{ auth()->id() }}/profile">View profile</a></li>
-                    <li><a class="dropdown-item" href="/buy/orders/{{auth()->id()}}"> Orders</a></li>
-                    <li><a class="dropdown-item" href="">Contact Us</a></li>
+                    <li><a class="dropdown-item fw-bold text-primary" href="/buy/{{ auth()->id() }}/edit">Edit Profile</a></li>
+                    <li><a class="dropdown-item fw-bold text-info" href="/buy/{{ auth()->id() }}/profile">View profile</a></li>
+                    <li><a class="dropdown-item fw-bold text-warning" href="/buy/orders/{{auth()->id()}}"> Orders</a></li>
+                    <li><a class="dropdown-item fw-bold text-secondary" href="/buy/inbox/{{auth()->id()}}"> Inbox</a></li>
+                    <li><a class="dropdown-item fw-bold text-success" href="">Contact Us</a></li>
                 </ul>
             </div>
             <a href="/buy/logout" title="Do you want to log out?" class="ms-2 btn btn-outline-danger">Logout</a>

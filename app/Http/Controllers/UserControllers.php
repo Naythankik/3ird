@@ -3,14 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
+use App\Mail\OrderProduct;
+use App\Models\Images;
+use App\Models\Messages;
 use App\Models\Order;
 use App\Models\Products;
 use App\Models\Users;
 use App\Models\Carts;
 use App\Models\WishLists;
+use http\Message;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Support\Facades\Password;
@@ -240,7 +248,6 @@ class UserControllers extends Controller
 
     public function remove_list($id)
     {
-//        dd($id);
         WishLists::where('users_id',auth()->id())->where('product_id',$id)->delete();
         return back()->with(['delete' => 'Product removed from Wish List successfully!']);
     }
@@ -325,36 +332,48 @@ class UserControllers extends Controller
         $users = Carts::where('users_id',$id)->get('product_id');
 
         foreach ($users as $user){
+            $image = Images::where('products_id',$user['product_id'])->first('id');
 
-//            checking if the order is unique
-//            $check_order = Order::where([
-//                'user_id' => $id,
-//                'product_id' => $user['product_id']
-//            ])->count();
-//            if($check_order > 0){
-//                return back()->with(['order' => "Product is in order already"]);
-//            }
             Order::create([
                 'user_id' => $id,
                 'product_id' => $user['product_id'],
-                'order_number' => date('now')
+                'image_id' => $image['id'],
+                'order_number' => uniqid()
             ]);
+                Mail::to(auth()->user()->email)->later(now()->addSecond(10),new OrderProduct());
+
             $pr_id = Products::where('id',$user['product_id'])->get('quantity');
             $quantity = $pr_id[0]['quantity']-1;
             Products::where('id',$user['product_id'])->update([
                 'quantity' => $quantity
             ]);
         }
+
         Carts::where('users_id',$id)->delete();
         return redirect('/buy');
     }
 
     public function orders($order){
-        $orders = Order::with(['user', 'product'])->where('user_id',$order)->get();
-//        foreach ($orders as $order){
-//            print_r($order['product']['name']);
-//        }
+        $orders = Order::with(['user', 'product','image'])
+                    ->where('user_id',$order)->get();
         return view('buy.logged.order',['orders' => $orders]);
+
+    }
+
+    public function inbox($id){
+        $message = Messages::where('user_id',$id)
+            ->orderBy('id', 'ASC')
+            ->get();
+        $senders = Messages::distinct()->where('user_id',$id)->get('sender');
+        $from = [];
+        foreach ($senders as $id => $sender)
+        {
+            $from[] =$sender->sender;
+        }
+        return view('buy.logged.inbox',[
+            'messages' => $message,
+            'senders' => $from
+        ]);
     }
 
 }

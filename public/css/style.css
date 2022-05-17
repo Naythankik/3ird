@@ -67,7 +67,7 @@ hr.rule{
 }
 
 .foot{
-    margin: 30px 0 0 0;
+    margin: 5px 0 0 0;
     left: 0;
     text-align: center;
     border-radius: 1px;
@@ -101,8 +101,12 @@ div.contents{
     text-align: center;
     font-weight: bold;
     border: 0px;
+    font-family: 'Macondo', cursive;
+    /*font-family: 'Oleo Script', cursive;*/
+    font-size: 100px;
 }
 span.search{
+    font-family: 'Macondo', cursive;
     font-style: italic;
     font-size: 15px;
 }
@@ -152,6 +156,84 @@ img.picture:hover{
     width: 100%;
     height: 100%;
 }
+/*for orders link*/
+div#body{
+    display: flex;
+    background-color: navajowhite;
+    background-image: linear-gradient(-90deg, silver, gold);
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: normal;
+    justify-content: normal;
+    align-items: normal;
+    box-sizing: border-box;
+    width: 60%;
+    margin: 20px auto 20px auto;
+    border-radius: 5px;
+}
+div#body:nth-child(odd){
+    background-color: cornflowerblue;
+    background-image: linear-gradient(-90deg, #70ba9c, #cf8ce2);
+}
+div#body img{
+    margin: 30px;
+    flex-shrink: 0;
+    border-style: none;
+    width: 130px;
+    height: 130px;
+    border-radius: 5px;
+}
+
+div#contents{
+    flex-direction: column;
+    display: flex;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+div#contents h4{
+    display: block;
+    font-size: 1.0em;
+    margin-block-start: 0.83em;
+    margin-block-end: 2.34em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+div#body div#contents p{
+    margin: 0;
+    padding: 0;
+    display: block;
+    margin-block-start: 0.3em;
+    margin-block-end: 0.3em;
+    margin-inline-start: 2px;
+    margin-inline-end: 0px;
+}
+
+div#list{
+    /*margin-top: auto;*/
+}
+div#list p {
+    padding-top: 1px;
+}
+div#body a{
+    margin: 8px 13px 4px auto;
+    align-self: baseline;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+    color: #00f2ff;
+    cursor: pointer;
+    line-height: 2rem;
+    text-decoration: none;
+}
+div#body a:hover{
+    background-color: lightblue;
+    color: black;
+    font-weight: bold;
+    border-radius: 10px;
+    width: 12%;
+    text-align: center;
+}
 
 
 /*progress bar*/
@@ -173,11 +255,11 @@ img.picture:hover{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
     background-color: rgb(43, 194, 83);
-    background-image: linear-gradient(
-            center bottom,
-            rgb(43, 194, 83) 37%,
-            rgb(84, 240, 84) 69%
-    );
+    /*background-image: linear-gradient(*/
+    /*        center bottom,*/
+    /*        rgb(43, 194, 83) 37%,*/
+    /*        rgb(84, 240, 84) 69%*/
+    /*);*/
     box-shadow: inset 0 2px 9px rgba(255, 255, 255, 0.3),
     inset 0 -2px 6px rgba(0, 0, 0, 0.4);
     position: relative;
@@ -194,7 +276,7 @@ img.picture:hover{
 /*}*/
 
 .orange > span {
-    background-image: linear-gradient(rgba(60, 231, 60, 0.91), #50e31a);
+    /*background-image: linear-gradient(rgba(60, 231, 60, 0.91), #50e31a);*/
 }
 
 .nostripes > span > span,
@@ -206,3 +288,155 @@ img.picture:hover{
 /*    width: 490px;*/
 /*    margin: 80px auto;*/
 /*}*/
+
+
+/*modal for more details view*/
+#myModal-body{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.myModal-content{
+    background-color: #fefefe;
+    margin: 100px auto 30px auto;
+    padding: 20px 20px 20px 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 50%;
+    height: 70%;
+    overflow: auto;
+}
+
+.close-contents{
+    color: #aaaaaa;
+    float: right;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.close-contents:focus,
+.close-contents:hover{
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+.details h3{
+    color: red;
+}
+
+
+/*inbox message*/
+div.inbox-mode{
+    width: 350px;
+    height: 600px;
+    margin: 0px 0 0px 2px;
+    text-align: center;
+    border-radius: 4px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+div.vr{
+
+    border-left: 2px solid grey;
+    height: 600px;
+}
+div.inbox-mode::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar{
+    width: 2px;
+}
+.inbox-mode::-webkit-scrollbar-thumb{
+    background: #9c9797;
+    border-radius: 5px;
+}
+.inbox-mode::-webkit-scrollbar-thumb:hover {
+    background: black;
+}
+div.inbox-content{
+    display: block;
+    width: 100%;
+    padding: 10px 4px 10px 4px;
+    border-bottom: 1px solid grey;
+}
+div.inbox-content:last-child{
+    border-bottom: 0px;
+}
+.inbox-content:first-child{
+    margin-top: 30px;
+}
+.inbox-content:hover{
+    background: lightgrey;
+    border-radius: 5px;
+}
+
+div.inbox-details{
+    padding: 30px 0 35px 0;
+    width: 100%;
+    height: 600px;
+    text-align: center;
+    display: block;
+    border-radius: 10px;
+    /*background-color: rgba(13,110,253,0.01);*/
+    overflow-y: scroll;
+    /*background: red;*/
+}
+
+div.inbox-details img{
+    width: 100px;
+    border-radius: 100%;
+    margin-top: 10%;
+    background: none;
+}
+
+div.inbox-details-contents{
+    background-color: rgba(13,110,253,0.01);
+    width: max-content;
+    margin: 30px auto 10px auto;
+    padding: 10px 0px 10px 0;
+    text-align: center;
+    font-weight: bold;
+    border: 0px;
+    font-family: 'Macondo', cursive;
+    font-size: 100px;
+}
+
+.inbox-details::-webkit-scrollbar{
+    width: 3px;
+}
+.inbox-details::-webkit-scrollbar-thumb{
+    background: grey;
+}
+div.message-details{
+    color: black;
+    /*display: none;*/
+    width: 40%;
+    /*height: 50%;*/
+    word-wrap: break-word;
+    /*word-break: break-all;*/
+    background-color: #c4c0c0;
+    padding: 10px 20px 10px 20px;
+    margin: 0 0 20px 40px;
+    border-radius: 10px;
+}
+.message-details p:hover{
+    cursor: pointer;
+}
+
+p.message:last-child{
+    margin-bottom: 5px;
+}
+
+div.message{
+    display: flex;
+    width: 100%;
+    /*background-color: greenyellow;*/
+}

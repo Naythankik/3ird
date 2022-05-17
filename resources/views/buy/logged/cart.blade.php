@@ -11,7 +11,7 @@
             <img src="{{ Storage::url('/logo/cart.jpeg') }}">
             <div class="contents">
                 <p>Nothing to show here</p>
-                <strong style="color: gray">Your cart is empty!</strong>
+                <p>Your cart is empty!</p>
                 <p style="margin-top: 14px">Browse our categories and discover our best deals!</p>
             </div>
             <a class="btn btn-warning fw-bold" href="/buy">Start Shopping</a>
