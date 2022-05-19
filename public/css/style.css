@@ -385,9 +385,7 @@ div.inbox-details{
     text-align: center;
     display: block;
     border-radius: 10px;
-    /*background-color: rgba(13,110,253,0.01);*/
     overflow-y: scroll;
-    /*background: red;*/
 }
 
 div.inbox-details img{
@@ -417,16 +415,34 @@ div.inbox-details-contents{
 }
 div.message-details{
     color: black;
-    /*display: none;*/
+    /*position: absolute;*/
+    bottom: 70px;
+    width: 40%;
+    word-wrap: break-word;
+    background-color: #c4c0c0;
+    padding: 10px 20px 10px 20px;
+    margin: 0 0 60px 40px;
+    border-radius: 10px;
+}
+
+div.reply-details{
+    color: red;
+    background: yellow;
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 60px;
     width: 40%;
     /*height: 50%;*/
     word-wrap: break-word;
+    word-break: break-all;
     /*word-break: break-all;*/
-    background-color: #c4c0c0;
+    /*background-color: #c4c0c0;*/
     padding: 10px 20px 10px 20px;
-    margin: 0 0 20px 40px;
+    margin: 0 20px 60px 40px;
     border-radius: 10px;
 }
+
 .message-details p:hover{
     cursor: pointer;
 }
@@ -440,3 +456,70 @@ div.message{
     width: 100%;
     /*background-color: greenyellow;*/
 }
+
+/*text box for replying messages*/
+div.reply{
+    width: 50%;
+    /*background: red;*/
+    position: absolute;
+    bottom: 0;
+    display: block;
+    /*justify-content: space-between;*/
+    margin: 100px 20% 50px 15%;
+    padding: 5px 0px 5px 0px;
+}
+
+.reply input{
+    width: 650px;
+    height: 40px;
+    border: 1px solid grey;
+    box-shadow: 20px 10px 90px 1px grey;
+    border-radius: 10px;
+    padding-left: 20px;
+    margin: 10px auto 10px auto;
+}
+.reply input::placeholder{
+    color: cornflowerblue;
+    font-style: italic;
+    font-size: large;
+}
+
+.reply input:focus{
+    color: cornflowerblue;
+}
+
+
+.reply button{
+    width: 13%;
+    padding-left: 2px;
+    height: 40px;
+    border: 1px solid grey;
+    border-radius: 10px;
+    text-wrap: avoid;
+}
+
+@media screen and (max-width: 800px) {
+    div.message-details{
+        margin: 0 0 100px 40px;
+    }
+    div.reply {
+        width: 40%;
+        position: absolute;
+        bottom: 0;
+        display: block;
+    }
+    .reply input {
+        width: 200px;
+        height: 40px;
+        border: 1px solid grey;
+        box-shadow: 20px 10px 90px 1px grey;
+        border-radius: 10px;
+        padding-left: 20px;
+        margin: 10px auto 10px 1px;
+    }
+    .reply button{
+        width: max-content;
+        text-align: center;
+        font-size: large;
+    }
+    }

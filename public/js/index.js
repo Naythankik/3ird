@@ -150,18 +150,56 @@ details.forEach(function(detail,index,array){
 let messages = document.querySelectorAll('#message');
 let messageContent = document.querySelectorAll('.message-details');
 let noMessage = document.querySelector('.inbox-details-message');
-// console.log(noMessage);
-    messages.forEach(function (message,id,array){
-        message.addEventListener("click",function (e){
-            // contents.style.display = 'block';
-            // if(!messageContent[id].hasAttribute('hidden')){
-                noMessage.setAttribute('hidden','');
-            // }else{
-                messageContent[id].toggleAttribute('hidden');
-            // }
+let replyMessage = document.querySelectorAll('.reply-details');
+let reply = document.querySelector('.reply');
+let identifierMessage = [];
+let identifierReply = [];
+
+for(let x = 0; x < replyMessage.length; x++){
+    identifierReply.push(x);
+}
+
+messages.forEach(function (message,id,array){
+    identifierMessage.push(id);
+    message.addEventListener("click",function (e){
+        identifierReply.push(id);
+        identifierMessage.push(id);
+
+        // create set array for data uniqueness
+        let replied = new Set(identifierReply);
+        let nums = new Set(identifierMessage);
+
+        // removing the id from set Array to allow setting the remaining elements to hidden attributes
+        replied.delete(id);
+        nums.delete(id);
+
+        // removing the hidden attribute from the id, when message header is clicked
+        messageContent[identifierMessage.pop()].removeAttribute('hidden');
+
+        // checking if the message has been replied
+        //and checking if the message has replies from database or not
+        if (replyMessage[id] === undefined){
+            // console.log(`${id} doesn't have replies!!!!`);
+        }else{
+            replyMessage[identifierReply.pop()].removeAttribute('hidden');
+        }
+
+        // showing text box to type reply and removing the default interface message
+        reply.removeAttribute('hidden');
+        noMessage.setAttribute('hidden','');
+
+        // setting the to the remaining id's from the set array
+        // hidden attribute after click on button
+        nums.forEach(function (hidden,id){
+            messageContent[id].setAttribute('hidden','');
         })
+        replied.forEach(function (hide,number){
+                replyMessage[number].setAttribute('hidden','');
+        })
+
     })
-console.log(require('mysql'));
+})
+
 
 
 //cancelling profile changes
