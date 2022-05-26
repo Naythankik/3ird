@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrderShipped;
 use App\Http\Requests\UsersRequest;
 use App\Mail\OrderProduct;
 use App\Models\Images;
@@ -11,9 +12,14 @@ use App\Models\Products;
 use App\Models\Users;
 use App\Models\Carts;
 use App\Models\WishLists;
+use App\Notifications\OrderMail;
 use http\Message;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
+//use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -27,6 +33,9 @@ use Illuminate\Auth\Events\PasswordReset;
 
 class UserControllers extends Controller
 {
+    use Notifiable;
+
+
     public function __construct()
     {
         $this->middleware('auth')->except('create','store','login','forgot','reset');
@@ -88,7 +97,7 @@ class UserControllers extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -340,7 +349,6 @@ class UserControllers extends Controller
                 'image_id' => $image['id'],
                 'order_number' => uniqid()
             ]);
-                Mail::to(auth()->user()->email)->later(now()->addSecond(10),new OrderProduct());
 
             $pr_id = Products::where('id',$user['product_id'])->get('quantity');
             $quantity = $pr_id[0]['quantity']-1;
@@ -348,7 +356,7 @@ class UserControllers extends Controller
                 'quantity' => $quantity
             ]);
         }
-
+        event(new \App\Events\OrderProduct(auth()->user()));
         Carts::where('users_id',$id)->delete();
         return redirect('/buy');
     }
@@ -362,17 +370,38 @@ class UserControllers extends Controller
 
     public function inbox($id){
         $message = Messages::where('user_id',$id)
-            ->orderBy('id', 'ASC')
+            ->orderBy('id', 'DESC')
             ->get();
-        $senders = Messages::distinct()->where('user_id',$id)->get('sender');
-        $from = [];
-        foreach ($senders as $id => $sender)
-        {
-            $from[] =$sender->sender;
-        }
+        $last  = Messages::where('user_id',1)->orderBy('id','DESC')->get();
+
         return view('buy.logged.inbox',[
             'messages' => $message,
-            'senders' => $from
+            'senders' => $last
+        ]);
+    }
+
+
+    public function markAsRead($id){
+
+        $seen = Messages::where(['id' => $id, 'user_id' => auth()->id()])->get();
+        if($seen[0]['opened'] == 0){
+            Messages::where('id',$id)->update(['opened' => 1]);
+        }
+
+        return response()->json($id);
+    }
+
+    public function complaint(Request $request){
+        $request->validate([
+            $request->name => 'required',
+            $request->email => 'required',
+            $request->phone => 'required',
+            $request->address => 'required',
+            $request->gender => 'required',
+            $request->country => 'required',
+            $request->state => 'required',
+            $request->subject => 'required',
+            $request->message => 'required'
         ]);
     }
 

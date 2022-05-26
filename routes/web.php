@@ -27,9 +27,13 @@ Route::view('/login','buy.login')->name('login');
 
 Route::post('/login',[UserControllers::class,'login']);
 
+
+
 Route::prefix('buy')
     ->controller(UserControllers::class)
     ->group(function (){
+        Route::get('/read/{id}','markAsRead');
+        Route::post('/complaint','complaint');
         Route::get('/inbox/{id}','inbox');
         Route::post('/pay','payment');
         Route::get('/add_to_cart/{p_id}','add_to_cart');
@@ -83,9 +87,3 @@ Route::get('/forgot-password', function () {
 })->name('password.request');
 
 Route::post('/forget',[SellersController::class,'forget']);
-
-
-
-//testing the mailing class
-//Route::get('/mail',[UserControllers::class,'http']);
-//Route::get('/mail',[UserControllers::class,'paymentCompleted']);

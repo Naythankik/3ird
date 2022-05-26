@@ -18,7 +18,6 @@
     <footer class="mt-5"><a href="/sell/create" class="ms-4 fw-bold  text-decoration-none text-warning">Click here to Sell</a></footer>
 
 </div>
-
-
+<script src="{{ asset('js/sell.js') }}"></script>
 </body>
 </html>

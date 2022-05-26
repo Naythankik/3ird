@@ -154,14 +154,30 @@ let replyMessage = document.querySelectorAll('.reply-details');
 let reply = document.querySelector('.reply');
 let identifierMessage = [];
 let identifierReply = [];
+let open = document.querySelectorAll('.open');
+
 
 for(let x = 0; x < replyMessage.length; x++){
     identifierReply.push(x);
 }
+async function markRead(id){
+    res = await fetch(`/buy/read/${id}`, {
+        method: 'GET',
+    })
 
+    return await res.json();
+}
 messages.forEach(function (message,id,array){
     identifierMessage.push(id);
-    message.addEventListener("click",function (e){
+    message.addEventListener("click",function (e) {
+
+        let seen = open[id].innerHTML;
+
+        // const response =
+            markRead(seen);
+        // response.then(data => console.log(data));
+
+
         identifierReply.push(id);
         identifierMessage.push(id);
 
@@ -178,37 +194,64 @@ messages.forEach(function (message,id,array){
 
         // checking if the message has been replied
         //and checking if the message has replies from database or not
-        if (replyMessage[id] === undefined){
+        if (replyMessage[id] === undefined) {
             // console.log(`${id} doesn't have replies!!!!`);
-        }else{
+        } else {
             replyMessage[identifierReply.pop()].removeAttribute('hidden');
         }
 
         // showing text box to type reply and removing the default interface message
         reply.removeAttribute('hidden');
-        noMessage.setAttribute('hidden','');
+        noMessage.setAttribute('hidden', '');
 
         // setting the to the remaining id's from the set array
         // hidden attribute after click on button
-        nums.forEach(function (hidden,id){
-            messageContent[id].setAttribute('hidden','');
+        nums.forEach(function (hidden, id) {
+            messageContent[id].setAttribute('hidden', '');
         })
-        replied.forEach(function (hide,number){
-                replyMessage[number].setAttribute('hidden','');
+        replied.forEach(function (hide, number) {
+            replyMessage[number].setAttribute('hidden', '');
         })
 
     })
 })
 
+// complaint script for logged user
+const complainButton = document.querySelector('#complaint');
+const complainDisplay = document.querySelector('.complaint');
+const complaintOverlay = document.querySelector('.complaint-overlay');
+const closeComplaint = document.querySelector('.complaint-close');
+
+complainButton.addEventListener('click',function (e){
+    complainDisplay.removeAttribute('hidden');
+    closeComplaint.removeAttribute('hidden');
+    complaintOverlay.removeAttribute('hidden');
+});
+
+function hide(){
+    complainDisplay.setAttribute('hidden','');
+    closeComplaint.setAttribute('hidden','');
+    complaintOverlay.setAttribute('hidden','');
+}
+
+closeComplaint.addEventListener('click',hide);
+complaintOverlay.addEventListener('click',hide);
+document.addEventListener("keydown",function (e){
+    if (e.key === "Escape" && !complainDisplay.hasAttribute("hidden")){
+        hide();
+    }
+
+})
+
 
 
 //cancelling profile changes
-        let profile = document.querySelector(".cancel");
-        profile.addEventListener("click",function (){
-            alert("Redirecting to home page......");
-            setTimeout(function (){
-                window.location.href = "/buy"
-            },500);
-        })
+//         let profile = document.querySelector(".cancel");
+//         profile.addEventListener("click",function (){
+//             alert("Redirecting to home page......");
+//             setTimeout(function (){
+//                 window.location.href = "/buy"
+//             },500);
+//         })
 
 

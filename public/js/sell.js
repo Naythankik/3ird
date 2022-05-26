@@ -1,10 +1,14 @@
-let message = document.getElementById('alert');
+// let message = document.getElementById('alert');
+//
+// if (message){
+//     alert(message.innerText);
+// }
+//
+// function sell(){
+//     confirm('Do you want to post products?')
+// }
 
-if (message){
-    alert(message.innerText);
-}
+const x = require('mysql');
 
-function sell(){
-    confirm('Do you want to post products?')
-}
+console.log(x);
 
