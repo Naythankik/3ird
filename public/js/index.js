@@ -1,3 +1,5 @@
+
+
 // switching between languages
 const language = document.getElementById('lang');
         en.addEventListener("click",function (){
@@ -243,15 +245,33 @@ document.addEventListener("keydown",function (e){
 
 })
 
+//alert box for successful registration
+let success = document.querySelector('#welcome')
+success.setAttribute('title',success.innerHTML);
+success.addEventListener('click',function (){
+    success.style.display = 'none';
+})
 
 
-//cancelling profile changes
-//         let profile = document.querySelector(".cancel");
-//         profile.addEventListener("click",function (){
-//             alert("Redirecting to home page......");
-//             setTimeout(function (){
-//                 window.location.href = "/buy"
-//             },500);
-//         })
+function showPassword(){
+    let password = document.querySelector('#pwd');
+    if (password.type === 'password'){
+        password.type = 'text';
+    }else{
+        password.type = 'password';
+    }
+}
+
+
+
+
+// cancelling profile changes
+        let profile = document.querySelector(".cancel");
+        profile.addEventListener("click",function (){
+            alert("Redirecting to home page......");
+            setTimeout(function (){
+                window.location.href = "/buy"
+            },500);
+        })
 
 

@@ -29,9 +29,8 @@ class UsersRequest extends FormRequest
             'email' => 'required',
             'telephone' => 'required|numeric',
             'username' => 'required',
-            'age' => 'required|date',
             'password' => 'required',
-            'password_2' => 'same:password',
+            'password_2' => 'required|same:password',
             'profile' => 'required|image|max:2000|'
         ];
     }
@@ -39,19 +38,20 @@ class UsersRequest extends FormRequest
     public function messages()
     {
         return [
-            'first_name.required' => 'User\'s First Name is required',
-            'last_name.required' => 'User\'s Last Name is required',
-            'email.required' => 'User\'s Email is required',
-            'username.required' => 'Username is required',
-            'age.required' => 'User\'s Date of Birth is Required',
-            'password.required' =>'User\'s password is required',
-            'profile.required' => 'User\'s Profile Image is required',
-            'password_2.same' => 'Password Does\'nt Match',
-            'profile.image' => 'File must be an Image',
-            'profile.max' => 'File should be less than 2MB',
-            'age.date' => 'Date is Invalid',
-            'telephone.required' => 'Telephone Number is Required',
-            'telephone.numeric' => 'Telephone must be Numeric'
+            'first_name.required' => 'first name is required',
+            'last_name.required' => 'last name is required',
+            'email.required' => 'email is required',
+            'username.required' => 'username is required',
+            'age.required' => 'date of birth is required',
+            'password.required' =>'password is required',
+            'profile.required' => 'profile image is required',
+            'password_2.required' => 'password confirmation is required',
+            'password_2.same' => 'password does\'nt match',
+            'profile.image' => 'file must be an image',
+            'profile.max' => 'file should be less than 2MB',
+            'age.date' => 'date is invalid',
+            'telephone.required' => 'telephone number is required',
+            'telephone.numeric' => 'telephone must be numeric'
         ];
     }
 }

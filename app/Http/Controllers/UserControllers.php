@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\OrderShipped;
 use App\Http\Requests\UsersRequest;
 use App\Mail\OrderProduct;
+use App\Mail\UserRegistered;
 use App\Models\Images;
 use App\Models\Messages;
 use App\Models\Order;
@@ -67,11 +68,33 @@ class UserControllers extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(UsersRequest $request)
+    public function store(Request $request)
     {
-        $request->validated();
+        $day = $request->day;
+        $month = $request->month;
+        $year = $request->year;
+        $dobArray = [$day,$month,$year];
+        $dateOfBirth = strtotime($day." ".$month." ".$year);
+
+        if (in_array("",$dobArray)){
+            return back()->withErrors(['emptyDate' => 'date of birth is empty!'])->withInput();
+        }
+        if($dateOfBirth > 1262304000){
+            return back()->withErrors(['dob' => 'age range is not invalid!'])->withInput();
+        };
+        if (empty($request->gender)){
+            return back()->withErrors(['gend' => 'gender is not selected!'])->withInput();
+        }
+        if ($request->gender == "custom"){
+            if ($request->genderCustom == null){
+            return back()->withErrors(['gender' => 'customed gender is not selected!'])->withInput();
+            }else{
+                $request->gender = $request->genderCustom;
+            }
+        }
+
         $new_name = uniqid($request->username,'true').'.'.$request->profile->extension();
         $picture = $request->profile->storeAs('public/buyer/profile',$new_name);
 
@@ -81,12 +104,14 @@ class UserControllers extends Controller
             'username' => $request->username,
             'telephone' => $request->telephone,
             'email' => $request->email,
-            'dob' => $request->age,
+            'dob' => $dateOfBirth,
+            'gender' => $request->gender,
             'profile' => $picture,
             'password' => Hash::make($request->password)
         ]);
+        Mail::to($request->email)->later(now()->addMinute(1),new UserRegistered($request->first_name));
 
-        return view('buy.login')->with(['success' => 'User created Successfully!']);
+        return redirect('/login')->with(['status' => 'User registered successfully!!']);
     }
 
     /**

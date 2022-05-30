@@ -28,7 +28,6 @@ Route::view('/login','buy.login')->name('login');
 Route::post('/login',[UserControllers::class,'login']);
 
 
-
 Route::prefix('buy')
     ->controller(UserControllers::class)
     ->group(function (){

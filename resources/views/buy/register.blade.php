@@ -2,107 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}" type="text/css">
     <link rel="shortcut icon" type="imaage/jpg" href="{{ Storage::url('public/logo/3ird.jpg') }}">
-    <title>3ird</title>
+    <title>Document</title>
 </head>
+<body>
 
-<body class="bg-success">
-
-<center>
-    <div class="p-3 m-3">
-        <h3 class="ms-3 mt-5 text-info fw-bold">SIGN UP</h3>
-        <form method="post" action="/buy" enctype="multipart/form-data">
-
-            @csrf
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text" id="basic-addon1">First Name</span>
-                <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{old('first_name')}}" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            @error('first_name')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text" id="basic-addon1">Last Name</span>
-                <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{old('last_name')}}" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            @error('last_name')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text" id="basic-addon1">Username</span>
-                <input type="text" class="form-control" name="username" placeholder="Username" value="{{old('username')}}" aria-label="Username" aria-describedby="basic-addon1">
-            </div>
-            @error('username')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text" id="basic-addon2">Email</span>
-                <input type="text" class="form-control" name="email" placeholder="User's Email" value="{{old('email')}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            </div>
-            @error('email')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text" id="basic-addon2">Telephone</span>
-                <input type="text" class="form-control" name="telephone" value="{{old('telephone')}}" placeholder="User's Telephone" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            </div>
-            @error('telephone')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <input type="file" class="form-control" name="profile" id="basic-url" aria-describedby="basic-addon3">
-            </div>
-            @error('profile')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text">Date Of Birth</span>
-                <input type="text" name="age" placeholder="YYYY-MM-DD" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">
-            </div>
-            @error('age')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text">Password</span>
-                <input type="password" name="password"  class="form-control" placeholder="********" aria-label="Username">
-            </div>
-            @error('password')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <div class="input-group mb-2 w-50">
-                <span class="input-group-text">Confirm Password</span>
-                <input type="password" name="password_2" placeholder="********" class="form-control" aria-label="With textarea"></input>
-            </div>
-            @error('password_2')
-            <p class="alert alert-danger w-50 p-1">{{$message}}</p>
-            @enderror
-
-
-            <button class="btn btn-primary fw-bold text-dark fst-normal mt-4" type="submit">SUBMIT</button>
-        </form>
+<div class="header" style="cursor: default;">3ird Corporation</div>
+<div class="body">
+    <div class="body-header">
+        <p>Create new accounts</p><br>
+        <p>It's Quick and easy</p>
     </div>
-    <a href="/login" class="text-decoration-none">Already a User?</a><br>
-    <a href="/" class="text-decoration-none text-warning">Do you want to sell?</a>
-</center>
+    <hr>
+    <div class="body-content">
+        @error('dob')
+        <p id="age">{{ $message }}</p>
+        @enderror
+        @error('emptyDate')
+        <p id="age">{{ $message }}</p>
+        @enderror
+        @error('gender')
+        <p id="age">{{ $message }}</p>
+        @enderror
+        @error('gend')
+        <p id="age">{{ $message }}</p>
+        @enderror
+        <form method="post" action="/buy" enctype="multipart/form-data">
+            @csrf
+            <div class="names">
+                <input type="text" name="first_name" id="fname" placeholder="First Name" value="{{old('first_name')}}">
+                <input type="text" name="last_name" placeholder="Last Name" value="{{old('last_name')}}">
+            </div>
+            <div class="error-names">
+                @error('first_name')
+                <p>{{ $message }}</p>
+                @enderror
+                @error('last_name')
+                <p>{{ $message }}</p>
+                @enderror
+            </div>
+            <div class="email">
+                <input type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
+                <input type="text" name="username" placeholder="Username" value="{{old('username')}}">
+            </div>
+            <div class="error-email">
+                @error('email')
+                <p>{{$message}}</p>
+                @enderror
+                @error('username')
+                <p>{{$message}}</p>
+                @enderror
+            </div>
+            <div class="phone">
+                <input type="text" name="telephone" placeholder="Mobile Number" value="{{old('telephone')}}">
+            </div>
+            <div class="error-phone">
+                @error('telephone')
+                <p>{{$message}}</p>
+                @enderror
+            </div>
+            <input type="file" name="profile" class="custom-file-input">
+            <div class="error-phone">
+                @error('profile')
+                <p>{{$message}}</p>
+                @enderror
+            </div>
+            <span style="background-color: white; float:left; color: grey; font-size: 11px;">Date of birth</span>
+            <div class="date">
+                <input type="text" name="dob" value="" hidden>
+                <select name="day" id="day">
+                    <option value="" disabled selected hidden>Day</option>
+                </select>
+                <select name="month" id="month">
+                    <option value="" selected disabled hidden>Month</option>
+                </select>
+                <select name="year" id="year">
+                    <option value="" selected disabled hidden>Year</option>
+                </select>
+            </div>
+            <span style="background-color: white; float:left ; color: grey;font-size: 11px;">Gender</span>
+            <div class="gender">
+                <span>Male<input type="radio" name="gender" value="male" id="male"></span>
+                <span>Female<input type="radio" name="gender" value="female" id="female"></span>
+                <span>Custom<input type="radio" name="gender" id="custom" value="custom"></span>
+            </div>
+            <div class="gender-select" style="background-color: white;" hidden>
+                <div class="custom-gender">
+                    <select name="genderCustom" id="custom-gender">
+                        <option value="" selected disabled hidden>Select your pronoun</option>
+                        <option value="she/her">She: "Wish her a happy birthday!"</option>
+                        <option value="he/him">He: "Wish him a happy birthday!"</option>
+                        <option value="they/them">They: "Wish them a happy birthday!"</option>
+                    </select>
+                </div>
+                <div class="gender-option">
+                    <input type="text" name="gender1" placeholder="Gender (optional)">
+                </div>
+            </div>
+            <div class="passwords">
+                <input type="password" name="password" placeholder="Enter password">
+                <input type="password" name="password_2" placeholder="Confirm password">
+            </div>
+            <div class="error-email">
+                @error('password')
+                <p>{{$message}}</p>
+                @enderror
+                @error('password_2')
+                <p>{{$message}}</p>
+                @enderror
+            </div>
+            <p>People who use our service may have uploaded your contact information to 3ird.</p>
+            <p>By clicking Sign Up, you agree to our <a href="#">Terms</a>, <a href="#">Data Policy</a> and <a href="#">Cookie Policy</a>.
+                You may receive EMAIL notifications from us.</p>
+            <div class="submit">
+                <button type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="account">
+            <a href="/login">Already Have an account?</a>
+        </div>
+    </div>
+</div>
 
 </body>
+<script src="{{ asset('js/register.js') }}"></script>
 </html>
+
+
+
+{{--            <div class="input-group mb-2 w-50">--}}
+{{--                <input type="file" class="form-control" name="profile" id="basic-url" aria-describedby="basic-addon3">--}}
+{{--            </div>--}}
+{{--            @error('profile')--}}
+{{--            <p class="alert alert-danger w-50 p-1">{{$message}}</p>--}}
+{{--            @enderror--}}
+
+
+{{--            <div class="input-group mb-2 w-50">--}}
+{{--                <span class="input-group-text">Date Of Birth</span>--}}
+{{--                <input type="text" name="age" placeholder="YYYY-MM-DD" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">--}}
+{{--            </div>--}}
+{{--            @error('age')--}}
+{{--            <p class="alert alert-danger w-50 p-1">{{$message}}</p>--}}
+{{--            @enderror--}}
+
+
+{{--            <div class="input-group mb-2 w-50">--}}
+{{--                <span class="input-group-text">Confirm Password</span>--}}
+{{--                <input type="password" name="password_2" placeholder="********" class="form-control" aria-label="With textarea"></input>--}}
+{{--            </div>--}}
+{{--            @error('password_2')--}}
+{{--            <p class="alert alert-danger w-50 p-1">{{$message}}</p>--}}
+{{--            @enderror--}}
+
+
+{{--        </form>--}}
+{{--    </div>--}}
+
+{{--    <a href="/" class="text-decoration-none text-warning">Do you want to sell?</a>--}}
