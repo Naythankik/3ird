@@ -133,33 +133,4 @@
 
 
 
-{{--            <div class="input-group mb-2 w-50">--}}
-{{--                <input type="file" class="form-control" name="profile" id="basic-url" aria-describedby="basic-addon3">--}}
-{{--            </div>--}}
-{{--            @error('profile')--}}
-{{--            <p class="alert alert-danger w-50 p-1">{{$message}}</p>--}}
-{{--            @enderror--}}
 
-
-{{--            <div class="input-group mb-2 w-50">--}}
-{{--                <span class="input-group-text">Date Of Birth</span>--}}
-{{--                <input type="text" name="age" placeholder="YYYY-MM-DD" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">--}}
-{{--            </div>--}}
-{{--            @error('age')--}}
-{{--            <p class="alert alert-danger w-50 p-1">{{$message}}</p>--}}
-{{--            @enderror--}}
-
-
-{{--            <div class="input-group mb-2 w-50">--}}
-{{--                <span class="input-group-text">Confirm Password</span>--}}
-{{--                <input type="password" name="password_2" placeholder="********" class="form-control" aria-label="With textarea"></input>--}}
-{{--            </div>--}}
-{{--            @error('password_2')--}}
-{{--            <p class="alert alert-danger w-50 p-1">{{$message}}</p>--}}
-{{--            @enderror--}}
-
-
-{{--        </form>--}}
-{{--    </div>--}}
-
-{{--    <a href="/" class="text-decoration-none text-warning">Do you want to sell?</a>--}}
