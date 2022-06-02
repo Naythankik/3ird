@@ -1,5 +1,3 @@
-
-
 // switching between languages
 const language = document.getElementById('lang');
         en.addEventListener("click",function (){
@@ -261,9 +259,6 @@ function showPassword(){
         password.type = 'password';
     }
 }
-
-
-
 
 // cancelling profile changes
         let profile = document.querySelector(".cancel");

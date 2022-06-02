@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('buyers', function (Blueprint $table) {
-            //
+            $table->text('address')->after('gender');
+            $table->string('city')->after('address')->default('Lagos');
+            $table->string('state')->after('city')->default('Lagos');
+            $table->string('country')->after('state')->default('Nigeria');
         });
     }
 
@@ -26,7 +29,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('buyers', function (Blueprint $table) {
-            //
+            $table->dropColumn(['address','state','country','city']);
         });
     }
 };

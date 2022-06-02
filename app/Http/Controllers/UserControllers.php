@@ -30,6 +30,7 @@ use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use phpDocumentor\Reflection\Types\Integer;
 
 
 class UserControllers extends Controller
@@ -70,7 +71,7 @@ class UserControllers extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UsersRequest $request)
     {
         $day = $request->day;
         $month = $request->month;
@@ -89,7 +90,7 @@ class UserControllers extends Controller
         }
         if ($request->gender == "custom"){
             if ($request->genderCustom == null){
-            return back()->withErrors(['gender' => 'customed gender is not selected!'])->withInput();
+                return back()->withErrors(['gender' => 'customed gender is not selected!'])->withInput();
             }else{
                 $request->gender = $request->genderCustom;
             }
@@ -133,8 +134,7 @@ class UserControllers extends Controller
      */
     public function edit($id)
     {
-        $user = Users::where('id',$id)->get();
-        return view('buy.logged.editProfile',['user' => $user]);
+        return redirect('/buy/'.$id.'/profile');
     }
 
     /**
@@ -144,39 +144,68 @@ class UserControllers extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,int $id)
     {
-
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required',
             'email' => 'required',
             'telephone' => 'required|numeric',
-            'image' => 'required|image|max:2000'
+            'profile_picture' => 'image|max:2000',
+            'dob' => 'required|date|before_or_equal:2010-01-01|date_format:Y-m-d',
+            'gender' => 'required|alpha',
+            'city' => 'required',
+            'state' => 'required',
+            'country' => 'required',
+            'address' => 'required',
+            'password' => 'required|current_password',
         ],[
-           'first_name.required' => 'This field is empty',
-            'last_name.required' => 'This field is empty',
-            'username.required' => 'This field is empty',
-            'email.required' => 'This field is empty',
-            'telephone.required' => 'This field is empty',
-            'telephone.numeric' => 'This field must be a number',
-            'image.required' => 'Image is required',
-            'image.image' => 'File is not an image',
-            'image.size' => 'File is too big'
+            'first_name.required' => 'first name is required',
+            'last_name.required' => 'last name is required',
+            'email.required' => 'email is required',
+            'telephone.required' => 'telephone is required',
+            'telephone.numeric' => 'telephone must be a number',
+            'dob.required' => 'date of birth is required',
+            'dob.date' => 'date is invalid',
+            'dob.before_or_equal' => 'user is underage',
+            'gender.required' => 'gender is required',
+            'gender.alpha' => 'gender must be alphabet',
+            'city.required' => 'city is required',
+            'state.required' => 'state is required',
+            'country.required' => 'country is required',
+            'address.required' =>'user address is required',
+            'profile_picture.image' => 'File is not an image',
+            'profile_picture.size' => 'File is too big',
+            'password.required' => 'password is needed',
+            'password.current_password' => 'password is incorrect, failed to update profile'
         ]);
-        $profiles = uniqid(lcfirst(auth()->user()->username),true).".".$request->image->extension();
-        $profile = $request->image->storeAs('public/buyer/profile',$profiles);
-//
-        Users::where('id',auth()->id())->update([
+        $image = $request->profile_picture;
+        if (!empty($image)){
+            $imageArea = getimagesize($image);
+            if ($imageArea[0] > 301 || $imageArea[1] > 301){
+                return back()->withErrors(['width' => 'Image area must be 300 by 300']);
+            }
+            $profiles = uniqid(lcfirst(auth()->user()->username),true).".".$image->extension();
+            $image = $image->storeAs('public/buyer/profile',$profiles);
+        }else{
+            $image = $request->image;
+        }
+
+        Users::where('id',$id)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'username' => $request->username,
-            'profile' => $profile
-            ]);
-//
+            'dob' => $request->dob,
+            'gender' => $request->gender,
+            'city' => $request->city,
+            'state' => $request->state,
+            'country' => $request->country,
+            'address' => $request->address,
+            'profile' => $image
+        ]);
+
         return back()->with(['updated' => 'User Info updated successfully!']);
 
     }
@@ -233,10 +262,10 @@ class UserControllers extends Controller
     {
         $carts = Carts::with('product.images')->where('users_id',auth()->id())->get();
         $price = [];
-       foreach ($carts as $cart){
+        foreach ($carts as $cart){
             $price[] = $cart->product['price'];
-       }
-       $price = array_sum($price);
+        }
+        $price = array_sum($price);
 
         return view('buy.logged.cart',['carts' => $carts,'price' => $price]);
     }
@@ -258,8 +287,8 @@ class UserControllers extends Controller
 
     public function remove_cart($id)
     {
-       Carts::where('users_id',auth()->id())->where('product_id',$id)->delete();
-       return back()->with(['delete' => 'Product removed from cart successfully!']);
+        Carts::where('users_id',auth()->id())->where('product_id',$id)->delete();
+        return back()->with(['delete' => 'Product removed from cart successfully!']);
     }
 
     public function search(Request $request)
@@ -299,11 +328,11 @@ class UserControllers extends Controller
         {
             return back()->with(['cart_exist' => 'Product is in List!','id' => $p_id]);
         }
-            WishLists::create([
-                'users_id' => auth()->id(),
-                'product_id' => $p_id
-            ]);
-            return back()->with(['cart' => 'Product Added to Wish List successfully!', 'id' => $p_id]);
+        WishLists::create([
+            'users_id' => auth()->id(),
+            'product_id' => $p_id
+        ]);
+        return back()->with(['cart' => 'Product Added to Wish List successfully!', 'id' => $p_id]);
     }
 
     public function list()
@@ -388,7 +417,7 @@ class UserControllers extends Controller
 
     public function orders($order){
         $orders = Order::with(['user', 'product','image'])
-                    ->where('user_id',$order)->get();
+            ->where('user_id',$order)->get();
         return view('buy.logged.order',['orders' => $orders]);
 
     }

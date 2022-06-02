@@ -1,0 +1,151 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+div.contents-details {
+    background: white;
+    padding: 20px 0 10px 50px;
+    margin: 10px auto 20px auto;
+    width: 50%;
+    border-radius: 20px;
+    box-shadow: 1px 1px 40px -10px black;
+}
+div.update p{
+    text-align: center;
+    padding: 10px 0 10px 0;
+    font-size: 15px;
+    color: green;
+    font-weight: bold;
+}
+div.update{
+    margin: 10px auto 5px auto;
+    width: 25%;
+    outline: none;
+    background: none;
+    border-radius: 10px;
+
+}
+
+div.face {
+    text-align: center;
+    position: relative;
+}
+div.file {
+    text-align: center;
+}
+div.file input::-webkit-file-upload-button{
+    visibility: hidden;
+}
+/*div.file input::before{*/
+/*    content: 'Select some files';*/
+/*    display: inline-block;*/
+/*    background: linear-gradient(top, #f9f9f9, #e3e3e3);*/
+/*    border: 1px solid #999;*/
+/*    border-radius: 3px;*/
+/*    padding: 5px 8px;*/
+/*    outline: none;*/
+/*    white-space: nowrap;*/
+/*    -webkit-user-select: none;*/
+/*    cursor: pointer;*/
+/*    text-shadow: 1px 1px #fff;*/
+/*    font-weight: 700;*/
+/*    font-size: 10pt;*/
+/*}*/
+div.file input {
+    width: 3%;
+    color: blue;
+    background: none;
+    padding: 0 5px 0 5px;
+    border: none;
+    outline: none;
+    position: absolute;
+    top: 95px;
+    font-size: small;
+    text-decoration: none;
+    cursor: pointer;
+    z-index: 1;
+}
+div.face img {
+    border-radius: 50%;
+    width: 15vh;
+    height: 15vh;
+    outline: 1px solid #4e6fa7;
+}
+
+div.names input {
+    padding: 5px 10px 5px 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+div.names  p,
+div.email p,
+div.telephone p,
+div.address p,
+div.face p
+{
+    background: none;
+    border-radius: 10px;
+    text-align: left;
+    margin-top: 4px;
+    color: red;
+    font-size: 10px;
+}
+div.face p{
+    text-align: center;
+}
+div.names {
+    display: flex;
+    background: none;
+    width: 70%;
+    justify-content: space-around;
+    margin: 10px 20px;
+    gap: 50px;
+}
+
+div.email,
+div.telephone,
+div.address {
+    background: none;
+    width: 70%;
+    margin: 10px 20px;
+}
+
+div.email > input,
+div.telephone > input,
+div.address > input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid grey;
+}
+div.submit {
+    background: none;
+    width: 70%;
+    margin: 20px;
+    text-align: left;
+}
+div.submit > button {
+    padding: 15px;
+    border-radius: 10px;
+    width: 20%;
+    font-size: 15px;
+    color: white;
+    background: rgb(66, 66, 228);
+    border: none;
+    box-shadow: 0 10px 40px -10px rgb(66, 66, 228);
+}
+input {
+    margin-top: 5px;
+    outline: 1px solid rgb(240, 240, 248) ;
+}
+label {
+    font-weight: bold;
+}
+input:focus {
+    outline: 1px solid blue;
+    color: black;
+}
+input{
+    color: grey;
+}

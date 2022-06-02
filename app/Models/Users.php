@@ -17,6 +17,7 @@ class Users extends Authenticatable
 
     protected $guarded = ['id'];
 
+
     public function cart()
     {
         return $this->hasMany(Carts::class);
