@@ -2,13 +2,6 @@
 
 namespace App\Providers;
 
-use App\Events\OrderProduct;
-use App\Events\PodcastProcessed;
-use App\Events\UserDeleted;
-use App\Listeners\OrderMail;
-use App\Listeners\SendPodcastNotification;
-use App\Listeners\SendShipmentNotification;
-use App\Listeners\SendUserNotification;
 use App\Models\Products;
 use App\Observers\ProductObserver;
 use Illuminate\Auth\Events\Registered;
@@ -27,6 +20,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        ProductOrdered::class => [
+            ProductOrderedMail::class,
+        ],
     ];
 
     /**
@@ -37,12 +33,8 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         Event::listen(
-            \App\Events\OrderShipped::class,
-            [SendShipmentNotification::class,'handle']
-        );
-        Event::listen(
-            OrderProduct::class,
-            [OrderMail::class,'handle']
+            ProductOrdered::class,
+            [ProductOrderedMail::class,'handle'],
         );
     }
 

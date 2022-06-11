@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\OrderShipped;
 use App\Http\Requests\UsersRequest;
 use App\Mail\OrderProduct;
 use App\Mail\UserRegistered;
@@ -14,6 +13,7 @@ use App\Models\Users;
 use App\Models\Carts;
 use App\Models\WishLists;
 use App\Notifications\OrderMail;
+use App\Providers\ProductOrdered;
 use http\Message;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
@@ -49,9 +49,18 @@ class UserControllers extends Controller
      */
     public function index()
     {
-        $show = Products::with('images')->get();
-
-        return view('buy.logged.home',['products' => $show]);
+        $budgets = Products::with('image')->where('price','<' ,100000)->get();
+        $recommends = Products::with('image')->inRandomOrder()->limit(7)->get();
+        $category = Products::with('image')->where('price','>=' ,100000)->get();
+        $brands = DB::table('brands')->select('*')->get();
+        $all = Products::with('image')->inRandomOrder()->get();
+        return view('buy.logged.home')->with([
+            'budgets' => $budgets,
+            'recommends' => $recommends,
+            'category' => $category,
+            'brands' => $brands,
+            'all' => $all
+        ]);
     }
 
     /**
@@ -123,6 +132,12 @@ class UserControllers extends Controller
      */
     public function show($id)
     {
+        $products = Products::with('images')->where('id',$id)->get();
+        $firstImage = Images::where('products_id', $id)->first();
+        return view('buy.logged.show',[
+            'products' => $products,
+            'image' => $firstImage
+        ]);
 
     }
 
@@ -254,13 +269,16 @@ class UserControllers extends Controller
 
     public function category($category)
     {
-        $categories = Products::with('images')->where('category','=',$category)->get();
-        return view('buy.logged.home',['products' => $categories]);
+        $categories = Products::with('image')->where('category','=',$category)->inRandomOrder()->get();
+        return view('buy.logged.view',[
+            'products' => $categories,
+            'category' => $category
+        ]);
     }
 
     public function cart()
     {
-        $carts = Carts::with('product.images')->where('users_id',auth()->id())->get();
+        $carts = Carts::with('product.image')->where('users_id',auth()->id())->get();
         $price = [];
         foreach ($carts as $cart){
             $price[] = $cart->product['price'];
@@ -300,7 +318,10 @@ class UserControllers extends Controller
             ->orWhere('name','like',$user)
             ->get();
 
-        return view('buy.logged.home',['products' => $string]);
+        return view('buy.logged.view',[
+            'products' => $string,
+            'category' => $request->q
+        ]);
     }
 
     public function profile($id)
@@ -326,7 +347,7 @@ class UserControllers extends Controller
         }
         if ($wish > 0)
         {
-            return back()->with(['cart_exist' => 'Product is in List!','id' => $p_id]);
+            return back()->with(['cart_exist' => 'Product is in Wish List!','id' => $p_id]);
         }
         WishLists::create([
             'users_id' => auth()->id(),
@@ -394,7 +415,7 @@ class UserControllers extends Controller
         $id = auth()->id();
         $users = Carts::where('users_id',$id)->get('product_id');
 
-        foreach ($users as $user){
+        foreach ($users as $i => $user){
             $image = Images::where('products_id',$user['product_id'])->first('id');
 
             Order::create([
@@ -410,7 +431,8 @@ class UserControllers extends Controller
                 'quantity' => $quantity
             ]);
         }
-        event(new \App\Events\OrderProduct(auth()->user()));
+        event(new ProductOrdered(auth()->user()));
+
         Carts::where('users_id',$id)->delete();
         return redirect('/buy');
     }

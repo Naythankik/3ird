@@ -15,7 +15,9 @@ table{
     justify-content: center;
     border-bottom-width: 0px;
 }
-
+a{
+    text-decoration: none;
+}
 
 th, td {
     border-style: none;
@@ -76,6 +78,7 @@ hr.rule{
     left: 0;
     text-align: center;
     border-radius: 1px;
+    /*position: absolute;*/
     bottom: 0;
     background-color: white;
     width: 100%;

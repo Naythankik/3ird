@@ -71,22 +71,22 @@ const list = document.querySelectorAll(".wish");
 
 const about = document.querySelector(".modal-about");
 const close = document.querySelector(".about-close");
-const overlay = document.querySelector(".about-overlay");
+// const overlay = document.querySelector(".about-overlay");
 const mAbout = document.querySelector(".about");
         about.addEventListener("click",function (){
             close.classList.remove("hidden");
-            overlay.classList.remove("hidden");
+            // overlay.classList.remove("hidden");
             mAbout.classList.remove("hidden");
         })
 
         function closed(){
             close.classList.add("hidden");
-            overlay.classList.add("hidden");
+            // overlay.classList.add("hidden");
             mAbout.classList.add("hidden");
         }
 
         close.addEventListener("click",closed);
-        overlay.addEventListener("click", closed);
+        // overlay.addEventListener("click", closed);
         document.addEventListener("keydown",function (e){
             if (e.key === "Escape" && !mAbout.classList.contains("hidden")){
                 closed();
@@ -219,23 +219,23 @@ messages.forEach(function (message,id,array){
 // complaint script for logged user
 const complainButton = document.querySelector('#complaint');
 const complainDisplay = document.querySelector('.complaint');
-const complaintOverlay = document.querySelector('.complaint-overlay');
+// const complaintOverlay = document.querySelector('.complaint-overlay');
 const closeComplaint = document.querySelector('.complaint-close');
 
 complainButton.addEventListener('click',function (e){
     complainDisplay.removeAttribute('hidden');
     closeComplaint.removeAttribute('hidden');
-    complaintOverlay.removeAttribute('hidden');
+    // complaintOverlay.removeAttribute('hidden');
 });
 
 function hide(){
     complainDisplay.setAttribute('hidden','');
     closeComplaint.setAttribute('hidden','');
-    complaintOverlay.setAttribute('hidden','');
+    // complaintOverlay.setAttribute('hidden','');
 }
 
 closeComplaint.addEventListener('click',hide);
-complaintOverlay.addEventListener('click',hide);
+// complaintOverlay.addEventListener('click',hide);
 document.addEventListener("keydown",function (e){
     if (e.key === "Escape" && !complainDisplay.hasAttribute("hidden")){
         hide();

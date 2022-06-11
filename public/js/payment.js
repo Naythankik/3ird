@@ -1,4 +1,5 @@
 const paymentForm = document.getElementById('paymentForm');
+
 paymentForm.addEventListener("submit", payWithPaystack, false);
 function payWithPaystack(e) {
     e.preventDefault();
@@ -16,8 +17,12 @@ function payWithPaystack(e) {
         },
         callback: function(response){
             alert(`Payment complete! Reference: ${response.reference}. Redirecting to orders...`);
+            let ids = [];
             setTimeout(function () {
-                window.location.href = "/buy/cart/complete"
+                quantity.forEach(function (text,index,arrays){
+                    ids.push(text.innerHTML);
+                })
+                window.location.href = `/buy/cart/complete`
             }, 3000)
         }
 

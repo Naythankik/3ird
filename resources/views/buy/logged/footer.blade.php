@@ -38,7 +38,7 @@
                        <p>CEO : Nathaniel Abolarin Okiki-ola.</p>
                    </marquee>
                </div>
-               <div class="about-overlay hidden"></div>
+
            <a href="#">Help</a>
            <a href="#">Developer</a>
            <a href="#">Terms</a>
@@ -131,7 +131,5 @@
                </div>
 
            </div>
-           <div class="complaint-overlay"></div>
-{{--           <a href="sms:1234567890;?&body=message">Text Messages</a>--}}
        </div>
 </footer>

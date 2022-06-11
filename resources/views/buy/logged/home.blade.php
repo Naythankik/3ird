@@ -1,34 +1,113 @@
 @extends("buy.logged.main")
 @section('body')
 
-    @if(!empty($products->toArray()))
-        <div class="row mt-1 row-cols-md-4 g-4 ">
-            @foreach($products as $id => $product)
-                <div class="col">
-                    <div class="card">
-                        @include('buy.logged.display.image')
-                        <div class="card-body">
-                            @include('buy.logged.display.index')
-                            <a href="/buy/add_to_cart/{{$product->id}}" class="btn d-flex justify-content-center btn-success text-dark fw-bold mt-2">ADD TO CART</a>
-                            <a href="/buy/wishlist/{{ $product->id }}" class="btn d-flex justify-content-center btn-outline-danger mt-2" title="Add to Wishlist">&#10084;</a>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @else
-        <div class="carts">
-            <img src="{{ Storage::url('/logo/search.jpeg') }}">
-            <div class="contents">
-                <p>There are no results for <span class="search text-danger" style="cursor: pointer" title="{{$_GET['q']." is not found" }}">“{{ $_GET['q'] }}”</span>.</p>
-                <p>- Check your spelling for typing errors</p>
-                <p>- Try searching with short and simple keywords</p>
-                <p>- Try searching more general terms - you can then filter the search results</p>
+
+    <div class="product">
+        <div class="trending">
+            <div class="trending-header">
+                <p>Low Budgets</p>
+                <a href="#">see all <i class="fa fa-arrow-right"></i></a>
             </div>
-            <a class="btn btn-warning fw-bold" href="/buy">Go to Homepage</a>
+            <div class="trending-products">
+                <div class="trending-info">
+                    @foreach($budgets as $product)
+                        <a href="/buy/{{$product->id}}" style="text-decoration: none;">
+
+                            <div class="trending-good">
+                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <div class="trending-name">
+                                    <p>{{ substr($product->name,0,20)."..." }}</p>
+                                </div>
+                                <div class="trending-price">&#8358; {{ number_format($product->price,2) }}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
         </div>
-    @endif
 
+        {{--            recommendation--}}
+        <div class="recommended">
+            <div class="trending-header">
+                <p>Recommendations for you</p>
+            </div>
+            <div class="trending-products">
+                <div class="trending-info">
+                    @foreach($recommends as $product)
+                        <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
+                            <div class="trending-good">
+                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <div class="trending-name">
+                                    <p>{{ substr($product->name,0,20)."..." }}</p>
+                                </div>
+                                <div class="trending-price">&#8358; {{ number_format($product->price,2) }}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        {{--            top categories--}}
+        <div class="category">
+            <div class="trending-header">
+                <p>Top Deals | Stay Connected</p>
+            </div>
+            <div class="trending-products">
+                <div class="trending-info">
+                    @foreach($category as $product)
+                        <a href="/buy/{{$product->id}}" style="text-decoration: none;">
+
+                            <div class="trending-good">
+                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <div class="trending-name">
+                                    <p>{{ substr($product->name,0,20)."..." }}</p>
+                                </div>
+                                <div class="trending-price">&#8358; {{ number_format($product->price,2) }}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+        {{--            branding--}}
+        <div class="brands">
+            <div class="branding-header">
+                <p>Official Store Brands</p>
+            </div>
+            <div class="branding-contents">
+                @foreach($brands as $brand)
+                    <a href="/brands/{{$brand->brand}}">
+                        <img src="{{ Storage::url('public/products/brand/'.$brand->brand_image) }}" alt="No Image">
+                    </a>
+                @endforeach
+            </div>
+        </div>
+
+        {{--           all products--}}
+        <div class="recommended">
+            <div class="trending-header">
+                <p>All products</p>
+            </div>
+            <div class="trending-products">
+                <div class="trending-info">
+                    @foreach($all as $product)
+                        <a href="/buy/{{$product->id}}" style="text-decoration: none;">
+
+                            <div class="trending-good">
+                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <div class="trending-name">
+                                    <p>{{ substr($product->name,0,20)."..." }}</p>
+                                </div>
+                                <div class="trending-price">&#8358; {{ number_format($product->price,2) }}</div>
+                            </div>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection

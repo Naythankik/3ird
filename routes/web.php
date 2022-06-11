@@ -86,3 +86,5 @@ Route::get('/forgot-password', function () {
 })->name('password.request');
 
 Route::post('/forget',[SellersController::class,'forget']);
+
+Route::post('/nath',[ProductsController::class,'brands']);

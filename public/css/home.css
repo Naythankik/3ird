@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+body {
+    background: dodgerblue;
+}
+div.product {
+    width: 95%;
+    height: 100%;
+    margin: 20px auto;
+    display: block;
+}
+div.trending,
+div.brands,
+div.recommended,
+div.category,
+div.budgets {
+    background: white;
+    margin: 50px 0px;
+    border-radius: 7px;
+}
+
+/* trending products */
+div.trending-header,
+div.branding-header{
+    display: flex;
+    background: #baecfb;
+    justify-content: space-between;
+    border-radius: 8px 8px 0 0;
+    padding: 10px 5px 0 5px;
+    margin: 0;
+    font-weight: bold;
+}
+div.trending-header a {
+    text-decoration: none;
+    color: black;
+    background: none;
+}
+div.trending-header a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+div.trending-header i {
+    background: none;
+    margin: 0 0 0 5px;
+}
+div.trending-header p {
+    background: none;
+}
+div.trending-products {
+    background: white;
+}
+div.trending-info {
+    background: none;
+    width: 100%;
+    display: flex;
+    overflow-x: scroll;
+    padding: 10px 1px;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+}
+div.trending-info::-webkit-scrollbar {
+    visibility: hidden;
+}
+
+div.trending-good {
+    background: none;
+    width: 100%;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 0 2px -10px 2px;
+    outline: 0;
+}
+div.trending-good:hover {
+    padding: 2px;
+    box-shadow: 1px 0px 15px -10px black;
+}
+
+div.trending-info img {
+    width: 185px;
+    height: 185px;
+    border-radius: 10px;
+    padding: 1px;
+}
+div.trending-name {
+    font-size: 15px;
+    text-align: left;
+    background: none;
+    padding: 1px;
+    margin: 0 12px 5px 12px;
+}
+div.trending-name p {
+    color: black;
+}
+div.trending-price {
+    color: black;
+    margin: 0 12px 5px 12px;
+    padding: 2px 1px;
+}
+
+div.branding-header p{
+    margin: 0 auto 5px auto;
+}
+
+div.branding-contents{
+    background: none;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+div.branding-contents img{
+    width: 230px;
+}
+
+
+

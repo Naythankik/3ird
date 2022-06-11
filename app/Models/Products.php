@@ -19,6 +19,12 @@ class Products extends Model
         return $this->hasMany(Images::class);
     }
 
+    public function image()
+    {
+//        aiming to return a distinct a value from model
+        return $this->hasOne(Images::class);
+    }
+
 
 //    protected static function boot()
 //    {
