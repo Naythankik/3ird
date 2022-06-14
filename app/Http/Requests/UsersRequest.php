@@ -29,6 +29,7 @@ class UsersRequest extends FormRequest
             'email' => 'required',
             'telephone' => 'required|numeric',
             'username' => 'required',
+            'address' => 'required',
             'password' => 'required',
             'password_2' => 'required|same:password',
             'profile' => 'required|image|max:2000|'
@@ -42,6 +43,7 @@ class UsersRequest extends FormRequest
             'last_name.required' => 'last name is required',
             'email.required' => 'email is required',
             'username.required' => 'username is required',
+            'address.required' => 'address is required',
             'age.required' => 'date of birth is required',
             'password.required' =>'password is required',
             'profile.required' => 'profile image is required',

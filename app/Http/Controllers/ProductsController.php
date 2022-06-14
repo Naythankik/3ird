@@ -140,5 +140,13 @@ class ProductsController extends Controller
         return back()->with(['deleted' => 'Product Successfully deleted']);
     }
 
+    public function brands(Request $request){
 
+        $name = uniqid($request->brand).'.'.$request->brand_image->Extension();
+        $request->brand_image->storeAs('/public/products/brand/header',$name);
+        DB::table('brands')->where('brand', '=',$request->brand)->update([
+            'brand_image_header' => $name,
+        ]);
+        return view('branding');
+    }
 }

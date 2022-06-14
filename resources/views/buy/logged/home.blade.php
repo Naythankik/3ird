@@ -79,7 +79,7 @@
             </div>
             <div class="branding-contents">
                 @foreach($brands as $brand)
-                    <a href="/brands/{{$brand->brand}}">
+                    <a href="/buy/brands/{{$brand->brand}}">
                         <img src="{{ Storage::url('public/products/brand/'.$brand->brand_image) }}" alt="No Image">
                     </a>
                 @endforeach

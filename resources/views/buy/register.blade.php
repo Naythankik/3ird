@@ -64,6 +64,14 @@
                 <p>{{$message}}</p>
                 @enderror
             </div>
+            <div class="phone">
+                <input type="text" name="address" placeholder="Address" value="{{old('address')}}">
+            </div>
+            <div class="error-phone">
+                @error('address')
+                <p>{{$message}}</p>
+                @enderror
+            </div>
             <input type="file" name="profile" class="custom-file-input">
             <div class="error-phone">
                 @error('profile')

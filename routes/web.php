@@ -46,6 +46,7 @@ Route::prefix('buy')
         Route::get('/logout','logout');
         Route::get("/orders/{order}",'orders');
         Route::get('/category/{category}','category');
+        Route::get('/brands/{brand}','brands');
         Route::get('/{id}/profile','profile')->name('profile');
         Route::get('/forgot-password',function ()
         {
@@ -88,3 +89,4 @@ Route::get('/forgot-password', function () {
 Route::post('/forget',[SellersController::class,'forget']);
 
 Route::post('/nath',[ProductsController::class,'brands']);
+Route::view('/nath','branding');

@@ -42,8 +42,8 @@
                 </p>
             </div>
             <div class="brand">
-                <a href="#">Brand: {{ $product->brand }}</a>
-                <a href="#">Category: {{ ucwords($product->category) }}</a>
+                <a href="{{'/buy/brands/'.$product->brand}}">Brand: {{ $product->brand }}</a>
+                <a href="{{'/buy/category/'.$product->category}}">Category: {{ ucwords($product->category) }}</a>
             </div>
             <div class="product-property">
                 <div class="classify">

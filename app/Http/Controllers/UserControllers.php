@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
+use App\Jobs\RegisteredUser;
 use App\Mail\OrderProduct;
 use App\Mail\UserRegistered;
 use App\Models\Images;
@@ -52,7 +53,7 @@ class UserControllers extends Controller
         $budgets = Products::with('image')->where('price','<' ,100000)->get();
         $recommends = Products::with('image')->inRandomOrder()->limit(7)->get();
         $category = Products::with('image')->where('price','>=' ,100000)->get();
-        $brands = DB::table('brands')->select('*')->get();
+        $brands = DB::table('brands')->select('*')->limit(12)->get();
         $all = Products::with('image')->inRandomOrder()->get();
         return view('buy.logged.home')->with([
             'budgets' => $budgets,
@@ -107,19 +108,19 @@ class UserControllers extends Controller
 
         $new_name = uniqid($request->username,'true').'.'.$request->profile->extension();
         $picture = $request->profile->storeAs('public/buyer/profile',$new_name);
-
-        Users::create([
+        $NewUser = Users::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
             'telephone' => $request->telephone,
             'email' => $request->email,
+            'address' => $request->address,
             'dob' => $dateOfBirth,
             'gender' => $request->gender,
             'profile' => $picture,
             'password' => Hash::make($request->password)
         ]);
-        Mail::to($request->email)->later(now()->addMinute(1),new UserRegistered($request->first_name));
+        RegisteredUser::dispatch($NewUser)->delay(now()->addMinutes(2));
 
         return redirect('/login')->with(['status' => 'User registered successfully!!']);
     }
@@ -191,28 +192,26 @@ class UserControllers extends Controller
             'address.required' =>'user address is required',
             'profile_picture.image' => 'File is not an image',
             'profile_picture.size' => 'File is too big',
-            'password.required' => 'password is needed',
+            'password.required' => 'password verification is needed',
             'password.current_password' => 'password is incorrect, failed to update profile'
         ]);
         $image = $request->profile_picture;
         if (!empty($image)){
-            $imageArea = getimagesize($image);
-            if ($imageArea[0] > 301 || $imageArea[1] > 301){
-                return back()->withErrors(['width' => 'Image area must be 300 by 300']);
-            }
             $profiles = uniqid(lcfirst(auth()->user()->username),true).".".$image->extension();
             $image = $image->storeAs('public/buyer/profile',$profiles);
+            Storage::delete($request->image);
         }else{
             $image = $request->image;
         }
 
-        Users::where('id',$id)->update([
+
+        $update = Users::where('id',$id)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
             'telephone' => $request->telephone,
             'username' => $request->username,
-            'dob' => $request->dob,
+            'dob' => strtotime($request->dob),
             'gender' => $request->gender,
             'city' => $request->city,
             'state' => $request->state,
@@ -272,8 +271,26 @@ class UserControllers extends Controller
         $categories = Products::with('image')->where('category','=',$category)->inRandomOrder()->get();
         return view('buy.logged.view',[
             'products' => $categories,
-            'category' => $category
+            'category' => $category,
+            'headers' => ''
         ]);
+    }
+
+    public function brands($brand){
+        if($brand == "all_brands"){
+            $brands = DB::table('brands')->select('*')->inRandomOrder()->get();
+            return view('buy.logged.brands',[
+                'brands' => $brands
+            ]);
+        }else{
+            $brands = Products::with('image')->where('brand','=',$brand)->inRandomOrder()->get();
+            $header = DB::table('brands')->where('brand','=',$brand)->first();
+            return view('buy.logged.view',[
+                'headers' => $header,
+                'products' => $brands,
+                'category' => $brand
+            ]);
+        };
     }
 
     public function cart()
@@ -316,9 +333,11 @@ class UserControllers extends Controller
             ->where('brand','like',$user)
             ->orWhere('category','like',$user)
             ->orWhere('name','like',$user)
+            ->inRandomOrder()
             ->get();
 
         return view('buy.logged.view',[
+            'headers' => '',
             'products' => $string,
             'category' => $request->q
         ]);

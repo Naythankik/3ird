@@ -310,7 +310,7 @@ div.distinct-header  span{
     display: flex;
     margin: 0;
     border: 0;
-    border-bottom: 1px solid grey;
+    border-bottom: 1px solid lightgrey;
     padding: 5px 10px;
     color: gray;
 }
@@ -326,6 +326,18 @@ div.distinct-header span:first-child p:first-child{
 div.distinct-header span p {
     margin: 2px 0;
     font-weight: 500;
+}
+div.brand-header{
+    background: none;
+    margin: 10px auto;
+    width: 99%;
+    border-radius: 10px;
+    text-align: center;
+}
+div.brand-header img{
+    margin: 0 auto;
+    width: 100%;
+    border-radius: 10px;
 }
 div.distinct-contents{
     background: none;

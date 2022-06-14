@@ -16,6 +16,11 @@
             <a class="btn btn-warning fw-bold" href="/buy">Go to Homepage</a>
         </div>
     @else
+        @if($headers)
+            <div class="brand-header">
+                <img src="{{Storage::url('public/products/brand/header/'.$headers->brand_image_header)}}">
+            </div>
+        @endif
         <div class="distinct-body">
             <div class="distinct-header">
         <span>
@@ -33,7 +38,7 @@
                         <div class="distinct-info">
                             <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No image">
                             <p>{{ $product->name }}</p>
-                            <p>{{ number_format($product->price,2) }}</p>
+                            <p> &#8358; {{ number_format($product->price,2) }}</p>
                         </div>
                     </a>
                 @endforeach

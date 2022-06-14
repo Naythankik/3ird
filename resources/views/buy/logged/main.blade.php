@@ -18,7 +18,7 @@
     <title>3ird</title>
 </head>
 
-<body class="bg-primary bg-opacity-75 ms-2 me-0">
+<body class="bg-primary bg-opacity-100">
 
 @include('buy.logged.header')
 
