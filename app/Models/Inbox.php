@@ -4,13 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
-class Messages extends Model
+class Inbox extends Model
 {
     use HasFactory;
 
-    protected $table = "messages";
+    protected $table = 'inbox';
 
     protected $guarded = ['id'];
 

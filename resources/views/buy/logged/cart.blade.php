@@ -64,6 +64,7 @@
                     </div>
                 @endif
             </div>
+        </div>
     @endif
 @endsection
 
@@ -71,13 +72,4 @@
 
 
 
-{{--                        @include('buy.logged.display.image',['product' => $cart->product])--}}
 
-{{--                        <div class="card-body">--}}
-
-{{--                            @include('buy.logged.display.index',['product' => $cart->product])--}}
-
-{{--                            <div style="display: flex; justify-content: center" class="mt-2 ms-2">--}}
-
-
-{{--@endsection--}}

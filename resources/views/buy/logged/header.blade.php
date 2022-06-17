@@ -82,7 +82,7 @@
                 <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item fw-bold text-info" href="/buy/{{ auth()->id() }}/profile">View profile</a></li>
                     <li><a class="dropdown-item fw-bold text-warning" href="/buy/orders/{{auth()->id()}}"> Orders</a></li>
-                    <li><a class="dropdown-item fw-bold text-secondary" href="/buy/inbox/{{auth()->id()}}"> Inbox</a></li>
+                    <li><a class="dropdown-item fw-bold text-secondary" href="/buy/message"> Inbox</a></li>
                     <li><a class="dropdown-item fw-bold text-success" href="">Contact Us</a></li>
                 </ul>
             </div>

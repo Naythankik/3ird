@@ -6,7 +6,7 @@
         <div class="trending">
             <div class="trending-header">
                 <p>Low Budgets</p>
-                <a href="#">see all <i class="fa fa-arrow-right"></i></a>
+                <a href="/buy/low_budget">see all <i class="fa fa-arrow-right"></i></a>
             </div>
             <div class="trending-products">
                 <div class="trending-info">
@@ -90,6 +90,7 @@
         <div class="recommended">
             <div class="trending-header">
                 <p>All products</p>
+                <a href="/buy/all_products">see all <i class="fa fa-arrow-right"></i></a>
             </div>
             <div class="trending-products">
                 <div class="trending-info">

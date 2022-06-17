@@ -381,3 +381,70 @@ div.distinct-info p{
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+
+/*styling for the wishlist*/
+div.wish-body{
+    display: flex;
+    margin: 10px auto;
+    width: 90%;
+    background: white;
+    flex-wrap: wrap;
+    padding: 20px 10px;
+    border-radius: 10px;
+}
+div.wish-content{
+    background: none;
+    border-radius: 10px;
+    margin: 5px;
+    padding: 5px;
+    width: 19.25%
+}
+
+div.wish-display{
+    border-radius: 10px;
+    width: auto;
+}
+
+div.wish-display:hover{
+    /*margin: 4px;*/
+    width: 255px;
+    /*box-shadow: 0 0px 20px -10px blue;*/
+}
+
+div.wish-info{
+    background: none;
+    margin: 5px;
+    color: black;
+}
+div.wish-info img{
+    width: 100%;
+    outline: 0;
+    border: 0;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+div.wish-action{
+    background: none;
+    width: auto;
+    padding: 5px 10px;
+    display: flex;
+    margin: 5px 0;
+    justify-content: space-between;
+    gap: 5px;
+}
+div.wish-action a{
+    background: none;
+    padding: 5px;
+    color: black;
+    width: auto;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 13px;
+    outline: 1px solid deepskyblue;
+    font-weight: 500;
+}
+div.wish-action a:hover{
+    background: blue;
+    outline: 0;
+}

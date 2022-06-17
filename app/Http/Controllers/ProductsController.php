@@ -149,4 +149,6 @@ class ProductsController extends Controller
         ]);
         return view('branding');
     }
+
+
 }

@@ -147,74 +147,15 @@ details.forEach(function(detail,index,array){
 
 
 //message in inbox folder
-let messages = document.querySelectorAll('#message');
-let messageContent = document.querySelectorAll('.message-details');
-let noMessage = document.querySelector('.inbox-details-message');
-let replyMessage = document.querySelectorAll('.reply-details');
-let reply = document.querySelector('.reply');
-let identifierMessage = [];
-let identifierReply = [];
-let open = document.querySelectorAll('.open');
-
-
-for(let x = 0; x < replyMessage.length; x++){
-    identifierReply.push(x);
+let MessageCanvas = document.querySelectorAll('#myCanvas');
+let MessageHeader = document.querySelectorAll('.message-head');
+for (let x = 0; x < MessageHeader.length; x++){
+    let colors = ['green','red','black','yellow','orange'];
+    let y = MessageCanvas[x].getContext('2d');
+    y.font = "100px arial lighter";
+    y.fillStyle = colors[x];
+    y.fillText(MessageHeader[x].innerHTML[0],110,100);
 }
-async function markRead(id){
-    res = await fetch(`/buy/read/${id}`, {
-        method: 'GET',
-    })
-
-    return await res.json();
-}
-messages.forEach(function (message,id,array){
-    identifierMessage.push(id);
-    message.addEventListener("click",function (e) {
-
-        let seen = open[id].innerHTML;
-
-        // const response =
-            markRead(seen);
-        // response.then(data => console.log(data));
-
-
-        identifierReply.push(id);
-        identifierMessage.push(id);
-
-        // create set array for data uniqueness
-        let replied = new Set(identifierReply);
-        let nums = new Set(identifierMessage);
-
-        // removing the id from set Array to allow setting the remaining elements to hidden attributes
-        replied.delete(id);
-        nums.delete(id);
-
-        // removing the hidden attribute from the id, when message header is clicked
-        messageContent[identifierMessage.pop()].removeAttribute('hidden');
-
-        // checking if the message has been replied
-        //and checking if the message has replies from database or not
-        if (replyMessage[id] === undefined) {
-            // console.log(`${id} doesn't have replies!!!!`);
-        } else {
-            replyMessage[identifierReply.pop()].removeAttribute('hidden');
-        }
-
-        // showing text box to type reply and removing the default interface message
-        reply.removeAttribute('hidden');
-        noMessage.setAttribute('hidden', '');
-
-        // setting the to the remaining id's from the set array
-        // hidden attribute after click on button
-        nums.forEach(function (hidden, id) {
-            messageContent[id].setAttribute('hidden', '');
-        })
-        replied.forEach(function (hide, number) {
-            replyMessage[number].setAttribute('hidden', '');
-        })
-
-    })
-})
 
 // complaint script for logged user
 const complainButton = document.querySelector('#complaint');
@@ -244,12 +185,24 @@ document.addEventListener("keydown",function (e){
 })
 
 //alert box for successful registration
-let success = document.querySelector('#welcome')
-success.setAttribute('title',success.innerHTML);
-success.addEventListener('click',function (){
-    success.style.display = 'none';
-})
+    // let success = document.querySelector('#welcome')
+    // success.setAttribute('title',success.innerHTML);
+    // success.addEventListener('click',function (){
+    //     success.style.display = 'none';
+    // })
 
+let picture = document.querySelector('.face');
+let pictureClose = document.querySelector('.profile-close');
+let pictureView = document.querySelector('.picture-view');
+
+let closePicture = () => {
+    pictureView.style.display = "none";
+}
+pictureClose.addEventListener('click', closePicture);
+pictureView.addEventListener('click',closePicture);
+picture.addEventListener('click',function (e){
+    pictureView.style.display = "block";
+})
 
 function showPassword(){
     let password = document.querySelector('#pwd');
@@ -259,14 +212,5 @@ function showPassword(){
         password.type = 'password';
     }
 }
-
-// cancelling profile changes
-        let profile = document.querySelector(".cancel");
-        profile.addEventListener("click",function (){
-            alert("Redirecting to home page......");
-            setTimeout(function (){
-                window.location.href = "/buy"
-            },500);
-        })
 
 

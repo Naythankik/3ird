@@ -23,12 +23,45 @@ div.update{
     outline: none;
     background: none;
     border-radius: 10px;
-
 }
 
 div.face {
     text-align: center;
     position: relative;
+    cursor: zoom-in;
+}
+div.picture-view{
+    position: absolute;
+    display: none;
+    width: 80%;
+    left: 150px;
+    top: 150px;
+    height: 65vh;
+    background: lightblue;
+    opacity: 1;
+    text-align: center;
+    padding: 10px;
+    z-index: 2;
+    border-radius: 20px;
+}
+div.profile-close{
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 3rem;
+    color: #39c1b7;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+div.picture-view img{
+    margin: 10px 0 0 0;
+    width: 80vh;
+    height: 60vh;
+    border-radius: 20px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
 }
 div.file {
     text-align: center;

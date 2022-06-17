@@ -31,8 +31,11 @@ Route::post('/login',[UserControllers::class,'login']);
 Route::prefix('buy')
     ->controller(UserControllers::class)
     ->group(function (){
-        Route::get('/read/{id}','markAsRead');
+        Route::get('/all_products','all');
+        Route::get('/low_budget','lowBudget');
+        Route::put('/{id}/inbox','reply');
         Route::post('/complaint','complaint');
+        Route::get('/message','message');
         Route::get('/inbox/{id}','inbox');
         Route::post('/pay','payment');
         Route::get('/add_to_cart/{p_id}','add_to_cart');
@@ -59,9 +62,16 @@ Route::prefix('buy')
         })->middleware('guest')->name('password.reset');
         Route::post('/reset-password','reset')->middleware('guest');
     });
+
 Route::resource('/buy',UserControllers::class);
 
-
+Route::any('/buy/{any?}/{verb?}', function (){
+    if (auth()->check()){
+        return redirect('/buy');
+    }else{
+        return redirect('login');
+    }
+});
 
 //Routes for sellers
 Route::prefix('/sell')->group(function (){
@@ -88,5 +98,5 @@ Route::get('/forgot-password', function () {
 
 Route::post('/forget',[SellersController::class,'forget']);
 
-Route::post('/nath',[ProductsController::class,'brands']);
-Route::view('/nath','branding');
+//Route::post('/nath',[ProductsController::class,'brands']);
+//Route::view('/nath','branding');

@@ -1,48 +1,39 @@
 @extends("buy.logged.main")
 @section('body')
 
-
     @if(session('delete'))
-        <p class="alert alert-info mx-2 my-5 w-25" style="display: flex; justify-content: center;">{{ session('delete') }}</p>
+        {{ session('delete') }}
     @endif
 
-
-    @if(!empty($wishes->toArray()))
-        <div class="row row-cols- row-cols-md-4 g-4 ">
-        @foreach($wishes as $wish)
-            <div class="col">
-                <div class="card mt-3 ms-2 me-2">
-
-                    @include('buy.logged.display.image',['product' => $wish->product])
-
-                    <div class="card-body">
-
-                        @include('buy.logged.display.index',['product' => $wish->product])
-
-                        <div style="display: flex; justify-content: center" class="mt-2 ms-2">
-
-                            <!-- Button trigger modal for removing product from cart-->
-                            <div class="d-grid">
-                                <a href="/buy/add_to_cart/{{$wish->product_id}}" class="btn btn-success my-2 fw-bold text-dark" data-bs-target="#exampleModal" id="wishes">
-                                    Add to Cart
-                                </a>
-                                <a href="/buy/remove/{{ $wish->product_id }}" type="button" class="btn btn-danger">Remove From Wish!</a>
-                            </div>
-                        </div>
+    @if(count($wishes) > 0)
+        <div class="wish-body">
+            @foreach($wishes as $wish)
+                <div class="wish-content">
+                   <div class="wish-display">
+                       <a href="/buy/{{$wish->product->id}}" style="text-decoration: none;">
+                           <div class="wish-info">
+                               <img src="{{ Storage::url('public/products/'.$wish->product->image['image_name']) }}" alt="No image">
+                               <p>{{ substr($wish->product['name'],0,20)."..." }}</p>
+                               <p> &#8358; {{ number_format($wish->product->price,2) }}</p>
+                           </div>
+                       </a>
+                   </div>
+                    <div class="wish-action">
+                        <a href="/buy/add_to_cart/{{$wish->product_id}}" id="wishes">Add to Cart</a>
+                        <a href="/buy/remove/{{ $wish->product_id }}">Remove From Wish</a>
                     </div>
                 </div>
-            </div>
             @endforeach
-            </div>
+        </div>
     @else
         <div class="carts">
             <img src="{{ Storage::url('/logo/wish.png') }}">
             <div class="contents">
-            <p>Nothing to show here</p>
-            <p>Your Wish List is empty!</p>
-            <p style="margin-top: 14px">Browse our categories and discover our best deals!</p>
-        </div>
-        <a class="btn btn-warning fw-bold" href="/buy">Start Shopping</a>
+                <p>Nothing to show here</p>
+                <p>Your Wish List is empty!</p>
+                <p style="margin-top: 14px">Browse our categories and discover our best deals!</p>
+            </div>
+            <a class="btn btn-warning fw-bold" href="/buy">Start Shopping</a>
         </div>
     @endif
 @endsection

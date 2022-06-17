@@ -12,6 +12,10 @@
         @endif
     </div>
     @foreach($profiles as $profile)
+        <div class="picture-view">
+            <div class="profile-close">&times;</div>
+            <img src="{{ Storage::url($profile->profile) }}" alt="" />
+        </div>
         <div class="contents-details">
             <form method="post" action="/buy/{{ auth()->id() }}" enctype="multipart/form-data">
                 @method('put')
@@ -30,14 +34,14 @@
                     <div class="names">
                         <div class="first">
                             <label for="first-name">First Name</label>
-                            <input type="text" name="first_name" id="" value="{{ $profile->first_name }}" />
+                            <input type="text" name="first_name" value="{{ $profile->first_name }}" />
                             @error('first_name')
                             <p>{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="last">
                             <label for="last-name">Last Name</label>
-                            <input type="text" name="last_name" id="" value="{{ $profile->last_name }}" />
+                            <input type="text" name="last_name" value="{{ $profile->last_name }}" />
                             @error('last_name')
                             <p>{{ $message }}</p>
                             @enderror
@@ -45,14 +49,14 @@
                     </div>
                     <div class="email">
                         <label for="email">Email</label>
-                        <input type="email" name="email" id="" value="{{ $profile->email }}" />
+                        <input type="email" name="email" value="{{ $profile->email }}" />
                         @error('email')
                         <p>{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="telephone">
                         <label for="telephone">Telephone</label>
-                        <input type="tel" name="telephone" id="" value="{{ $profile->telephone }}" />
+                        <input type="tel" name="telephone" value="{{ $profile->telephone }}" />
                         @error('telephone')
                         <p>{{ $message }}</p>
                         @enderror
@@ -60,14 +64,14 @@
                     <div class="names">
                         <div class="username">
                             <label for="username">Username</label>
-                            <input type="text" name="username" id="" value="{{ $profile->username }} " readonly/>
+                            <input type="text" name="username" value="{{ $profile->username }} " readonly/>
                             @error('username')
                             <p>{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="dob">
                             <label for="dob">Date of Birth</label>
-                            <input type="text" name="dob" id="" value="{{ date('Y-m-d',$profile->dob) }}" />
+                            <input type="text" name="dob" value="{{ date('Y-m-d',$profile->dob) }}" />
                             @error('dob')
                             <p>{{ $message }}</p>
                             @enderror
@@ -76,14 +80,14 @@
                     <div class="names">
                         <div class="gender">
                             <label for="gender">Gender</label>
-                            <input type="text" name="gender" id="" value="{{ ucwords($profile->gender) }}"/>
+                            <input type="text" name="gender" value="{{ ucwords($profile->gender) }}"/>
                             @error('gender')
                             <p>{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="city">
                             <label for="city">City</label>
-                            <input type="text" name="city" id="" value="{{ $profile->city }}" />
+                            <input type="text" name="city" value="{{ $profile->city }}" />
                             @error('city')
                             <p>{{ $message }}</p>
                             @enderror
@@ -92,14 +96,14 @@
                     <div class="names">
                         <div class="state">
                             <label for="state">State</label>
-                            <input type="text" name="state" id="" value="{{ ucwords($profile->state) }}"/>
+                            <input type="text" name="state" value="{{ ucwords($profile->state) }}"/>
                             @error('state')
                             <p>{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="country">
                             <label for="country">Country</label>
-                            <input type="text" name="country" id="" value="{{ $profile->country }}"/>
+                            <input type="text" name="country" value="{{ $profile->country }}"/>
                             @error('country')
                             <p>{{ $message }}</p>
                             @enderror
@@ -107,14 +111,14 @@
                     </div>
                     <div class="address">
                         <label for="address">Address</label>
-                        <input type="text" name="address" id="" value="{{ $profile->address }}"/>
+                        <input type="text" name="address" value="{{ $profile->address }}"/>
                         @error('address')
                         <p>{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="address">
                         <label for="password">Password</label>
-                        <input type="password" name="password" id="" />
+                        <input type="password" name="password" />
                         @error('password')
                         <p>{{ $message }}</p>
                         @enderror
@@ -126,5 +130,6 @@
             </form>
         </div>
     @endforeach
+
 @endsection
 

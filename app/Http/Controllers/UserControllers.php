@@ -7,6 +7,7 @@ use App\Jobs\RegisteredUser;
 use App\Mail\OrderProduct;
 use App\Mail\UserRegistered;
 use App\Models\Images;
+use App\Models\Inbox;
 use App\Models\Messages;
 use App\Models\Order;
 use App\Models\Products;
@@ -31,6 +32,7 @@ use Illuminate\Support\Str;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Validation\Rules\In;
 use phpDocumentor\Reflection\Types\Integer;
 
 
@@ -50,18 +52,21 @@ class UserControllers extends Controller
      */
     public function index()
     {
-        $budgets = Products::with('image')->where('price','<' ,100000)->get();
-        $recommends = Products::with('image')->inRandomOrder()->limit(7)->get();
+        $budgets = Products::with('image')->where('price','<' ,50000)->limit(10)->get();
+        $recommends = Products::with('image')->inRandomOrder()->limit(10)->get();
         $category = Products::with('image')->where('price','>=' ,100000)->get();
         $brands = DB::table('brands')->select('*')->limit(12)->get();
-        $all = Products::with('image')->inRandomOrder()->get();
-        return view('buy.logged.home')->with([
+        $all = Products::with('image')->limit(10)->inRandomOrder()->get();
+
+        $views = view('buy.logged.home')->with([
             'budgets' => $budgets,
             'recommends' => $recommends,
             'category' => $category,
             'brands' => $brands,
             'all' => $all
         ]);
+
+        return $views;
     }
 
     /**
@@ -269,6 +274,7 @@ class UserControllers extends Controller
     public function category($category)
     {
         $categories = Products::with('image')->where('category','=',$category)->inRandomOrder()->get();
+        $category = Str::replace('_',' ',$category);
         return view('buy.logged.view',[
             'products' => $categories,
             'category' => $category,
@@ -304,6 +310,11 @@ class UserControllers extends Controller
 
         return view('buy.logged.cart',['carts' => $carts,'price' => $price]);
     }
+    public function list()
+    {
+        $wish = WishLists::with('product.image')->where('users_id',auth()->id())->get();
+        return view('buy.logged.wishlist',['wishes' => $wish]);
+    }
 
     public function add_to_cart($p_id)
     {
@@ -328,19 +339,23 @@ class UserControllers extends Controller
 
     public function search(Request $request)
     {
-        $user = '%'.$request->q.'%';
-        $string = Products::with('images')
-            ->where('brand','like',$user)
-            ->orWhere('category','like',$user)
-            ->orWhere('name','like',$user)
-            ->inRandomOrder()
-            ->get();
+        if (empty($request->q)){
+            return back();
+        }else{
+            $user = '%'.$request->q.'%';
+            $string = Products::with('images')
+                ->where('brand','like',$user)
+                ->orWhere('category','like',$user)
+                ->orWhere('name','like',$user)
+                ->inRandomOrder()
+                ->get();
 
-        return view('buy.logged.view',[
-            'headers' => '',
-            'products' => $string,
-            'category' => $request->q
-        ]);
+            return view('buy.logged.view',[
+                'headers' => '',
+                'products' => $string,
+                'category' => $request->q
+            ]);
+        }
     }
 
     public function profile($id)
@@ -375,11 +390,7 @@ class UserControllers extends Controller
         return back()->with(['cart' => 'Product Added to Wish List successfully!', 'id' => $p_id]);
     }
 
-    public function list()
-    {
-        $wish = WishLists::with('product.images')->where('users_id',auth()->id())->get();
-        return view('buy.logged.wishlist',['wishes' => $wish]);
-    }
+
 
     public function forgot(Request $request)
     {
@@ -464,26 +475,60 @@ class UserControllers extends Controller
     }
 
     public function inbox($id){
-        $message = Messages::where('user_id',$id)
-            ->orderBy('id', 'DESC')
+        $message = Messages::all();
+        $inbox = Inbox::where([
+            'user_id' => auth()->id(),
+            'sender_id' => $id
+        ])->orderBy('id','desc')
+            ->orderBy('updated_at','desc')
             ->get();
-        $last  = Messages::where('user_id',1)->orderBy('id','DESC')->get();
 
         return view('buy.logged.inbox',[
             'messages' => $message,
-            'senders' => $last
+            'inboxes' => $inbox
         ]);
     }
 
+    public function message()
+    {
+        $message = Messages::all();
+        return view('buy.logged.inbox',[
+            'messages' => $message
+        ]);
 
-    public function markAsRead($id){
+    }
 
-        $seen = Messages::where(['id' => $id, 'user_id' => auth()->id()])->get();
-        if($seen[0]['opened'] == 0){
-            Messages::where('id',$id)->update(['opened' => 1]);
+    public function reply(Request $request, $user_id){
+        $message_id = $request->server('HTTP_REFERER');
+        $message_id = Str::afterLast($message_id,'/');
+        $last = Inbox::where([
+            'user_id' => $user_id,
+            'sender_id' => $message_id,
+            'reply' => ''
+        ])->orderBy('id','desc')->first();
+
+
+//        check if the row has null reply column
+        if (empty($last)){
+//            if true, insert request into new row
+            Inbox::create([
+                'user_id' => $user_id,
+                'sender_id' => $message_id,
+                'message' => '',
+                'reply' => $request->reply
+            ]);
+            return back();
+        }else{
+//            or update the reply column with the request received
+            Inbox::where([
+                'user_id' => $user_id,
+                'sender_id' => $message_id,
+                'id' => $last->id
+            ])->update([
+                'reply' => $request->reply
+            ]);
+            return back();
         }
-
-        return response()->json($id);
     }
 
     public function complaint(Request $request){
@@ -497,6 +542,29 @@ class UserControllers extends Controller
             $request->state => 'required',
             $request->subject => 'required',
             $request->message => 'required'
+        ]);
+    }
+    public function lowBudget(){
+        $all = Products::with('images')
+            ->where('price', '<' , 50000)
+            ->inRandomOrder()
+            ->get();
+
+        return view('buy.logged.view',[
+            'headers' => '',
+            'products' => $all,
+            'category' => 'Low Budgets'
+        ]);
+    }
+    public function all(){
+        $all = Products::with('images')
+            ->inRandomOrder()
+            ->get();
+
+        return view('buy.logged.view',[
+            'headers' => '',
+            'products' => $all,
+            'category' => 'All Products'
         ]);
     }
 

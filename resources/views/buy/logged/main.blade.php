@@ -24,8 +24,8 @@
 
 @yield('body')
 
-
 @include('buy.logged.footer')
+
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <script src="{{ asset('js/cart.js') }}"></script>
 <script src="{{ asset('js/index.js') }}"></script>

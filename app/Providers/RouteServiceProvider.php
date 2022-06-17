@@ -26,6 +26,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Route::pattern('buy','[0-9]+');
+//        pattern for (buy) parameter
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
