@@ -17,13 +17,13 @@ function payWithPaystack(e) {
         },
         callback: function(response){
             alert(`Payment complete! Reference: ${response.reference}. Redirecting to orders...`);
-            let ids = [];
+            // let ids = [];
             setTimeout(function () {
-                quantity.forEach(function (text,index,arrays){
-                    ids.push(text.innerHTML);
-                })
-                window.location.href = `/buy/cart/complete`
-            }, 3000)
+                // quantity.forEach(function (text,index,arrays){
+                //     ids.push(text.innerHTML);
+                // })
+                window.location.href = `/buy/cart/complete/${paymentForm[0].value}`
+            }, 1000)
         }
 
     });

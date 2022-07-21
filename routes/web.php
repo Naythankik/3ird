@@ -44,7 +44,7 @@ Route::prefix('buy')
         Route::get("/wishlist/{p_id}",'wishList');
         Route::get("/list",'list');
         Route::get("/remove/{p_id}","remove_list");
-        Route::get('/cart/complete','paymentCompleted');
+        Route::get('/cart/complete/{token}','paymentCompleted');
         Route::get('/search','search');
         Route::get('/logout','logout');
         Route::get("/orders/{order}",'orders');
@@ -100,3 +100,6 @@ Route::post('/forget',[SellersController::class,'forget']);
 
 //Route::post('/nath',[ProductsController::class,'brands']);
 //Route::view('/nath','branding');
+Route::get('/kik',function (){
+    return response()->download('/home/codeliter/3ird/public/storage/logo/3ird.jpg');
+});

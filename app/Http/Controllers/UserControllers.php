@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Requests\UsersRequest;
 use App\Jobs\RegisteredUser;
 use App\Mail\OrderProduct;
@@ -440,31 +441,33 @@ class UserControllers extends Controller
             : back()->withErrors(['email' => [__($status)]]);
     }
 
-    public function paymentCompleted()
+    public function paymentCompleted($token)
     {
-        $id = auth()->id();
-        $users = Carts::where('users_id',$id)->get('product_id');
+//        dd($token);
 
-        foreach ($users as $i => $user){
-            $image = Images::where('products_id',$user['product_id'])->first('id');
-
-            Order::create([
-                'user_id' => $id,
-                'product_id' => $user['product_id'],
-                'image_id' => $image['id'],
-                'order_number' => uniqid()
-            ]);
-
-            $pr_id = Products::where('id',$user['product_id'])->get('quantity');
-            $quantity = $pr_id[0]['quantity']-1;
-            Products::where('id',$user['product_id'])->update([
-                'quantity' => $quantity
-            ]);
-        }
-        event(new ProductOrdered(auth()->user()));
-
-        Carts::where('users_id',$id)->delete();
-        return redirect('/buy');
+//        $id = auth()->id();
+//        $users = Carts::where('users_id',$id)->get('product_id');
+//
+//        foreach ($users as $i => $user){
+//            $image = Images::where('products_id',$user['product_id'])->first('id');
+//
+//            Order::create([
+//                'user_id' => $id,
+//                'product_id' => $user['product_id'],
+//                'image_id' => $image['id'],
+//                'order_number' => uniqid()
+//            ]);
+//
+//            $pr_id = Products::where('id',$user['product_id'])->get('quantity');
+//            $quantity = $pr_id[0]['quantity']-1;
+//            Products::where('id',$user['product_id'])->update([
+//                'quantity' => $quantity
+//            ]);
+//        }
+//        event(new ProductOrdered(auth()->user()));
+//
+//        Carts::where('users_id',$id)->delete();
+//        return redirect('/buy');
     }
 
     public function orders($order){
