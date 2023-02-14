@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('image_id');
             $table->string('order_number');
-            $table->unsignedBigInteger('image_id')->after('product_id')->nullable();
             $table->foreign('image_id')->references('id')->on('product_images')->cascadeOnDelete();
             $table->foreign("user_id")->references('id')->on("buyers")->cascadeOnDelete();
             $table->foreign("product_id")->references('id')->on("products")->cascadeOnDelete();

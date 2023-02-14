@@ -13,6 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('messages');
+
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
             $table->text('sender')->default('3ird Corp.');

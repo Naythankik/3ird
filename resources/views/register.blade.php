@@ -9,7 +9,7 @@ Now that you have registered on our platform, a profile has been created on our 
 
 If you have any queries or issues please contact our team.
 
-<a href="/buy/complaints" style="text-decoration: none">The 3ird Team</a>
+<a href="{{ env('APP_URL')."/buy/complaints" }}" style="text-decoration: none">The 3ird Team</a>
 
 
 @component('mail::subcopy')
@@ -17,7 +17,7 @@ If you have any queries or issues please contact our team.
         <a href="tel:+234 817 7337 331">&phone; Call us</a><br>
         <a href="mailto:{{ env('MAIL_USERNAME') }}">&#9993; Send an Email</a>
         <h4>click the button below to login</h4>
-        @component('mail::button',['url' => '/buy','color' => 'success'])
+        @component('mail::button',['url' => env('APP_URL')."/buy",'color' => 'success'])
             Here
         @endcomponent
     @endcomponent

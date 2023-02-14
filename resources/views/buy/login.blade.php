@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/login.css') }}" type="text/css">
-    <link rel="shortcut icon" type="imaage/jpg" href="{{ Storage::url('public/logo/3ird.jpg') }}">
+    <link rel="icon" type="image/jpg" href="{{ asset('/images/logo/3ird.svg') }}">
     <title>3ird</title>
 </head>
 

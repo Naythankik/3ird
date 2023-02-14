@@ -2,7 +2,7 @@
 *{
     margin: 0;
     padding: 0;
-    background: rgb(207, 204, 204);
+    background: hsl(257, 40%, 49%);
 }
 
 div.header{
@@ -17,14 +17,14 @@ div.header{
 }
 div.body{
     background-color: white;
-    padding: 20px 20px;
-    margin: 0px auto 60px auto;
+    padding: 20px 35px;
+    margin: 0 auto 60px auto;
     width: 30%;
     border-radius: 10px;
 }
 div.body-header{
     text-align: center;
-    padding: 5px 0px;
+    padding: 5px 0;
     background: none;
 }
 .body-header > p:first-child{

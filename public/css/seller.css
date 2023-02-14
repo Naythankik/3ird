@@ -36,3 +36,364 @@ img.seller:hover{
 .custom-file-input:active::before {
     background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
 }
+
+
+/* The styling that is imported */
+
+:root {
+    --header-ff: "Raleway", sans-serif;
+    --body-ff: "Open Sans", sans-serif;
+    --sub-footer: hsl(238, 22%, 44%);
+    --final-footer: hsl(243, 87%, 12%);
+    --button-color: hsl(224, 93%, 58%);
+    --in-link: hsl(170, 45%, 43%);
+    --body-bg: hsl(240, 75%, 98%);
+    --card-color: hsl(0, 0%, 75%);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--body-ff);
+}
+
+body {
+    background-color: var(--body-bg);
+}
+div.parent-container {
+    display: block;
+}
+/* navigation bar */
+nav {
+    width: 95%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+div.nav-menu {
+    width: 17rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+div.nav-menu a {
+    text-decoration: none;
+    color: black;
+    font-family: var(--body-ff);
+}
+
+/* top container */
+div.containers {
+    display: grid;
+    grid-template-columns: auto;
+    width: 95%;
+    margin: 10px auto;
+}
+div.top-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+div.top-left-container{
+    width: 50%;
+    align-self: center;
+}
+div.top-left-container h1{
+    font-family: var(--header-ff);
+    font-size: 2.2rem;
+    width: 80%;
+}
+div.top-left-container p
+{
+    font-family: var(--body-ff);
+    margin: 20px 0;
+    width: 75%;
+    font-size: 1.05em;
+}
+div.top-left-container form {
+    width: 70%;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 10px;
+}
+div.top-left-container input {
+    padding: 10px 15px;
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 0.2rem;
+}
+button {
+    padding: 10px;
+    background: var(--button-color);
+    outline: none;
+    border: none;
+    border-radius: 0.2rem;
+    color: white;
+    font-weight: 600;
+    box-shadow: 1px 1px 5px -2px var(--in-link);
+    cursor: pointer;
+}
+button:hover {
+    opacity: 0.8;
+}
+
+div.top-right-container{
+    width: 100%;
+    background: red;
+}
+
+/* the footer styling */
+
+div.top-footer {
+    background: var(--sub-footer);
+    width: 100%;
+    margin: 100px auto 0 auto;
+    display: flex;
+    padding: 60px 40px;
+}
+div.top-left-footer {
+    width: 50%;
+}
+div.top-right-footer {
+    width: 50%;
+    /* text-align: -webkit-right; */
+}
+div.top-right-footer form {
+    display: grid;
+    padding: 10px;
+    width: 80%;
+    row-gap: 10px;
+}
+div.top-right-footer form input {
+    width: 100%;
+    padding: 10px 15px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 0.2rem;
+}
+
+div.top-right-footer form button {
+    width: fit-content;
+}
+div.top-left-footer p {
+    font-family: var(--body-ff);
+    margin: 20px 0;
+    width: 75%;
+    font-size: 1.1em;
+    color: white;
+}
+
+div.top-left-footer h2 {
+    font-family: var(--header-ff);
+    font-size: 2.2rem;
+    width: 80%;
+    color: white;
+}
+
+div.bottom-footer {
+    background: var(--final-footer);
+    display: grid;
+    grid-template-columns: auto;
+    row-gap: 30px;
+    padding: 60px 40px;
+}
+.fylo-image {
+    filter: invert(1);
+}
+div.footer-links {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+}
+div.digital-links {
+    height: 50%;
+    display: grid;
+    gap: 10px;
+}
+.digital-links a {
+    color: white;
+    text-decoration: none;
+}
+.digital-links a > img {
+    margin-right: 10px;
+}
+div.web-links {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-between;
+    width: 25%;
+    row-gap: 10px;
+}
+
+div.web-links a {
+    text-decoration: none;
+    color: white;
+}
+
+footer a:hover,
+div.icon-links a:hover {
+    color: var(--button-color);
+}
+div.icon-links {
+    display: flex;
+}
+
+div.icon-links a {
+    color: white;
+    border: 1px solid white;
+    margin: 0 0.3em;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    position: relative;
+}
+
+div.icon-links a i {
+    position: absolute;
+    left: 0.5em;
+    top: 0.4em;
+}
+div.icon-links a:first-child i {
+    left: 0.6em;
+}
+div.icon-links a:hover {
+    border: 1px solid var(--button-color);
+}
+
+@media only screen and (max-width: 960px) {
+    div.containers {
+        margin-top: 50px;
+    }
+
+    div.top-container{
+        display: grid;
+        grid-template-columns: auto;
+        height: auto;
+    }
+
+    div.top-left-container,
+    div.top-right-container,
+    div.bottom-right-container {
+        width: 100%;
+        text-align: center;
+    }
+    div.top-left-container h1
+    {
+        width: 90%;
+        margin: 0 auto;
+    }
+    div.top-left-container p{
+        margin: 20px auto;
+        width: 85%;
+    }
+    div.top-left-container form {
+        width: 85%;
+        margin: 0 auto;
+        grid-template-columns: auto;
+    }
+    div.top-left-container input {
+        width: 100%;
+    }
+
+
+    div.top-footer {
+        margin: 0 auto;
+        display: grid;
+        padding: 40px;
+    }
+    div.top-left-footer {
+        width: 90%;
+        text-align: center;
+        margin: 0 auto;
+    }
+    div.top-left-footer h2,
+    div.top-left-footer p {
+        margin: 10px auto;
+    }
+    div.top-right-footer,
+    div.top-right-footer form button {
+        width: 100%;
+    }
+
+    div.top-right-footer form {
+        margin: 0 auto;
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    nav img {
+        width: 60%;
+    }
+
+    div.nav-menu {
+        width: 13rem;
+    }
+    div.top-footer {
+        padding: 20px;
+    }
+
+    div.top-left-container h1,
+    div.top-left-container,
+    div.top-left-footer h2,
+    div.top-left-footer,
+    div.top-left-footer p,
+    div.top-right-footer {
+        width: 100%;
+    }
+    div.top-right-footer form {
+        width: 90%;
+    }
+    div.bottom-footer {
+        background: var(--final-footer);
+        display: grid;
+        grid-template-columns: auto;
+        row-gap: 30px;
+        padding: 60px 40px;
+    }
+
+    div.footer-links {
+        display: grid;
+        row-gap: 15px;
+        justify-content: unset;
+        width: 100%;
+    }
+    div.digital-links {
+        gap: 15px;
+        height: auto;
+    }
+
+    .digital-links a > img {
+        vertical-align: sub;
+    }
+    div.web-links {
+        grid-template-columns: auto;
+        width: 100%;
+        row-gap: 10px;
+    }
+
+    footer a:hover,
+    div.icon-links a:hover {
+        color: var(--button-color);
+    }
+    div.icon-links {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    nav img {
+        width: 80%;
+    }
+
+    div.nav-menu {
+        width: 30rem;
+    }
+}
+
+/* The End */

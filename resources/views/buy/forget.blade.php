@@ -5,10 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="shortcut icon" type="imaage/jpg" href="{{ Storage::url('public/logo/3ird.jpg') }}">
+    <link rel="icon" type="image/jpg" href="{{ asset('/images/logo/3ird.svg') }}">
     <title>3ird</title>
 </head>
-<body class="bg-warning d-flex">
+<body class="d-flex" style="background: hsl(257, 40%, 49%)">
 
 <form method="post" action="/buy/forgot-password" class="mx-auto mt-5">
     @csrf

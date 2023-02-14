@@ -1,7 +1,7 @@
 <nav class="mt-2 py-1 navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="/buy">
-            <img src="{{ Storage::url('public/logo/3ird.jpg') }}" style="width: 70px; border-radius: 5px;" alt="No Image">
+            <img src="{{ asset('/images/logo/3ird.svg') }}" style="width: 70px; border-radius: 5px;" alt="No Image">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
