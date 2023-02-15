@@ -70,6 +70,10 @@ nav {
     display: flex;
     justify-content: space-between;
 }
+nav  .logo-image > img{
+    display: flex;
+    width: 30%;
+}
 
 div.nav-menu {
     width: 17rem;
@@ -88,21 +92,22 @@ div.containers {
     display: grid;
     grid-template-columns: auto;
     width: 95%;
-    margin: 10px auto;
+    margin: auto;
 }
 div.top-container {
     width: 100%;
-    display: flex;
-    flex-direction: row-reverse;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     margin: 20px 0;
 }
 div.top-left-container{
-    width: 50%;
     align-self: center;
 }
 div.top-left-container h1{
     font-family: var(--header-ff);
+    color: var(--button-color);
+    text-transform: uppercase;
     font-size: 2.2rem;
     width: 80%;
 }
@@ -141,8 +146,7 @@ button:hover {
 }
 
 div.top-right-container{
-    width: 100%;
-    background: red;
+    /*width: 100%;*/
 }
 
 /* the footer styling */
@@ -263,6 +267,35 @@ div.icon-links a:hover {
     border: 1px solid var(--button-color);
 }
 
+/*Styling for uploading products */
+.seller-product{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+.seller-product > *{
+    width: 50%;
+}
+.seller-product  input,
+.seller-product  textarea{
+    padding: 15px;
+    border-radius: 10px;
+    outline: none;
+}
+.seller-product  textarea{
+    resize: none;
+}
+.seller-button{
+    display: flex;
+    justify-content: center;
+}
+.seller-button button {
+    width: 50%;
+}
+/* the end of the styling */
+
 @media only screen and (max-width: 960px) {
     div.containers {
         margin-top: 50px;
@@ -283,6 +316,7 @@ div.icon-links a:hover {
     div.top-left-container h1
     {
         width: 90%;
+        font-size: 2rem;
         margin: 0 auto;
     }
     div.top-left-container p{
@@ -322,6 +356,18 @@ div.icon-links a:hover {
         margin: 0 auto;
         width: 60%;
     }
+
+    .seller-product > *{
+        width: 100%;
+    }
+    .seller-product  input,
+    .seller-product  textarea{
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .seller-button button {
+        width: 100%;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -330,12 +376,14 @@ div.icon-links a:hover {
     }
 
     div.nav-menu {
-        width: 13rem;
+        width: 17rem;
     }
     div.top-footer {
         padding: 20px;
     }
-
+    div.top-left-container h1 {
+        font-size: 1.5rem;
+    }
     div.top-left-container h1,
     div.top-left-container,
     div.top-left-footer h2,
@@ -387,12 +435,20 @@ div.icon-links a:hover {
 }
 
 @media only screen and (max-width: 300px) {
+    nav{
+        display: flex;
+        flex-direction: column;
+    }
+    nav > a{
+        display: flex;
+        justify-content: center;
+    }
     nav img {
-        width: 80%;
+        width: 50%;
     }
 
     div.nav-menu {
-        width: 30rem;
+        width: 100%;
     }
 }
 

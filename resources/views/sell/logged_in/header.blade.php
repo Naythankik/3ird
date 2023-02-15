@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+<nav class="w-100 navbar navbar-expand-lg navbar-light sticky-top" style="background: #a5dbef">
     <div class="container-fluid">
         <a class="navbar-brand" href="/sell">
-            <img src="{{ Storage::url('public/logo/3ird.jpg') }}" style="width: 70px; border-radius: 5px;" alt="No Image">
+            <img src="{{ asset('/images/logo/3ird.svg') }}" style="width: 70px; border-radius: 5px;" alt="No Image">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Options
+                        Product
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="products/create">Post a Products</a></li>

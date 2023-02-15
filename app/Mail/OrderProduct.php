@@ -33,14 +33,10 @@ class OrderProduct extends Mailable
             ->orderBy('id','DESC')
             ->limit(1)
             ->get();
-        $product = [];
-        foreach ($user->toArray() as $users){
-            $product[] = $users;
-        }
-        return $this->from(env('mail_from_address'))
+        return $this->from(env('MAIL_FROM_ADDRESS'))
             ->markdown('mail')->with([
-                'order_number' => $product[0]['order_number'],
-                'date' => $product[0]['created_at'],
+                'order_number' => $user[0]['order_number'],
+                'date' => $user[0]['created_at'],
             ]);
     }
 }
