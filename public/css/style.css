@@ -3,7 +3,6 @@
 
 
 /*css for homepage*/
-
 table{
     padding: 0.5rem;
     display: grid;
@@ -139,7 +138,7 @@ img.picture:hover{
     background-color: rgba(244, 11, 74, 0.95);
     padding: 6rem;
     border-radius: 5px;
-    box-shadow: 0 0rem 0rem rgb(11, 79, 133);
+    box-shadow: 0 0 0 rgb(11, 79, 133);
     z-index: 2;
 }
 

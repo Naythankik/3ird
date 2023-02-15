@@ -24,14 +24,13 @@ class SellersController extends Controller
     public function index()
     {
 
-        $products = Products::with("images")->where("seller_id",auth('selling')->id())->get();
+        $products = Products::with("images")->where("sellers_id",auth('selling')->id())->get();
         return view('sell.logged_in.home',['products' => $products]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -41,8 +40,6 @@ class SellersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(SellersRequest $request)
     {

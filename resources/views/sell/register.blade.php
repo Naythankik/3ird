@@ -19,130 +19,121 @@
 <div class="parent-container">
     <!-- navigation bar  -->
     <nav>
-        <a href="#" class="logo-image">
-            <img src="./images/logo.svg" alt="Fylo" />
+        <a href="/sell/create" class="logo-image">
+            <img src="{{ asset('/images/logo/3ird.svg') }}" alt="3ird" />
         </a>
         <div class="nav-menu">
             <a href="#">Features</a>
-            <a href="#">Team</a>
-            <a href="#">Sign In</a>
+            <a href="/login">Buy</a>
+            <a href="/sell/login">Sign In</a>
         </div>
     </nav>
 
     <!-- body contents -->
     <div class="containers">
         <div class="top-container">
+            <div class="top-left-container">
+                <h1>Register as a seller on 3ird to reach out to your clients faster.</h1>
+                <p>
+                    3ird stores your most important products in one secure location.
+                    Access them wherever you need, share and collaborate with friends,
+                    family, and co-workers.
+                </p>
+            </div>
             <div class="top-right-container">
-                    <h3 class="ms-3 mt-5 text-warning fw-bold">SIGN UP</h3>
                     <form method="post" action="/sell" enctype="multipart/form-data">
                         @csrf
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">First Name</span>
                             <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{old('first_name')}}" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         @error('first_name')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">Last Name</span>
                             <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{old('last_name')}}" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         @error('last_name')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">Username</span>
                             <input type="text" class="form-control" name="username" placeholder="Username" value="{{old('username')}}" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         @error('username')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon2">Email</span>
                             <input type="text" class="form-control" name="email" placeholder="Seller's Email" value="{{old('email')}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
                         @error('email')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon2">Telephone</span>
                             <input type="text" class="form-control" name="telephone" value="{{old('telephone')}}" placeholder="Seller's Telephone" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
                         @error('telephone')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <input type="file" class="form-control" name="profile" id="basic-url" aria-describedby="basic-addon3">
                         </div>
 
                         @error('profile')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text">Address</span>
                             <input type="text" name="address" placeholder="Enter address" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                         @error('age')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text">Date Of Birth</span>
                             <input type="text" name="age" placeholder="YYYY-MM-DD" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                         @error('age')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text">Password</span>
                             <input type="password" name="password"  class="form-control" placeholder="********" aria-label="Username">
                         </div>
                         @error('password')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
 
-                        <div class="input-group mb-2 w-50">
+                        <div class="input-group mb-2">
                             <span class="input-group-text">Confirm Password</span>
                             <input type="password" name="password_2" placeholder="********" class="form-control" aria-label="With textarea"></input>
                         </div>
                         @error('password_2')
-                        <p class="alert alert-danger w-50 p-1">{{$message}}</p>
+                        <p class="alert alert-danger p-1">{{$message}}</p>
                         @enderror
 
-
-                        <button class="btn btn-primary fw-bold text-dark fst-normal mt-4" type="submit">SUBMIT</button>
+                        <button class="btn btn-primary fw-bold text-dark fst-normal my-3"
+                                type="submit">SUBMIT</button>
                     </form>
-            </div>
-            <div class="top-left-container">
-                <h1>All your files in one secure location, accessible anywhere.</h1>
-                <p>
-                    Fylo stores your most important files in one secure location.
-                    Access them wherever you need, share and collaborate with friends,
-                    family, and co-workers.
-                </p>
-                <form action="#">
-                    <input
-                            type="text"
-                            name="email"
-                            placeholder="Enter your email..."
-                    />
-                    <button type="submit">Get Started</button>
-                </form>
             </div>
         </div>
     </div>

@@ -15,7 +15,6 @@ class ProductsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -38,16 +37,13 @@ class ProductsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(ProductsRequest $request)
     {
-
         $pro = Products::create([
             'email' => $request->email,
             'name' => $request->name,
-            'seller_id' => auth('selling')->id(),
+            'sellers_id' => auth('selling')->id(),
             'brand' => $request->brand,
             'category' => $request->category,
             'description' => $request->description,

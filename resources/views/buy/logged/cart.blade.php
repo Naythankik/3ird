@@ -45,7 +45,7 @@
             <div class="cart-payment">
                 <hr>
                 <div class="cart-total">
-                    <input type="text" id="total" value="{{ number_format($price,2) }}" >
+                    <input type="text" id="total" value="{{ number_format($price,2) }}">
                     <span>
                         <p>Sub Total</p>
                         <p>{{ count($carts) }} Items</p>
