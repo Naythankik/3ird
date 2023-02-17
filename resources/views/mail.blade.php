@@ -1,7 +1,6 @@
 @component('mail::message')
 # Introduction
 
-Hi {{ auth()->user()->username }},
 
 Thank you for purchasing from our store.
 
