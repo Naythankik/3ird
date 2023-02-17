@@ -48,16 +48,16 @@
                     </label>
                     <input type="email" name="email" class="form-control" id="exampleInputEmail1" value="{{ old('email') }}" placeholder="Enter email..." aria-describedby="emailHelp">
                     @error('email')
-                    <div id="emailHelp" class="form-text mb-3">
+                    <div id="emailHelp" class="form-text text-danger mb-2">
                         {{ $message }}
                     </div>
-                    <a href="/login" class="mx-auto text-decoration-none">
+                    <a href="/buy/create" class="mx-auto text-decoration-none">
                         You can create account,if you don't have  any?
                     </a>
                     @enderror
 
                     @if(session('status'))
-                        <div id="emailHelp" class="form-text">
+                        <div id="emailHelp" class="form-text text-success">
                             {{ session('status') }}
                         </div>
                     @endif
