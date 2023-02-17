@@ -135,13 +135,18 @@
                         <button class="btn btn-primary fw-bold text-dark fst-normal my-3"
                                 type="submit">SUBMIT</button>
                     </form>
+                    <a href="/sell/login" class="text-dark">Have an account?</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="ref">
+        <a href="/" class="text-light">Do you want to buy?</a>
+    </div>
+
 </div>
-    <a href="/sell/login" class="text-decoration-none text-dark">have an account?</a>
-    <a href="/" class="text-decoration-none text-light">Do you want to buy?</a>
+
 <script src="https://kit.fontawesome.com/b98f00e78a.js" crossorigin="anonymous"></script>
 
 </body>

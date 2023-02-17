@@ -52,7 +52,8 @@ img.seller:hover{
 
 /* The styling that is imported */
 div.parent-container {
-    display: block;
+    min-height: 100vh;
+    position: relative;
 }
 /* navigation bar */
 nav {
@@ -61,7 +62,7 @@ nav {
     padding: 15px 50px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid white;
+    border-bottom: 2px solid white;
     position: sticky;
     top: 0;
     z-index: 1;
@@ -180,34 +181,35 @@ div.top-right-container{
 .seller-button button {
     width: 50%;
 }
+div.ref{
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
 /* the end of the styling */
 
 @media only screen and (max-width: 960px) {
-    div.containers {
-        margin-top: 50px;
-    }
-
     div.top-container{
         display: grid;
         grid-template-columns: auto;
         height: auto;
     }
-
     div.top-left-container,
-    div.top-right-container,
-    div.bottom-right-container {
+    div.top-right-container{
         width: 100%;
         text-align: center;
     }
     div.top-left-container h1
     {
-        width: 90%;
         font-size: 2rem;
         margin: 0 auto;
     }
     div.top-left-container p{
         margin: 20px auto;
-        width: 85%;
+        width: 100%;
     }
     div.top-left-container form {
         width: 85%;
@@ -217,8 +219,6 @@ div.top-right-container{
     div.top-left-container input {
         width: 100%;
     }
-
-
 
     .seller-product > *{
         width: 100%;
@@ -231,6 +231,7 @@ div.top-right-container{
     .seller-button button {
         width: 100%;
     }
+
 }
 
 @media only screen and (max-width: 600px) {
@@ -250,29 +251,10 @@ div.top-right-container{
      {
         width: 100%;
     }
-
-    div.digital-links {
-        gap: 15px;
-        height: auto;
+    div.ref{
+        position: unset;
     }
 
-    .digital-links a > img {
-        vertical-align: sub;
-    }
-    div.web-links {
-        grid-template-columns: auto;
-        width: 100%;
-        row-gap: 10px;
-    }
-
-    div.icon-links a:hover {
-        color: var(--button-color);
-    }
-    div.icon-links {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-    }
 }
 
 @media only screen and (max-width: 300px) {
@@ -291,6 +273,7 @@ div.top-right-container{
     div.nav-menu {
         width: 100%;
     }
+
 }
 
 /* The End */
