@@ -2,7 +2,16 @@
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     background: hsl(257, 40%, 49%);
+}
+main{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 div.header{
@@ -18,13 +27,12 @@ div.header{
 div.body{
     background-color: white;
     padding: 20px 35px;
-    margin: 0 auto 60px auto;
-    width: 30%;
+    width: 40%;
     border-radius: 10px;
 }
 div.body-header{
     text-align: center;
-    padding: 5px 0;
+    padding: 3px 0;
     background: none;
 }
 .body-header > p:first-child{
@@ -40,8 +48,8 @@ p{
     background: none;
 }
 hr{
-    margin: 10px 0px;
-    border-top: 1px ;
+    margin: 10px 0;
+    border-top: 1px;
 }
 div.body-content{
     text-align: center;
@@ -50,17 +58,19 @@ div.body-content{
 }
 form{
     background: white;
+    padding: 10px;
 }
 div.names,
 div.email,
 div.passwords
 {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     justify-content: space-between;
     background: white;
-    margin: 0px auto 15px auto;
+    margin: 0 auto 15px auto;
     width: 100%;
-    gap: 5px;
+    gap: 20px;
 }
 div.names >input,
 div.email > input,
@@ -80,16 +90,14 @@ select:focus{
     outline: none;
 }
 
-
-
-
 div.date{
     background: white;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-between;
-    margin: 0px auto 8px auto;
+    margin: 0 auto 8px auto;
     width: 100%;
-    gap: 5px;
+    gap: 20px;
 }
 div.date > select{
     border-radius: 9px;
@@ -100,33 +108,37 @@ div.date > select{
 }
 
 
-
-div.gender{
+div.genders{
     background-color: white;
-    display: flex;
-    gap: 10px;
-    margin: 0px auto 5px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin: 0 auto 5px auto;
     width: 100%;
     border-radius: 9px;
 }
-
-div.gender > span{
+div.gender{
     padding: 15px 10px;
     box-sizing: border-box;
     border-radius: 9px;
     border: 1px solid grey;
-    background: white;
-    width: 33%;
     display: flex;
     justify-content: space-between;
     font-weight: normal;
+    background: white;
 }
 
+div.gender > span{
+    background: white;
+}
+div.gender > input[type="radio"]{
+    accent-color: hsl(257, 40%, 49%);
+}
 div.custom-gender{
     display: block;
     justify-content: center;
     background: white;
-    margin: 0px auto 8px auto;
+    margin: 0 auto 8px auto;
     width: 100%;
 }
 .custom-gender > select{
@@ -137,30 +149,25 @@ div.custom-gender{
     width: 100%;
 }
 
-
 div.phone,div.gender-option{
-    display: block;
-    justify-content: center;
     background: white;
-    margin: 0px auto 15px auto;
-    width: 100%;
+    margin: 0 auto 15px auto;
 }
 div.phone > input, div.gender-option > input{
     padding: 20px 10px;
-    width: 95%;
+    width: 100%;
     border: 1px solid grey;
     border-radius: 10px;
     background-color: white;
 }
 
-div.gender > input{
+div.genders > input{
     outline: none;
 }
 
 
-
 div.body-content p{
-    margin: 5px 0px;
+    margin: 5px 0;
     font-size: 12px;
     text-align: left;
     word-break: break-all;
@@ -284,4 +291,42 @@ a:hover{
     background: white;
     font-weight: bold;
     font-size: 20px;
+}
+@media screen and (max-width:960px){
+    main{
+        padding: 10px;
+    }
+    div.header{
+        font-size: 35px;
+    }
+    div.body{
+        width: 100%;
+        padding: 10px;
+    }
+    div.names,
+    div.email,
+    div.passwords{
+        grid-template-columns: 1fr;
+        gap: unset;
+    }
+    div.names >input,
+    div.email > input,
+    div.passwords > input{
+        margin-bottom: 10px;
+    }
+    div.email >input:last-child,
+    div.passwords > input:last-child{
+        margin-bottom: unset;
+
+    }
+}
+
+@media screen and (max-width: 400px){
+    div.genders,
+    div.date
+    {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+
 }
