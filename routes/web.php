@@ -94,7 +94,8 @@ Route::middleware('seller:selling')->group( function (){
 //Route for forgot password
 Route::get('/forgot-password', function () {
     return view('forgot-password');
-})->name('password.request');
+});
+//    ->name('password.request');
 
 Route::post('/forget',[SellersController::class,'forget']);
 

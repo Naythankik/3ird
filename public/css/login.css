@@ -27,10 +27,11 @@ p#welcome{
 
 div.body{
     display: flex;
-    justify-content: space-around;
-    margin: 0 auto;
-    padding: 100px;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
     width: 80%;
+    margin: 0 auto;
 }
 
 div.contents{
@@ -39,11 +40,10 @@ div.contents{
     width: 100%;
     display: block;
     border-radius: 20px;
-    box-shadow: black 0px 26px 60px -30px;
+    box-shadow: black 0 26px 60px -30px;
 }
 
 div.header {
-    margin: 100px auto;
     color: #1877f2;
     padding: 0 100px;
     border-radius: 10px;
@@ -53,7 +53,7 @@ div.header {
     font-family: 'palatino linotype';
     font-weight: bolder;
     font-size: 50px;
-    margin: 10px 10px 10px 0;
+    margin: 10px auto;
 }
 .header h4{
     font-family: SFProDisplay-Regular, Helvetica, Arial, sans-serif;
@@ -70,7 +70,7 @@ div.login form {
     line-height: 30px;
     background: none;
     border-radius: 10px;
-    padding: 10px 0px;
+    padding: 10px 0;
 }
 
 .login p {
@@ -114,8 +114,10 @@ div.login form {
 }
 div.hr{
     margin: 5px auto 10px auto;
-    width: max-content;
     text-align: center;
+    background: none;
+    width: 100%;
+
 }
 div.register{
     width: max-content;
@@ -173,3 +175,24 @@ div.seller{
 }
 
 
+@media screen and (max-width:960px){
+    *{
+        width: unset;
+    }
+    div.body{
+        flex-direction: column;
+    }
+    div.header{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .login input{
+        padding: 18px 10px;
+        margin: 0 auto 10px auto;
+    }
+    div.hr{
+        margin-bottom: 15px;
+    }
+
+}
