@@ -21,7 +21,9 @@
         <a href="/buy/login" class="nav-links">Login</a>
         <a href="" class="nav-links">Contact</a>
     </nav>
-    <button type="submit">Sell Products</button>
+    <a href="/sell">
+        Sell Products
+    </a>
     <button type="submit" id="menu" onclick="hamburger(this)">
         <img src="{{ asset('./images/logo/icon-hamburger.svg') }}" alt="menu" class="menu" />
         <img src="{{ asset('./images/logo/icon-close.svg') }}" alt="close" class="close" hidden />
