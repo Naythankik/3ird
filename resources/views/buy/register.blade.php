@@ -34,29 +34,35 @@
             <form method="post" action="/buy" enctype="multipart/form-data">
                 @csrf
                 <div class="names">
-                    <input type="text" name="first_name" id="fname" placeholder="First Name" value="{{old('first_name')}}">
-                    <input type="text" name="last_name" placeholder="Last Name" value="{{old('last_name')}}">
+                    <div id="names">
+                        <input type="text" name="first_name" id="fname" placeholder="First Name" value="{{old('first_name')}}">
+                        @error('first_name')
+                        <span id="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div id="names">
+                        <input type="text" name="last_name" placeholder="Last Name" value="{{old('last_name')}}">
+                        @error('last_name')
+                        <span id="error">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="error-names">
-                    @error('first_name')
-                    <p>{{ $message }}</p>
-                    @enderror
-                    @error('last_name')
-                    <p>{{ $message }}</p>
-                    @enderror
-                </div>
+
                 <div class="email">
-                    <input type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
-                    <input type="text" name="username" placeholder="Username" value="{{old('username')}}">
+                    <div id="names">
+                        <input type="text" name="email" placeholder="Email Address" value="{{old('email')}}">
+                        @error('email')
+                        <span id="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div id="names">
+                        <input type="text" name="username" placeholder="Username" value="{{old('username')}}">
+                        @error('username')
+                        <span id="error">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="error-email">
-                    @error('email')
-                    <p>{{$message}}</p>
-                    @enderror
-                    @error('username')
-                    <p>{{$message}}</p>
-                    @enderror
-                </div>
+
                 <div class="phone">
                     <input type="text" name="telephone" placeholder="Mobile Number" value="{{old('telephone')}}">
                 </div>
@@ -65,6 +71,7 @@
                     <p>{{$message}}</p>
                     @enderror
                 </div>
+
                 <div class="phone">
                     <input type="text" name="address" placeholder="Address" value="{{old('address')}}">
                 </div>
@@ -73,12 +80,14 @@
                     <p>{{$message}}</p>
                     @enderror
                 </div>
+
                 <input type="file" name="profile" class="custom-file-input">
                 <div class="error-phone">
                     @error('profile')
                     <p>{{$message}}</p>
                     @enderror
                 </div>
+
                 <span style="background-color: white; float:left; color: grey; font-size: 11px;">Date of birth</span>
                 <div class="date">
                     <input type="text" name="dob" value="" hidden>
@@ -121,17 +130,20 @@
                     </div>
                 </div>
                 <div class="passwords">
-                    <input type="password" name="password" placeholder="Enter password">
-                    <input type="password" name="password_2" placeholder="Confirm password">
+                    <div id="names">
+                        <input type="password" name="password" placeholder="Enter password">
+                        @error('password')
+                        <span id="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div id="names">
+                        <input type="password" name="password_2" placeholder="Confirm password">
+                        @error('password_2')
+                        <span id="error">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="error-email">
-                    @error('password')
-                    <p>{{$message}}</p>
-                    @enderror
-                    @error('password_2')
-                    <p>{{$message}}</p>
-                    @enderror
-                </div>
+
                 <p>People who use our service may have uploaded your contact information to 3ird.</p>
                 <p>By clicking Sign Up, you agree to our <a href="#">Terms</a>, <a href="#">Data Policy</a> and <a href="#">Cookie Policy</a>.
                     You may receive EMAIL notifications from us.</p>
