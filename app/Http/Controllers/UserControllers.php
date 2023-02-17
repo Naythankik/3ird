@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Requests\UsersRequest;
+use App\Jobs\ForgetPassword;
 use App\Jobs\RegisteredUser;
 use App\Mail\OrderProduct;
 use App\Mail\UserRegistered;
@@ -49,7 +50,6 @@ class UserControllers extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -59,7 +59,7 @@ class UserControllers extends Controller
         $brands = DB::table('brands')->select('*')->limit(12)->get();
         $all = Products::with('image')->limit(10)->inRandomOrder()->get();
 
-        $views = view('buy.logged.home')->with([
+        return view('buy.logged.home')->with([
             'budgets' => $budgets,
             'recommends' => $recommends,
             'category' => $category,
@@ -67,7 +67,6 @@ class UserControllers extends Controller
             'all' => $all
         ]);
 
-        return $views;
     }
 
     /**
@@ -126,7 +125,8 @@ class UserControllers extends Controller
             'profile' => $picture,
             'password' => Hash::make($request->password)
         ]);
-        RegisteredUser::dispatch($NewUser)->delay(now()->addMinutes(2));
+
+        RegisteredUser::dispatch($NewUser)->delay(now()->addMinutes(1));
 
         return redirect('/login')->with(['status' => 'User registered successfully!!']);
     }
@@ -405,6 +405,7 @@ class UserControllers extends Controller
         $status = Password::sendResetLink(
             $request->only('email')
         );
+
         return $status === Password::RESET_LINK_SENT
             ? back()->with(['status' => __($status)])
             : back()->withErrors(['email' => __($status)]);

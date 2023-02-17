@@ -40,6 +40,6 @@ class RegisteredUser implements ShouldQueue
      */
     public function handle()
     {
-        Mail::to($this->user->email)->later(now()->addMinute(1),new UserRegistered($this->user->first_name));
+        Mail::to($this->user->email)->send(new UserRegistered($this->user->first_name));
     }
 }
