@@ -137,62 +137,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="top-footer">
-            <div class="top-left-footer">
-                <h2>Get early access today</h2>
-                <p>
-                    It only takes a minute to sign up and our free starter tier is
-                    extremely generous. If you have any questions, our support team
-                    would be happy to help you.
-                </p>
-            </div>
-            <div class="top-right-footer">
-                <form action="#">
-                    <input type="text" name="email" placeholder="email@example.com" />
-                    <button type="submit">Get Started For Free</button>
-                </form>
-            </div>
-        </div>
-        <div class="bottom-footer">
-            <div class="logo-image">
-                <img src="./images/logo.svg" alt="Fylo" class="fylo-image" />
-            </div>
-            <div class="footer-links">
-                <div class="digital-links">
-                    <a href="tel:8177337331"
-                    ><img src="./images/icon-phone.svg" alt="" /> Phone: 08177337331
-                    </a>
-                    <a href="mailto:nathabolarin@gmail.com"
-                    ><img src="./images/icon-email.svg" alt="" />
-                        naythankik@fylo.com</a
-                    >
-                </div>
-                <div class="web-links">
-                    <a href="#">About Us</a>
-                    <a href="#">Contact Us</a>
-                    <a href="#">Jobs</a>
-                    <a href="#">Terms</a>
-                    <a href="#">Press</a>
-                    <a href="#">Privacy</a>
-                    <a href="#">Blog</a>
-                </div>
-                <div class="icon-links">
-                    <a href="https://www.facebook.com/"
-                    ><i class="fa-brands fa-facebook-f"></i
-                        ></a>
-                    <a href="https://twitter.com/"
-                    ><i class="fa-brands fa-twitter"></i
-                        ></a>
-                    <a href="https://www.instagram.com/"
-                    ><i class="fa-brands fa-instagram"></i
-                        ></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Challenge by Frontend Mentor. Coded by Your Name Here. -->
 </div>
 
 
