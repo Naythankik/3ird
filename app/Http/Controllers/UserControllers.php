@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Requests\UsersRequest;
 use App\Jobs\ForgetPassword;
+use App\Jobs\OrderProductJob;
 use App\Jobs\RegisteredUser;
 use App\Mail\OrderProduct;
 use App\Mail\UserRegistered;
@@ -135,7 +136,6 @@ class UserControllers extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -152,7 +152,6 @@ class UserControllers extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -447,10 +446,12 @@ class UserControllers extends Controller
         $id = auth()->id();
 
         $users = Carts::where('users_id',$id)->get();
+        if (!count($users) > 0){
+            dd("Error no user found");
+        }
 
         foreach ($users as  $user){
             $image = Images::where('products_id',$user['product_id'])->first();
-
             Order::create([
                 'user_id' => $id,
                 'product_id' => $user['product_id'],
@@ -464,7 +465,11 @@ class UserControllers extends Controller
                 'quantity' => $pr_id[0]['quantity'] - 1
             ]);
         }
-        event(new ProductOrdered(auth()->user()));
+
+        OrderProductJob::dispatch(
+            auth()->user(),
+            Order::latest()->first()
+        )->delay(now()->addMinutes(1));
 
         Carts::where('users_id',$id)->delete();
         return redirect('/buy');

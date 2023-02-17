@@ -12,14 +12,15 @@ class OrderProduct extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $order;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Order $order)
     {
-//        $this->order = $order;
+        $this->order = $order;
     }
 
     /**
@@ -29,14 +30,10 @@ class OrderProduct extends Mailable
      */
     public function build()
     {
-        $user = Order::where('user_id',auth()->id())
-            ->orderBy('id','DESC')
-            ->limit(1)
-            ->get();
         return $this->from(env('MAIL_FROM_ADDRESS'))
             ->markdown('mail')->with([
-                'order_number' => $user[0]['order_number'],
-                'date' => $user[0]['created_at'],
+                'order_number' => $this->order['order_number'],
+                'date' => $this->order['created_at'],
             ]);
     }
 }
