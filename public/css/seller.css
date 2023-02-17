@@ -1,3 +1,17 @@
+:root {
+    --header-ff: "Raleway", sans-serif;
+    --body-ff: "Open Sans", sans-serif;
+    --button-color: hsl(224, 93%, 58%);
+    --in-link: hsl(170, 45%, 43%);
+    --card-color: hsl(0, 0%, 75%);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--body-ff);
+}
+
 img.seller{
     width: 10%;
     display: inline-block;
@@ -9,8 +23,6 @@ img.seller{
 img.seller:hover{
     width: 15%;
 }
-
-
 
 .custom-file-input::-webkit-file-upload-button {
     visibility: hidden;
@@ -39,34 +51,21 @@ img.seller:hover{
 
 
 /* The styling that is imported */
-
-:root {
-    --header-ff: "Raleway", sans-serif;
-    --body-ff: "Open Sans", sans-serif;
-    --button-color: hsl(224, 93%, 58%);
-    --in-link: hsl(170, 45%, 43%);
-    --body-bg: hsl(240, 75%, 98%);
-    --card-color: hsl(0, 0%, 75%);
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: var(--body-ff);
-}
-
-body {
-    background-color: var(--body-bg);
-}
 div.parent-container {
     display: block;
 }
 /* navigation bar */
 nav {
-    width: 95%;
-    margin: 1rem auto;
+    width: 100%;
+    margin: auto;
+    padding: 15px 50px;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: dodgerblue;
 }
 
 div.nav-menu {
@@ -75,6 +74,9 @@ div.nav-menu {
     justify-content: space-between;
     align-items: center;
 }
+a.logo-image > img{
+    width: 20%;
+}
 div.nav-menu a {
     text-decoration: none;
     color: black;
@@ -82,11 +84,18 @@ div.nav-menu a {
 }
 
 /* top container */
+section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
 div.containers {
     display: grid;
     grid-template-columns: auto;
-    width: 95%;
-    margin: auto;
+    width: 80%;
+    padding: 20px;
 }
 div.top-container {
     width: 100%;
@@ -141,12 +150,6 @@ button:hover {
 
 div.top-right-container{
     /*width: 100%;*/
-}
-
-/* the footer styling */
-
-.fylo-image {
-    filter: invert(1);
 }
 
 

@@ -30,17 +30,18 @@
     </nav>
 
     <!-- body contents -->
-    <div class="containers">
-        <div class="top-container">
-            <div class="top-left-container">
-                <h1>Register as a seller on 3ird to reach out to your clients faster.</h1>
-                <p>
-                    3ird stores your most important products in one secure location.
-                    Access them wherever you need, share and collaborate with friends,
-                    family, and co-workers.
-                </p>
-            </div>
-            <div class="top-right-container">
+    <section>
+        <div class="containers">
+            <div class="top-container">
+                <div class="top-left-container">
+                    <h1>Register as a seller on 3ird to reach out to your clients faster.</h1>
+                    <p>
+                        3ird stores your most important products in one secure location.
+                        Access them wherever you need, share and collaborate with friends,
+                        family, and co-workers.
+                    </p>
+                </div>
+                <div class="top-right-container">
                     <form method="post" action="/sell" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group mb-2">
@@ -134,12 +135,11 @@
                         <button class="btn btn-primary fw-bold text-dark fst-normal my-3"
                                 type="submit">SUBMIT</button>
                     </form>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 </div>
-
-
     <a href="/sell/login" class="text-decoration-none text-dark">have an account?</a>
     <a href="/" class="text-decoration-none text-light">Do you want to buy?</a>
 <script src="https://kit.fontawesome.com/b98f00e78a.js" crossorigin="anonymous"></script>
