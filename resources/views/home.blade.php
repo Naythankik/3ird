@@ -20,6 +20,7 @@
             position: absolute;
             bottom: 0;
             width: 100%;
+            background: white;
         }
         .attribution a {
             color: hsl(228, 45%, 44%);
@@ -49,7 +50,8 @@
         </div>
         <div class="menu-container">
             <a href="#"><img src="{{ asset('/images/home/facebook.svg') }}" alt="facebook" /></a>
-            <a href="#"><img src="{{ asset('/images/home/twitter.svg') }}" alt="twitter" /></a>
+            <a href="https://twitter.com/3irdChild" target="_blank">
+                <img src="{{ asset('/images/home/twitter.svg') }}" alt="twitter" /></a>
             <a href="#"><img src="{{ asset('/images/home/instagram.svg') }}" alt="instagram" /></a>
         </div>
     </section>
@@ -57,15 +59,15 @@
 <footer>
     <p class="attribution">
         Challenge by
-        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
-        >Frontend Mentor</a
-        >. Coded by
-        <a href="https://github.com/Naythankik" target="_blank"
-        >Nathaniel Abolarin</a
-        >.
+        <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">
+            Frontend Mentor
+        </a>.
+        Coded by
+        <a href="https://github.com/Naythankik" target="_blank">
+            Nathaniel Abolarin
+        </a>.
     </p>
 </footer>
-<script src="{{ asset('js/sell.js') }}"></script>
 </body>
 </html>
 

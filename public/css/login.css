@@ -66,8 +66,8 @@ div.header {
 div.login form {
     margin: 0 auto;
     display: grid;
+    gap: 15px;
     width: 100%;
-    line-height: 30px;
     background: none;
     border-radius: 10px;
     padding: 10px 0;
@@ -79,13 +79,36 @@ div.login form {
     color: red;
 }
 
-.login input{
+.input{
+    display: flex;
+    flex-direction: column;
+    background: none;
     width: 80%;
-    margin: 2px auto 5px auto;
-    padding: 14px 5px;
+    margin: 0 auto;
+}
+
+.input > input,
+.login button{
+    padding: 15px 5px;
     border: 1px solid grey;
     border-radius: 6px;
     background: none;
+}
+
+.input > input{
+    width: 100%;
+    background: none;
+}
+
+.hide{
+    position: absolute;
+    width: 100%;
+}
+.hide input{
+    right: 0;
+    width: 20px;
+    position: inherit;
+    top: 17px;
 }
 
 .login input::placeholder{
@@ -94,20 +117,16 @@ div.login form {
     font-size: large;
 }
 .login input:focus{
-    padding: 10px;
     color: black;
-    font-size: large;
     outline-color: #1a6edc;
+    padding-left: 10px;
 }
 
 .login button{
-    width: 82%;
-    margin: 5px auto 10px auto;
+    width: 80%;
+    margin: 0 auto;
     background-color: hsl(257, 40%, 49%);
     cursor: pointer;
-    padding: 14px 5px;
-    border: 1px solid grey;
-    border-radius: 6px;
     color: white;
     font-size: 20px;
 
@@ -194,5 +213,11 @@ div.seller{
     div.hr{
         margin-bottom: 15px;
     }
+}
 
+@media screen and (max-width:300px) {
+    .hide{
+        position: unset;
+        display: none;
+    }
 }

@@ -23,18 +23,26 @@
         <div class="login">
             <form method="post" action="/login">
                 @csrf
-                <input type="text" name="email"  placeholder="3ird@example.com" value="{{old('email')}}" autocomplete="on">
-                @error('email')
-                <p>{{$message}}</p><br>
-                @enderror
-                @error('username')
-                <p>{{ $message}}</p><br>
-                @enderror
-                <input type="password" name="password" id="pwd" placeholder="Password" value="{{ old('password') }}">
-{{--                <input type="checkbox" onclick="showPassword()" title="show password" style="position: absolute;width: 2%; background: red; top: 220px;right: 208px">--}}
-                @error('password')
-                <p>{{$message}}</p><br>
-                @enderror
+                <div class="input">
+                    <input type="text" name="email"  placeholder="3ird@example.com" value="{{old('email')}}" autocomplete="on">
+                    @error('email')
+                    <p>{{$message}}</p>
+                    @enderror
+                    @error('username')
+                    <p>{{ $message}}</p>
+                    @enderror
+                </div>
+
+                <div class="input" style="position: relative">
+                    <input type="password" name="password" id="pwd" placeholder="Password" value="{{ old('password') }}">
+                    <div class="hide">
+                        <input type="checkbox" onclick="showPassword()" title="show password">
+                    </div>
+                    @error('password')
+                    <p>{{$message}}</p>
+                    @enderror
+                </div>
+
                 <button type="submit">Log In</button>
             </form>
         </div>
