@@ -10,7 +10,7 @@
         }
     ],
     "env": {
-        "APP_NAME": "3irds",
+        "APP_NAME": "3ird",
         "APP_ENV": "production",
         "APP_DEBUG": "false",
         "APP_URL": "https://3ird.vercel.app",
