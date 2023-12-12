@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/register.css') }}" type="text/css">
     <link rel="icon" type="image/jpg" href="{{ asset('/images/logo/3ird.svg') }}">
-    <title>Document</title>
+    <title>{{ env('APP_NAME') }}</title>
 </head>
 <body>
 

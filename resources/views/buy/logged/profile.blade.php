@@ -71,7 +71,7 @@
                         </div>
                         <div class="dob">
                             <label for="dob">Date of Birth</label>
-                            <input type="text" name="dob" value="{{ date('Y-m-d',$profile->dob) }}" />
+                            <input type="text" name="dob" value="{{ date('Y-m-d',$profile->dob) || $profile->dob }}" />
                             @error('dob')
                             <p>{{ $message }}</p>
                             @enderror

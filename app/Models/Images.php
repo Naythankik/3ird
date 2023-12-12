@@ -13,5 +13,4 @@ class Images extends Model
 
     protected $guarded = ['id'];
 
-
 }

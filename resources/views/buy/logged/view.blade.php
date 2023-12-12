@@ -36,7 +36,7 @@
                 @foreach($products as $product)
                     <a href="/buy/{{$product->id}}" style="text-decoration: none;">
                         <div class="distinct-info">
-                            <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No image">
+                            <img src="{{ $product->image['image_name'] }}" alt="No image">
                             <p>{{ $product->name }}</p>
                             <p> &#8358; {{ number_format($product->price,2) }}</p>
                         </div>

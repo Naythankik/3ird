@@ -198,6 +198,7 @@ div.submit {
     padding: 10px 10px;
     width: 30%;
     border: 1px solid grey;
+    cursor: pointer;
     border-radius: 10px;
     margin-bottom: 5px;
     background-color: green;

@@ -22,12 +22,12 @@
                         <button id="next">></button>
                     </div>
                 @endif
-                <img src="{{Storage::url('public/products/'.$image['image_name']) }}" id="active-image" alt="" />
+                <img src="{{$image['image_name'] }}" id="active-image" alt="" />
             </div>
             <div class="display-list">
                 @foreach($product->images as $image)
                     @if(count($product->images) > 1)
-                        <img src="{{ Storage::url('public/products/'.$image->image_name) }}" alt="" />
+                        <img src="{{ $image->image_name }}" alt="" />
                     @endif
                 @endforeach
             </div>

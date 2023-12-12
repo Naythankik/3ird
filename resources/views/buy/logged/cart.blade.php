@@ -23,7 +23,7 @@
             </div>
             @foreach($carts as $cart)
                 <div class="cart-content">
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url('public/products/'.$cart->product->image['image_name']) }}" alt="" />
+                    <img src="{{ $cart->product->image['image_name'] }}" alt="" />
                     <div class="cart-product-name">
                         <a href="/buy/{{$cart->product_id}}" style="text-decoration: none; color: black">
                             <p>{{ substr($cart->product['name'],0,20)."..." }}</p>

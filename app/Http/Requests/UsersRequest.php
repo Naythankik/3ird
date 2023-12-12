@@ -24,15 +24,15 @@ class UsersRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'telephone' => 'required|numeric',
-            'username' => 'required',
+            'first_name' => 'required|string|min:2|max:50',
+            'last_name' => 'required|string|min:2|max:50',
+            'email' => 'required|email|unique:buyers',
+            'telephone' => 'required|unique:buyers|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'username' => 'required|unique:buyers',
             'address' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'password_2' => 'required|same:password',
-            'profile' => 'required|image|max:2000|'
+            'profile' => 'required|image|max:2000'
         ];
     }
 

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Images;
+use App\Models\Users;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+         Users::factory(1)->create();
+        Images::factory(400)->create();
     }
 }

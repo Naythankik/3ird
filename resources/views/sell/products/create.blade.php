@@ -71,18 +71,9 @@
         <label for="formFileMultiple" class="form-label">Category</label>
         <select class="form-select" name="category" aria-label="Default select example">
             <option disabled>Select Category</option>
-            <option value="supermarket">Supermarket</option>
-            <option value="health_&_beauty">Health & Beauty</option>
-            <option value="home_&_office">Home & Office</option>
-            <option value="phones_&_tablets">Phones & Tablets</option>
-            <option value="computing">Computing</option>
-            <option value="electronics">Electronics</option>
-            <option value="fashion">Fashion</option>
-            <option value="baby_products">Baby Products</option>
-            <option value="gaming">Gaming</option>
-            <option value="sporting_goods">Sporting Goods</option>
-            <option value="automobile">Automobile</option>
-            <option value="others">Others</option>
+            @foreach(config('product')['categories'] as $key => $value)
+                <option value="{{ $key }}">{{ ucwords($value) }}</option>
+            @endforeach
         </select>
         <div class="col-12 mt-3 seller-button">
             <button type="submit" onclick="sell()" class="btn btn-primary">Save</button>

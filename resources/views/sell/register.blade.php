@@ -46,7 +46,7 @@
                         @csrf
                         <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">First Name</span>
-                            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{old('first_name')}}" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         @error('first_name')
                         <p class="alert alert-danger p-1">{{$message}}</p>
@@ -54,7 +54,7 @@
 
                         <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">Last Name</span>
-                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{old('last_name')}}" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         @error('last_name')
                         <p class="alert alert-danger p-1">{{$message}}</p>
@@ -63,7 +63,7 @@
 
                         <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon1">Username</span>
-                            <input type="text" class="form-control" name="username" placeholder="Username" value="{{old('username')}}" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="text" class="form-control" name="username" placeholder="Username" value="{{ old('username') }}" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
                         @error('username')
                         <p class="alert alert-danger p-1">{{$message}}</p>
@@ -72,7 +72,7 @@
 
                         <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon2">Email</span>
-                            <input type="text" class="form-control" name="email" placeholder="Seller's Email" value="{{old('email')}}" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="email" class="form-control" name="email" placeholder="Seller's Email" value="{{ old('email') }}" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
                         @error('email')
                         <p class="alert alert-danger p-1">{{$message}}</p>
@@ -81,7 +81,7 @@
 
                         <div class="input-group mb-2">
                             <span class="input-group-text" id="basic-addon2">Telephone</span>
-                            <input type="text" class="form-control" name="telephone" value="{{old('telephone')}}" placeholder="Seller's Telephone" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="tel" class="form-control" name="telephone" value="{{ old('telephone') }}" placeholder="Seller's Telephone" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         </div>
                         @error('telephone')
                         <p class="alert alert-danger p-1">{{$message}}</p>
@@ -99,7 +99,7 @@
 
                         <div class="input-group mb-2">
                             <span class="input-group-text">Address</span>
-                            <input type="text" name="address" placeholder="Enter address" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" name="address" placeholder="Enter address" value="{{ old('address') }}" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                         @error('age')
                         <p class="alert alert-danger p-1">{{$message}}</p>
@@ -108,7 +108,7 @@
 
                         <div class="input-group mb-2">
                             <span class="input-group-text">Date Of Birth</span>
-                            <input type="text" name="age" placeholder="YYYY-MM-DD" value="{{old('age')}}" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="date" name="age" placeholder="YYYY-MM-DD" value="{{ old('age') }}" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                         @error('age')
                         <p class="alert alert-danger p-1">{{$message}}</p>

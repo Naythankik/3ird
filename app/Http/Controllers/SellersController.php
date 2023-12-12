@@ -43,16 +43,16 @@ class SellersController extends Controller
      */
     public function store(SellersRequest $request)
     {
-        $request->validated();
         $new_name = uniqid($request->username,'true').'.'.$request->profile->extension();
-        $picture = $request->profile->storeAs('seller/profile',$new_name);
+
+        $picture = $request->profile->storeAs('public/seller/profile',$new_name);
 
         Seller::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
             'address' => $request->address,
-            'telephone' => stripslashes($request->telephone),
+            'telephone' => $request->telephone,
             'email' => $request->email,
             'dob' => $request->age,
             'profile' => $picture,

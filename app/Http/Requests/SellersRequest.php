@@ -24,11 +24,11 @@ class SellersRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required',
-            'telephone' => 'required|numeric',
-            'username' => 'required',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|unique:sellers',
+            'telephone' => 'required|unique:sellers|regex:/^([0-9\s\-\+\(\)]*)$/',
+            'username' => 'required|unique:sellers',
             'address' => 'required|min:20',
             'age' => 'required|date',
             'password' => 'required',

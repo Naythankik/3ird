@@ -14,7 +14,7 @@
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <img src="{{ $product->image['image_name'] }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>
@@ -37,7 +37,7 @@
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <img src="{{ $product->image['image_name'] }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>
@@ -60,7 +60,7 @@
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <img src="{{ $product->image['image_name'] }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>
@@ -80,7 +80,7 @@
             <div class="branding-contents">
                 @foreach($brands as $brand)
                     <a href="/buy/brands/{{$brand->brand}}">
-                        <img src="{{ Storage::url('public/products/brand/'.$brand->brand_image) }}" alt="No Image">
+                        <img src="{{ $brand->brand_image }}" alt="No Image">
                     </a>
                 @endforeach
             </div>
@@ -98,7 +98,7 @@
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{ Storage::url('public/products/'.$product->image['image_name']) }}" alt="No mage">
+                                <img src="{{$product->image['image_name'] }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>
