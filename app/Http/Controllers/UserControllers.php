@@ -44,7 +44,7 @@ class UserControllers extends Controller
     use Notifiable;
 
 
-    public function __construct()
+    public function __construct(protected Products $products)
     {
         $this->middleware('auth')->except('create','store','login','forgot','reset');
     }
@@ -54,11 +54,11 @@ class UserControllers extends Controller
      */
     public function index()
     {
-        $budgets = Products::with('image')->where('price','<' ,50000)->limit(10)->get();
-        $recommends = Products::with('image')->inRandomOrder()->limit(10)->get();
-        $category = Products::with('image')->where('price','>=' ,100000)->get();
+        $budgets = $this->products->with('image')->where('price','<' ,50000)->limit(10)->get();
+        $recommends = $this->products->with('image')->inRandomOrder()->limit(10)->get();
+        $category = $this->products->with('image')->where('price','>=' ,100000)->get();
         $brands = DB::table('brands')->select('*')->limit(12)->get();
-        $all = Products::with('image')->limit(10)->inRandomOrder()->get();
+        $all = $this->products->with('image')->limit(10)->inRandomOrder()->get();
 
         return view('buy.logged.home')->with([
             'budgets' => $budgets,
