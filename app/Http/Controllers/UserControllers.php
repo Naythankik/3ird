@@ -44,7 +44,16 @@ class UserControllers extends Controller
     use Notifiable;
 
 
-    public function __construct(protected Products $products)
+    public function __construct(
+        protected Products $products,
+        protected Users $users,
+        protected Images $images,
+        protected Carts $carts,
+        protected WishLists $wishlists,
+        protected Inbox $inbox,
+        protected Messages $messages,
+        protected Order $order
+        )
     {
         $this->middleware('auth')->except('create','store','login','forgot','reset');
     }
@@ -114,7 +123,7 @@ class UserControllers extends Controller
 
         $new_name = uniqid($request->username,'true').'.'.$request->profile->extension();
         $picture = $request->profile->storeAs('public/buyer/profile',$new_name);
-        $NewUser = Users::create([
+        $NewUser = $this->users->create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'username' => $request->username,
@@ -139,8 +148,8 @@ class UserControllers extends Controller
      */
     public function show($id)
     {
-        $products = Products::with('images')->where('id',$id)->get();
-        $firstImage = Images::where('products_id', $id)->first();
+        $products = $this->products->with('images')->where('id',$id)->get();
+        $firstImage = $this->images->where('products_id', $id)->first();
         return view('buy.logged.show',[
             'products' => $products,
             'image' => $firstImage
@@ -210,7 +219,7 @@ class UserControllers extends Controller
         }
 
 
-        $update = Users::where('id',$id)->update([
+        $update = $this->users->where('id',$id)->update([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
             'email' => $request->email,
@@ -237,7 +246,7 @@ class UserControllers extends Controller
      */
     public function destroy($id)
     {
-        Users::with('cart')->where('id',$id)->delete();
+        $this->users->with('cart')->where('id',$id)->delete();
         return redirect('/login');
     }
 
@@ -250,7 +259,7 @@ class UserControllers extends Controller
             'email.required' => 'Email is empty',
             'password.required' => 'Password is empty'
         ]);
-        $user = Users::where('email',$request->email)->first();
+        $user = $this->users->where('email',$request->email)->first();
         if (!$user)
         {
             return back()->withErrors(['username' => 'Email is not Registered'])->withInput();
@@ -273,7 +282,7 @@ class UserControllers extends Controller
 
     public function category($category)
     {
-        $categories = Products::with('image')->where('category','=',$category)->inRandomOrder()->get();
+        $categories = $this->products->with('image')->where('category','=',$category)->inRandomOrder()->get();
         $category = Str::replace('_',' ',$category);
         return view('buy.logged.view',[
             'products' => $categories,
@@ -289,7 +298,7 @@ class UserControllers extends Controller
                 'brands' => $brands
             ]);
         }else{
-            $brands = Products::with('image')->where('brand','=',$brand)->inRandomOrder()->get();
+            $brands = $this->products->with('image')->where('brand','=',$brand)->inRandomOrder()->get();
             $header = DB::table('brands')->where('brand','=',$brand)->first();
             return view('buy.logged.view',[
                 'headers' => $header,
@@ -301,7 +310,7 @@ class UserControllers extends Controller
 
     public function cart()
     {
-        $carts = Carts::with('product.image')->where('users_id',auth()->id())->get();
+        $carts = $this->carts->with('product.image')->where('users_id',auth()->id())->get();
         $price = [];
         foreach ($carts as $cart){
             $price[] = $cart->product['price'];
@@ -312,28 +321,28 @@ class UserControllers extends Controller
     }
     public function list()
     {
-        $wish = WishLists::with('product.image')->where('users_id',auth()->id())->get();
+        $wish = $this->wishlists->with('product.image')->where('users_id',auth()->id())->get();
         return view('buy.logged.wishlist',['wishes' => $wish]);
     }
 
     public function add_to_cart($p_id)
     {
-        $check_cart = Carts::where('users_id',auth()->id())->where('product_id',$p_id)->count();
+        $check_cart = $this->carts->where('users_id',auth()->id())->where('product_id',$p_id)->count();
         if ($check_cart > 0)
         {
             return back()->with(['cart_exist' => 'Product is in cart!','id' => $p_id]);
         }
-        Carts::create([
+        $this->carts->create([
             'users_id' => auth()->id(),
             'product_id' => $p_id
         ]);
-        WishLists::where('users_id',auth()->id())->where('product_id',$p_id)->delete();
+        $this->wishlists->where('users_id',auth()->id())->where('product_id',$p_id)->delete();
         return back()->with(['cart' => 'Product Added to cart successfully!','id'=> $p_id]);
     }
 
     public function remove_cart($id)
     {
-        Carts::where('users_id',auth()->id())->where('product_id',$id)->delete();
+        $this->carts->where('users_id',auth()->id())->where('product_id',$id)->delete();
         return back()->with(['delete' => 'Product removed from cart successfully!']);
     }
 
@@ -343,7 +352,7 @@ class UserControllers extends Controller
             return back();
         }else{
             $user = '%'.$request->q.'%';
-            $string = Products::with('images')
+            $string = $this->products->with('images')
                 ->where('brand','like',$user)
                 ->orWhere('category','like',$user)
                 ->orWhere('name','like',$user)
@@ -360,20 +369,20 @@ class UserControllers extends Controller
 
     public function profile($id)
     {
-        $profile = Users::where('id',$id)->get();
+        $profile = $this->users->where('id',$id)->get();
         return view('buy.logged.profile',['profiles' => $profile]);
     }
 
     public function remove_list($id)
     {
-        WishLists::where('users_id',auth()->id())->where('product_id',$id)->delete();
+        $this->wishlists->where('users_id',auth()->id())->where('product_id',$id)->delete();
         return back()->with(['delete' => 'Product removed from Wish List successfully!']);
     }
 
     public function wishList($p_id)
     {
-        $wish = WishLists::where('users_id',auth()->id())->where('product_id',$p_id)->count();
-        $cartWish = Carts::where('users_id',auth()->id())->where('product_id',$p_id)->count();
+        $wish = $this->wishlists->where('users_id',auth()->id())->where('product_id',$p_id)->count();
+        $cartWish = $this->carts->where('users_id',auth()->id())->where('product_id',$p_id)->count();
 
         if ($cartWish > 0)
         {
@@ -383,7 +392,7 @@ class UserControllers extends Controller
         {
             return back()->with(['cart_exist' => 'Product is in Wish List!','id' => $p_id]);
         }
-        WishLists::create([
+        $this->wishlists->create([
             'users_id' => auth()->id(),
             'product_id' => $p_id
         ]);
@@ -445,46 +454,46 @@ class UserControllers extends Controller
     {
         $id = auth()->id();
 
-        $users = Carts::where('users_id',$id)->get();
+        $users = $this->carts->where('users_id',$id)->get();
         if (!count($users) > 0){
             dd("Error no user found");
         }
 
         foreach ($users as  $user){
-            $image = Images::where('products_id',$user['product_id'])->first();
-            Order::create([
+            $image = $this->images->where('products_id',$user['product_id'])->first();
+            $this->order->create([
                 'user_id' => $id,
                 'product_id' => $user['product_id'],
                 'image_id' => $image['id'],
                 'order_number' => uniqid()
             ]);
 
-            $pr_id = Products::where('id',$user['product_id'])->get();
+            $pr_id = $this->products->where('id',$user['product_id'])->get();
 
-            Products::where('id',$user['product_id'])->update([
+            $this->products->where('id',$user['product_id'])->update([
                 'quantity' => $pr_id[0]['quantity'] - 1
             ]);
         }
 
         OrderProductJob::dispatch(
             auth()->user(),
-            Order::latest()->first()
+            $this->order->latest()->first()
         )->delay(now()->addMinutes(1));
 
-        Carts::where('users_id',$id)->delete();
+        $this->carts->where('users_id',$id)->delete();
         return redirect('/buy');
     }
 
     public function orders($order){
-        $orders = Order::with(['user', 'product','image'])
+        $orders = $this->order->with(['user', 'product','image'])
             ->where('user_id',$order)->get();
         return view('buy.logged.order',['orders' => $orders]);
 
     }
 
     public function inbox($id){
-        $message = Messages::all();
-        $inbox = Inbox::where([
+        $message = $this->messages->all();
+        $inbox = $this->inbox->where([
             'user_id' => auth()->id(),
             'sender_id' => $id
         ])->orderBy('id','desc')
@@ -499,7 +508,7 @@ class UserControllers extends Controller
 
     public function message()
     {
-        $message = Messages::all();
+        $message = $this->messages->all();
         return view('buy.logged.inbox',[
             'messages' => $message
         ]);
@@ -509,7 +518,7 @@ class UserControllers extends Controller
     public function reply(Request $request, $user_id){
         $message_id = $request->server('HTTP_REFERER');
         $message_id = Str::afterLast($message_id,'/');
-        $last = Inbox::where([
+        $last = $this->inbox->where([
             'user_id' => $user_id,
             'sender_id' => $message_id,
             'reply' => ''
@@ -519,7 +528,7 @@ class UserControllers extends Controller
 //        check if the row has null reply column
         if (empty($last)){
 //            if true, insert request into new row
-            Inbox::create([
+            $this->inbox->create([
                 'user_id' => $user_id,
                 'sender_id' => $message_id,
                 'message' => '',
@@ -528,7 +537,7 @@ class UserControllers extends Controller
             return back();
         }else{
 //            or update the reply column with the request received
-            Inbox::where([
+            $this->inbox->where([
                 'user_id' => $user_id,
                 'sender_id' => $message_id,
                 'id' => $last->id
@@ -553,7 +562,7 @@ class UserControllers extends Controller
         ]);
     }
     public function lowBudget(){
-        $all = Products::with('images')
+        $all = $this->products->with('images')
             ->where('price', '<' , 50000)
             ->inRandomOrder()
             ->get();
@@ -565,7 +574,7 @@ class UserControllers extends Controller
         ]);
     }
     public function all(){
-        $all = Products::with('images')
+        $all = $this->products->with('images')
             ->inRandomOrder()
             ->get();
 

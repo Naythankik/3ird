@@ -33,11 +33,12 @@
             </div>
             <div class="trending-products">
                 <div class="trending-info">
+
                     @foreach($recommends as $product)
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{ $product->image['image_name'] }}" alt="No mage">
+                                <img src="{{ $product->image['image_name'] ?? asset('images/logo/3ird.svg') }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>
@@ -60,7 +61,7 @@
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{ $product->image['image_name'] }}" alt="No mage">
+                                <img src="{{ $product->image['image_name'] ?? asset('images/logo/3ird.svg') }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>
@@ -80,7 +81,7 @@
             <div class="branding-contents">
                 @foreach($brands as $brand)
                     <a href="/buy/brands/{{$brand->brand}}">
-                        <img src="{{ $brand->brand_image }}" alt="No Image">
+                        <img src="{{ $brand->brand_image ?? asset('images/logo/3ird.svg') }}" alt="No Image">
                     </a>
                 @endforeach
             </div>
@@ -98,7 +99,7 @@
                         <a href="/buy/{{$product->id}}" style="text-decoration: none;">
 
                             <div class="trending-good">
-                                <img src="{{$product->image['image_name'] }}" alt="No mage">
+                                <img src="{{ $product->image['image_name'] ?? asset('images/logo/3ird.svg') }}" alt="No mage">
                                 <div class="trending-name">
                                     <p>{{ substr($product->name,0,20)."..." }}</p>
                                 </div>

@@ -98,9 +98,3 @@ Route::get('/forgot-password', function () {
 //    ->name('password.request');
 
 Route::post('/forget',[SellersController::class,'forget']);
-
-//Route::post('/nath',[ProductsController::class,'brands']);
-//Route::view('/nath','branding');
-Route::get('/kik',function (){
-    return response()->download('/home/codeliter/3ird/public/storage/logo/3ird.jpg');
-});
